@@ -69,14 +69,18 @@
   animation: mui-fade-up .4s var(--mui-ease-out); }
 
 .mui-pagi { display: flex; gap: 8px; justify-content: center; align-items: center; }
-.mui-pagi button { min-width: 40px; height: 40px; border-radius: 50%;
-  border: 1px solid transparent; background: none; color: var(--text);
-  font-family: var(--font-body); font-size: 14px; cursor: pointer; transition: all var(--mui-dur-fast); }
-.mui-pagi button:hover:not(:disabled) { border-color: var(--line); }
-.mui-pagi button.cur { border-color: var(--accent); color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 7%, transparent); }
-.mui-pagi button:disabled { opacity: .25; cursor: default; }
-.mui-pagi .dots { color: var(--text-dim); padding: 0 4px; }
+.mui-pagi button { min-width: 42px; height: 42px; padding: 0 8px;
+  border-radius: var(--mui-radius-sm);
+  border: 1px solid var(--line); background: var(--surface);
+  color: var(--text); font-family: var(--font-body); font-size: 14px;
+  cursor: pointer; transition: all var(--mui-dur-fast); }
+.mui-pagi button:hover:not(:disabled) { border-color: var(--accent-soft);
+  background: var(--surface-raised); transform: translateY(-1px); }
+.mui-pagi button.cur { border-color: var(--accent); background: var(--accent);
+  color: var(--on-accent); font-weight: 500; }
+.mui-pagi button:disabled { opacity: .3; cursor: default; }
+.mui-pagi .dots { color: var(--text-dim); padding: 0 4px; border: 0; background: none; height: 42px;
+  display: inline-flex; align-items: center; }
 
 .mui-empty { border: 1px dashed var(--line); border-radius: var(--mui-radius-md);
   padding: 44px; text-align: center; color: var(--text-dim); }
