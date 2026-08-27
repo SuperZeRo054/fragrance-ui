@@ -1,0 +1,29 @@
+.mui-backdrop { position: fixed; inset: 0; z-index: 200; background: rgba(13,11,8,.55);
+  backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px);
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+  animation: mui-fade .35s var(--mui-ease-out); }
+@keyframes mui-fade { from { opacity: 0; } }
+
+.mui-modal { background: var(--surface); color: var(--text); border-radius: var(--mui-radius-lg);
+  width: 100%; padding: 36px; position: relative; max-height: 88vh; overflow-y: auto;
+  box-shadow: 0 40px 80px rgba(0,0,0,.35); animation: mui-rise .5s var(--mui-ease-out); }
+@keyframes mui-rise { from { opacity: 0; transform: translateY(16px) scale(.96); } to { opacity: 1; transform: none; } }
+.mui-modal__close { position: absolute; top: 14px; right: 16px; width: 36px; height: 36px;
+  border-radius: 50%; border: 0; background: none; color: var(--text); font-size: 20px;
+  cursor: pointer; transition: transform var(--mui-dur-base), background var(--mui-dur-base); }
+.mui-modal__close:hover { background: var(--surface-raised); transform: rotate(90deg); }
+.mui-modal__title { font-family: var(--font-display); font-weight: 300;
+  font-size: 28px; letter-spacing: .04em; margin: 6px 0 14px; }
+.mui-modal p { font-size: 14px; color: var(--text-dim); line-height: 1.85; }
+.mui-modal__actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 26px; flex-wrap: wrap; }
+
+.mui-toast-region { position: fixed; left: 50%; bottom: 30px; translate: -50% 0; z-index: 300;
+  display: grid; gap: 8px; pointer-events: none; }
+.mui-toast { background: var(--text); color: var(--surface); font-size: 13px; letter-spacing: .08em;
+  padding: 12px 26px; border-radius: var(--mui-radius-full);
+  box-shadow: 0 14px 34px rgba(0,0,0,.3); animation: mui-toast-in .45s var(--mui-ease-out); text-align: center; }
+@keyframes mui-toast-in { from { opacity: 0; transform: translateY(18px) scale(.95); } }
+
+.mui-lightbox__img { width: 100%; border-radius: var(--mui-radius-md); display: block; }
+.mui-lightbox__cap { margin-top: 14px !important; text-align: center;
+  font-family: var(--font-display); font-style: italic; font-size: 14.5px; }

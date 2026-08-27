@@ -1,0 +1,37 @@
+.mui-field label:first-child { display: block; font-size: 10.5px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--text-dim); margin-bottom: 9px; }
+.mui-field input[type=text], .mui-field input[type=email], .mui-field input:not([type]),
+.mui-field textarea, .mui-field select {
+  width: 100%; background: var(--surface-inset); border: 1px solid var(--line);
+  border-radius: var(--mui-radius-md); padding: 12px 14px;
+  font-family: var(--font-body); font-size: 14px; color: var(--text);
+  transition: border-color var(--mui-dur-fast), box-shadow var(--mui-dur-fast);
+}
+.mui-field textarea { resize: vertical; }
+.mui-field :is(input, select, textarea):focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); }
+.mui-field--error input, .mui-field--error select { border-color: var(--danger); }
+.mui-field__msg { font-size: 12px; margin-top: 6px; color: inherit; }
+.mui-field__msg.error { color: var(--danger); }
+.mui-field__msg.success { color: var(--success); }
+
+.mui-switch { display: inline-flex; align-items: center; gap: 11px; cursor: pointer; }
+.mui-switch input { display: none; }
+.mui-switch .track { width: 46px; height: 26px; border-radius: var(--mui-radius-full);
+  background: var(--surface-raised); border: 1px solid var(--line); position: relative;
+  transition: background var(--mui-dur-base), border-color var(--mui-dur-base); }
+.mui-switch .track::after { content: ""; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px;
+  border-radius: 50%; background: var(--text-dim);
+  transition: transform var(--mui-dur-base) var(--mui-ease-spring), background var(--mui-dur-base); }
+.mui-switch input:checked + .track { background: color-mix(in srgb, var(--accent) 25%, transparent); border-color: var(--accent); }
+.mui-switch input:checked + .track::after { transform: translateX(20px); background: var(--accent); }
+.mui-switch .cap { cursor: pointer; }
+
+.mui-check { display: inline-flex; align-items: center; gap: 9px; cursor: pointer; }
+.mui-check input { accent-color: var(--accent); width: 17px; height: 17px; cursor: pointer; }
+
+.mui-range { display: inline-flex; align-items: center; gap: 14px; flex: 1; }
+.mui-range .lbl { font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); }
+.mui-range input[type=range] { flex: 1; accent-color: var(--accent); }
+.mui-range output { font-family: var(--mono, ui-monospace, monospace); font-size: 13px; color: var(--accent); }

@@ -1,0 +1,22 @@
+/* 全局基线：reset / 选区彩蛋 / 焦点环 / 渐显工具 */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--surface);
+  color: var(--text);
+  line-height: 1.75;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--mui-dur-slow), color var(--mui-dur-slow);
+}
+::selection { background: var(--accent-soft); color: var(--text-inverse); }
+:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 40%, transparent); border-radius: var(--mui-radius-sm); }
+
+/* 渐显工具：配合 <Reveal> 使用，只碰 opacity/transform */
+.mui-reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s var(--mui-ease-out) var(--reveal-delay, 0ms), transform .9s var(--mui-ease-out) var(--reveal-delay, 0ms); }
+.mui-reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  .mui-reveal { opacity: 1; transform: none; }
+}

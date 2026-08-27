@@ -1,0 +1,10 @@
+.console { display: flex; align-items: center; gap: 8px; }
+.console .cap { font-size: 9.5px; letter-spacing: .3em; color: var(--text-dim); }
+.console i { width: 1px; height: 18px; background: var(--line); margin-inline: 6px; }
+.console button { font-family: var(--font-body); font-size: 12px; letter-spacing: .08em;
+  padding: 7px 16px; border-radius: var(--mui-radius-full); border: 1px solid var(--line);
+  background: none; color: var(--text); cursor: pointer; transition: all var(--mui-dur-fast); text-transform: uppercase; }
+.console button:hover { border-color: var(--accent); color: var(--accent); }
+.console button.on { border-color: var(--accent); color: var(--on-accent); background: var(--accent); }
+
+section { margin-top: 84px; }

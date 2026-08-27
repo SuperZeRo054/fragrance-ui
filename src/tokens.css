@@ -1,0 +1,62 @@
+/* ==================================================================
+   Musée UI · Token Engine
+   Layer 1 原语（形状/动效/字体，跨皮肤共享）
+   Layer 2 皮肤语义（surface/text/accent… 整组换血）
+   组件只允许消费 Layer 2 语义变量 —— 这是换肤能成立的唯一纪律。
+================================================================== */
+
+:root {
+  /* Layer 1: 全局原语 */
+  --mui-radius-sm: 8px;
+  --mui-radius-md: 12px;
+  --mui-radius-lg: 18px;
+  --mui-radius-full: 999px;
+  --mui-ease-out: cubic-bezier(.22, 1, .36, 1);
+  --mui-ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --mui-dur-fast: .25s;
+  --mui-dur-base: .35s;
+  --mui-dur-slow: .7s;
+
+  /* Layer 2 默认值 = musée 日间（防止无 skin 时裸奔） */
+  --surface: #f4f0e8; --surface-raised: #ebe5d9; --surface-inset: rgba(26,23,18,.045);
+  --text: #1a1712; --text-dim: #6d6555; --text-inverse: #f4f0e8;
+  --accent: #a8894f; --accent-soft: #c9b183; --on-accent: #ffffff;
+  --success: #6f7d4f; --warning: #b3833a; --danger: #a4543e; --info: #5a7285;
+  --line: rgba(26,23,18,.14);
+  --font-display: "Cormorant Garamond","Songti SC","Noto Serif SC",Georgia,serif;
+  --font-body: "Jost","Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;
+}
+
+/* ---------------- Skin 01 · musée（象牙纸×古铜金 策展） ---------------- */
+[data-skin="musee"] { }
+[data-skin="musee"][data-mode="day"] {
+  --surface: #f4f0e8; --surface-raised: #ebe5d9; --surface-inset: rgba(26,23,18,.05);
+  --text: #1a1712; --text-dim: #6d6555; --text-inverse: #fdf9ef;
+  --accent: #a8894f; --accent-soft: #c9b183; --on-accent: #ffffff;
+  --success: #6f7d4f; --warning: #b3833a; --danger: #a4543e; --info: #5a7285;
+  --line: rgba(26,23,18,.14);
+}
+[data-skin="musee"][data-mode="night"] {
+  --surface: #0a1120; --surface-raised: #111c30; --surface-inset: rgba(180,200,225,.06);
+  --text: #e8eef6; --text-dim: #9fb2c9; --text-inverse: #0a1120;
+  --accent: #c9b183; --accent-soft: #ddc79a; --on-accent: #0a1120;
+  --success: #93ab72; --warning: #d9a95e; --danger: #cf8471; --info: #8fb0c9;
+  --line: rgba(180,200,225,.14);
+}
+
+/* ---------------- Skin 02 · graphite（石墨暗室×熔铜 高对比） ---------------- */
+[data-skin="graphite"][data-mode="day"] {
+  --surface: #17181c; --surface-raised: #1f2127; --surface-inset: rgba(235,220,205,.06);
+  --text: #eceef2; --text-dim: #98a0af; --text-inverse: #14151a;
+  --accent: #d97b45; --accent-soft: #eab08a; --on-accent: #16110d;
+  --success: #7fa663; --warning: #dba24c; --danger: #e06c53; --info: #6ba3c9;
+  --line: rgba(232,235,242,.13);
+}
+[data-skin="graphite"][data-mode="night"] {
+  --surface: #0d0e11; --surface-raised: #15171c; --surface-inset: rgba(235,220,205,.045);
+  --text: #dfe2e8; --text-dim: #858da0; --text-inverse: #101114;
+  --accent: #c96a38; --accent-soft: #e09a6a; --on-accent: #120d09;
+  --line: rgba(232,235,242,.09);
+}
+
+/* 新皮肤只需复制一个 [data-skin="xxx"] 块 —— 引擎到此为止。 */
