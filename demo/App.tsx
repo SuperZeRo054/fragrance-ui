@@ -67,7 +67,7 @@ function Atoms() {
               悬停这枚词
             </span>
           </Tooltip>
-          <Button variant="glass" size="sm" onClick={() => toast("轻提示已送达 ✓")}>触发 Toast</Button>
+          <Button variant="glass" size="sm" onClick={() => toast("轻提示已送达")}>触发 Toast</Button>
         </div>
       </Reveal>
     </section>
