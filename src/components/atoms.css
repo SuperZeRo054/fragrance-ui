@@ -15,8 +15,20 @@
 .mui-btn--primary:hover::after { left: 130%; }
 .mui-btn--outline { background: none; color: var(--text); border-color: var(--text); }
 .mui-btn--outline:hover { background: var(--text); color: var(--surface); }
-.mui-btn--ghost { background: none; color: var(--accent); padding-inline: 4px; }
-.mui-btn--ghost:hover { letter-spacing: .22em; }
+/* 软底款：有实体的最低调按钮——不再存在纯文字裸奔形态 */
+.mui-btn--ghost { background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent); padding-inline: 22px; }
+.mui-btn--ghost:hover { background: color-mix(in srgb, var(--accent) 20%, transparent);
+  transform: translateY(-1px); }
+/* 毛玻璃款：实时模糊+微透，昼夜皮肤自动适配 */
+.mui-btn--glass { background: color-mix(in srgb, var(--surface-raised) 52%, transparent);
+  backdrop-filter: blur(14px) saturate(1.25); -webkit-backdrop-filter: blur(14px) saturate(1.25);
+  border-color: color-mix(in srgb, var(--text) 16%, transparent); color: var(--text);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 4px 16px rgba(0,0,0,.06); }
+.mui-btn--glass:hover { background: color-mix(in srgb, var(--surface-raised) 74%, transparent);
+  border-color: var(--accent-soft); transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.1); }
+body[data-mode="night"] .mui-btn--glass { box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 4px 18px rgba(0,0,0,.28); }
 .mui-btn--danger { background: none; color: var(--danger); border-color: var(--danger); }
 .mui-btn--danger:hover { background: var(--danger); color: #fff; }
 .mui-btn:disabled { opacity: .35; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
@@ -53,8 +65,9 @@
 .mui-chip.active { border-color: var(--accent); color: var(--accent);
   background: color-mix(in srgb, var(--accent) 7%, transparent); }
 
-.mui-rating { letter-spacing: .24em; color: var(--accent); font-size: 15px; }
-.mui-rating .off { opacity: .28; }
+.mui-rating { letter-spacing: 3px; display: inline-flex; gap: 3px; }
+.mui-rating svg.lit path { fill: var(--accent); }
+.mui-rating svg.dim path { fill: color-mix(in srgb, var(--text-dim) 26%, transparent); }
 
 .mui-avatar { display: inline-flex; align-items: center; justify-content: center;
   background: radial-gradient(circle at 36% 30%, var(--accent-soft), var(--accent));

@@ -25,7 +25,7 @@ export function Reveal({ children, delay = 0, as: Tag = "div" }: {
 }
 
 /* ---------------- Button ---------------- */
-type BtnVariant = "primary" | "outline" | "ghost" | "danger";
+type BtnVariant = "primary" | "outline" | "ghost" | "danger" | "glass";
 export function Button({
   variant = "primary", size = "md", loading = false,
   href, children, className = "", ...rest
@@ -37,6 +37,50 @@ export function Button({
   if (href) return <a className={cls} href={href} onClick={rest.onClick as never}>{inner}</a>;
   return <button className={cls} disabled={loading || rest.disabled} {...rest}>{inner}</button>;
 }
+
+/* ---------------- 品牌标记：零位图动物（替代一切 emoji） ---------------- */
+export function OxMark({ size = 44 }: { size?: number }) {
+  return (
+    <svg viewBox="0 0 64 64" width={size} height={size} aria-hidden>
+      {OX_HEAD}
+    </svg>
+  );
+}
+export function SheepMark({ size = 44 }: { size?: number }) {
+  return (
+    <svg viewBox="0 0 64 64" width={size} height={size} aria-hidden>
+      {/* 云朵绒身 */}
+      <g fill="var(--accent-soft,#c9b183)">
+        <circle cx="20" cy="34" r="10"/><circle cx="32" cy="27" r="12"/>
+        <circle cx="45" cy="33" r="11"/><circle cx="33" cy="39" r="13"/>
+      </g>
+      <g fill="#6b4a35">
+        <rect x="22" y="46" width="7" height="12" rx="3.5"/>
+        <rect x="37" y="46" width="7" height="12" rx="3.5"/>
+      </g>
+      {/* 黑尖小角 + 淡脸 */}
+      <path d="M26 18 Q21 9 28 6 Q31 12 32 16Z" fill="#2e2620"/>
+      <path d="M38 18 Q43 9 36 6 Q33 12 32 16Z" fill="#2e2620"/>
+      <ellipse cx="32" cy="26" rx="9.5" ry="8.5" fill="#efe0c6"/>
+      <circle cx="28.4" cy="23.5" r="1.7" fill="#33291f"/><circle cx="35.6" cy="23.5" r="1.7" fill="#33291f"/>
+      <ellipse cx="32" cy="29.5" rx="4.6" ry="3.2" fill="#d8b694"/>
+    </svg>
+  );
+}
+const OX_HEAD = (
+  <g>
+    <path d="M22 20 Q17 11 24 8 Q27 14 28 18Z" fill="#2e2620"/>
+    <path d="M42 20 Q47 11 40 8 Q37 14 36 18Z" fill="#2e2620"/>
+    <circle cx="17" cy="30" r="8"/><circle cx="47" cy="30" r="8"/>
+    <circle cx="32" cy="32" r="23" fill="var(--accent,#a8894f)"/>
+    <ellipse cx="32" cy="41" rx="12.5" ry="9" fill="#ecd2b4"/>
+    <circle cx="27" cy="39" r="1.9" fill="#b98d68"/><circle cx="37" cy="39" r="1.9" fill="#b98d68"/>
+    <path d="M28 45 q4 2.4 8 0" stroke="#caa87e" strokeWidth="2" fill="none" strokeLinecap="round"/>
+    <circle cx="25" cy="28" r="3.6" fill="#33291f"/><circle cx="39" cy="28" r="3.6" fill="#33291f"/>
+    <circle cx="26.2" cy="26.8" r="1.1" fill="#fff" opacity=".85"/>
+    <circle cx="40.2" cy="26.8" r="1.1" fill="#fff" opacity=".85"/>
+  </g>
+);
 
 /* ---------------- Badge / Kicker ---------------- */
 export function Badge({ tone = "gold", children }: {
@@ -78,21 +122,26 @@ export function ChipGroup<T extends string>({ items, value, onChange }:
   );
 }
 
-/* ---------------- Rating（展示型） ---------------- */
-export function Rating({ value, max = 5 }: { value: number; max?: number }) {
+/* ---------------- Rating（矢量星，零字符星） ---------------- */
+export function Rating({ value, max = 5, size = 15 }: { value: number; max?: number; size?: number }) {
   return (
-    <span className="mui-rating" aria-label={`${value} / ${max}`}>
-      {"★".repeat(value)}<span className="off">{"★".repeat(Math.max(0, max - value))}</span>
+    <span className="mui-rating" role="img" aria-label={`${value} / ${max}`}>
+      {Array.from({ length: max }).map((_, i) => (
+        <svg key={i} viewBox="0 0 24 24" width={size} height={size}
+          className={i < value ? "lit" : "dim"} aria-hidden>
+          <path d="M12 2.6l2.9 6.1 6.7.9-4.9 4.6 1.2 6.6L12 17.6l-5.9 3.2 1.2-6.6L2.4 9.6l6.7-.9z"/>
+        </svg>
+      ))}
     </span>
   );
 }
 
-/* ---------------- Avatar（SVG 原生友好） ---------------- */
-export function Avatar({ emoji, shape = "circle", size = 88 }:
-  { emoji?: string; shape?: "circle" | "rounded"; size?: number }) {
+/* ---------------- Avatar（SVG 原生：传任意节点即可，不再收 emoji） ---------------- */
+export function Avatar({ children, shape = "circle", size = 88 }:
+  { children?: React.ReactNode; shape?: "circle" | "rounded"; size?: number }) {
   return (
-    <span className={`mui-avatar mui-avatar--${shape}`} style={{ width: size, height: size, fontSize: size * .5 }}>
-      {emoji ?? "🐂"}
+    <span className={`mui-avatar mui-avatar--${shape}`} style={{ width: size, height: size }}>
+      {children ?? <OxMark size={size * .58} />}
     </span>
   );
 }

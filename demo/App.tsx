@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import {
   SkinProvider, useTheme, ToastProvider, useToast,
   Reveal, Button, Badge, Kicker, SectionHead, ChipGroup, Rating, Avatar, Tooltip,
+  OxMark, SheepMark,
   TextField, SelectField, Switch, Checkbox, RadioGroup, RangeField,
   Modal, ConfirmModal, Lightbox,
   Card, Table, Tabs, Accordion, Pagination, EmptyState, Skeleton,
@@ -22,7 +23,7 @@ function ThemeConsole() {
       <i />
       <span className="cap">MODE</span>
       <button onClick={() => setMode(mode === "day" ? "night" : "day")}>
-        {mode === "day" ? "☾ 夜" : "☀ 日"}
+        {mode === "day" ? "夜间" : "日间"}
       </button>
     </div>
   );
@@ -39,10 +40,11 @@ function Atoms() {
         <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
           <Button>主要操作</Button>
           <Button variant="outline">描边次级</Button>
-          <Button variant="ghost">幽灵 →</Button>
+          <Button variant="ghost">软底款</Button>
+          <Button variant="glass">毛玻璃款</Button>
           <Button variant="danger">危险</Button>
           <Button size="sm" loading>Loading</Button>
-          <Button variant="outline" disabled>禁用</Button>
+          <Button variant="glass" size="sm" disabled>禁用</Button>
         </div>
       </Reveal>
       <Reveal delay={120}>
@@ -57,9 +59,15 @@ function Atoms() {
           <ChipGroup items={[{ id: "all", label: "全部" }, { id: "imp", label: "印象派" },
             { id: "uki", label: "浮世绘" }, { id: "mod", label: "现代" }]}
             value={era} onChange={setEra} />
-          <Avatar emoji="🐂" /><Avatar emoji="🐑" shape="rounded" size={56} />
-          <Tooltip tip="我是 Tooltip，悬停或聚焦可见"><u>悬停这枚词</u></Tooltip>
-          <Button variant="ghost" onClick={() => toast("轻提示已送达 ✓")}>触发 Toast</Button>
+          <Avatar><OxMark size={54} /></Avatar>
+          <Avatar shape="rounded" size={64}><SheepMark size={38} /></Avatar>
+          <Tooltip tip="我是 Tooltip，悬停或聚焦可见">
+            <span style={{ border: "1px solid var(--line)", borderRadius: 999,
+              padding: "7px 16px", fontSize: 12.5, color: "var(--text-dim)", cursor: "help" }}>
+              悬停这枚词
+            </span>
+          </Tooltip>
+          <Button variant="glass" size="sm" onClick={() => toast("轻提示已送达 ✓")}>触发 Toast</Button>
         </div>
       </Reveal>
     </section>
@@ -77,7 +85,7 @@ function Forms() {
       <SectionHead kicker="02 · Forms" title="表单控件全套" sub="含校验错误与成功反馈态、开关、单选复选与滑块。" />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(230px,1fr))", gap: 20, marginTop: 30 }}>
         <Reveal><TextField label="访客姓名" placeholder="可匿名观展"
-          hint="✓ 可以留空，匿名观展" state="success" /></Reveal>
+          hint="可以留空，匿名观展" state="success" /></Reveal>
         <Reveal delay={80}><TextField label="邮箱" value={mail} onChange={(e) => setMail(e.target.value)}
           hint="这不是一个合法的邮箱" state="error" /></Reveal>
         <Reveal delay={160}><SelectField label="最想参观的年代"
@@ -122,7 +130,7 @@ function Overlays() {
       {/* 用一段内联 SVG 当 lightbox 的演示图 —— 零位图传统 */}
       <Lightbox open={lb} onClose={() => setLb(false)}
         src={"data:image/svg+xml;charset=utf-8," + encodeURIComponent(
-          `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'><defs><radialGradient id='g' cx='35%' cy='78%' r='85%'><stop offset='0%' stop-color='#ffeec4'/><stop offset='45%' stop-color='#eed493'/><stop offset='100%' stop-color='#93a9b4'/></radialGradient></defs><rect width='640' height='400' fill='url(#g)'/><text x='520' y='330' font-size='120'>🐂</text></svg>`)}
+          `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'><defs><radialGradient id='g' cx='35%' cy='78%' r='85%'><stop offset='0%' stop-color='#ffeec4'/><stop offset='45%' stop-color='#eed493'/><stop offset='100%' stop-color='#93a9b4'/></radialGradient></defs><rect width='640' height='400' fill='url(#g)'/><g transform='translate(530,320)'><circle cx='0' cy='-14' r='40' fill='#cf9a52'/><ellipse cx='0' cy='8' rx='15' ry='10.5' fill='#ecd2b4'/><circle cx='-9.5' cy='-19' r='3.6' fill='#33291f'/><circle cx='9.5' cy='-19' r='3.6' fill='#33291f'/><path d='M-24 -34 Q-31 -50 -19 -55 Q-13 -46 -12 -39Z' fill='#2e2620'/><path d='M24 -34 Q31 -50 19 -55 Q13 -46 12 -39Z' fill='#2e2620'/></g></svg>`)}
         caption="NLM·GOLD-01《镜面湖上的牛来》示意 — 内联 SVG" />
     </section>
   );
@@ -175,7 +183,7 @@ function Content() {
           ]} />
         </div>
         <div style={{ display: "grid", gap: 18, gridTemplateColumns: "1fr 1fr", alignItems: "start", marginTop: 40 }}>
-          <EmptyState icon="🐑" title="这里还没有展品" desc="羊还没下水，牛先看着。" />
+          <EmptyState icon={<SheepMark size={42} />} title="这里还没有展品" desc="羊还没下水，牛先看着。" />
           <Skeleton lines={3} /><Skeleton rect />
         </div>
         <div style={{ marginTop: 40 }}>

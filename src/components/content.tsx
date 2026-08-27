@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { OxMark } from "./atoms";
 import "./content.css";
 
 /* ---------------- Card ---------------- */
@@ -103,12 +104,12 @@ export function Pagination({ page, total, onChange }: {
 }
 
 /* ---------------- EmptyState / Skeleton ---------------- */
-export function EmptyState({ icon = "🐂", title, desc }: {
-  icon?: string; title: string; desc?: string;
+export function EmptyState({ icon, title, desc }: {
+  icon?: React.ReactNode; title: string; desc?: string;
 }) {
   return (
     <div className="mui-empty">
-      <span className="ico">{icon}</span>
+      <span className="ico">{icon ?? <OxMark size={38} />}</span>
       <strong>{title}</strong>
       {desc && <p>{desc}</p>}
     </div>
