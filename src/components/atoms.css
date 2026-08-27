@@ -48,8 +48,8 @@ body[data-mode="night"] .mui-btn--glass { box-shadow: inset 0 1px 0 rgba(255,255
 .mui-kicker { font-size: 11px; letter-spacing: .42em; text-transform: uppercase;
   color: var(--accent); font-weight: 500; }
 
-.mui-sechead__title { font-family: var(--font-display); font-weight: 300;
-  font-size: clamp(28px, 3.8vw, 44px); letter-spacing: .03em; line-height: 1.16; margin-top: 12px; }
+.mui-sechead__title { font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(28px, 3.8vw, 44px); letter-spacing: -0.015em; line-height: 1.14; margin-top: 12px; }
 .mui-sechead__rule { display: block; width: 54px; height: 1px; background: var(--accent);
   margin-top: 22px; transition: width 1.1s var(--mui-ease-out) .3s; }
 .mui-reveal:not(.in) .mui-sechead__rule { width: 0; }
@@ -65,9 +65,20 @@ body[data-mode="night"] .mui-btn--glass { box-shadow: inset 0 1px 0 rgba(255,255
 .mui-chip.active { border-color: var(--accent); color: var(--accent);
   background: color-mix(in srgb, var(--accent) 7%, transparent); }
 
-.mui-rating { letter-spacing: 3px; display: inline-flex; gap: 3px; }
+.mui-rating { display: inline-flex; gap: 3px; }
+.mui-rating svg { transition: transform .3s var(--mui-ease-out); transition-delay: calc(var(--i, 0) * 28ms); }
 .mui-rating svg.lit path { fill: var(--accent); }
 .mui-rating svg.dim path { fill: color-mix(in srgb, var(--text-dim) 26%, transparent); }
+.mui-rating:hover svg.lit { transform: translateY(-2px); }
+/* 入场：逐颗 spring 弹入，纯 transform —— 合成器 60fps */
+.mui-rating.anim svg { opacity: 0; transform: scale(.2) rotate(-24deg);
+  animation: mui-star-pop .6s var(--mui-ease-spring) forwards;
+  animation-delay: calc(var(--i, 0) * 85ms); }
+@keyframes mui-star-pop {
+  0% { opacity: 0; transform: scale(.2) rotate(-24deg); }
+  62% { opacity: 1; transform: scale(1.24) rotate(4deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
 
 .mui-avatar { display: inline-flex; align-items: center; justify-content: center;
   background: radial-gradient(circle at 36% 30%, var(--accent-soft), var(--accent));

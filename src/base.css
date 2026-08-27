@@ -16,7 +16,17 @@ body {
 /* 渐显工具：配合 <Reveal> 使用，只碰 opacity/transform */
 .mui-reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s var(--mui-ease-out) var(--reveal-delay, 0ms), transform .9s var(--mui-ease-out) var(--reveal-delay, 0ms); }
 .mui-reveal.in { opacity: 1; transform: none; }
+/* 手写/签名强调（英文为主，中文回退楷体系） */
+.mui-hand { font-family: var(--font-hand); }
+
+/* View Transitions：MPA / SPA 页面级跳转的合成器级过渡（60fps 由浏览器接管） */
+::view-transition-old(root) { animation: mui-vt-out .3s var(--mui-ease-out) both; }
+::view-transition-new(root) { animation: mui-vt-in .42s var(--mui-ease-out) both; }
+@keyframes mui-vt-out { to { opacity: 0; transform: translateY(-10px) scale(.995); } }
+@keyframes mui-vt-in { from { opacity: 0; transform: translateY(14px) scale(.997); } }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
   .mui-reveal { opacity: 1; transform: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }

@@ -18,13 +18,17 @@
   --mui-dur-slow: .7s;
 
   /* Layer 2 默认值 = musée 日间（防止无 skin 时裸奔） */
+  /* 字体体系：英文 Apple SF · 中文思源黑 · 强调/签名 Caveat 手写 */
   --surface: #f4f0e8; --surface-raised: #ebe5d9; --surface-inset: rgba(26,23,18,.045);
   --text: #1a1712; --text-dim: #6d6555; --text-inverse: #f4f0e8;
   --accent: #a8894f; --accent-soft: #c9b183; --on-accent: #ffffff;
   --success: #6f7d4f; --warning: #b3833a; --danger: #a4543e; --info: #5a7285;
   --line: rgba(26,23,18,.14);
-  --font-display: "Cormorant Garamond","Songti SC","Noto Serif SC",Georgia,serif;
-  --font-body: "Jost","Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;
+  --font-display: "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --font-body: "SF Pro Text", -apple-system, BlinkMacSystemFont,
+    "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --font-hand: "Caveat", "Xingkai SC", "STKaiti", cursive;
 }
 
 /* ---------------- Skin 01 · musée（象牙纸×古铜金 策展） ---------------- */

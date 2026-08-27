@@ -122,14 +122,17 @@ export function ChipGroup<T extends string>({ items, value, onChange }:
   );
 }
 
-/* ---------------- Rating（矢量星，零字符星） ---------------- */
-export function Rating({ value, max = 5, size = 15 }: { value: number; max?: number; size?: number }) {
+/* ---------------- Rating（圆润矢量星 · 入场逐颗 spring · 60fps） ---------------- */
+export function Rating({ value, max = 5, size = 15, animated = true }: {
+  value: number; max?: number; size?: number; animated?: boolean;
+}) {
   return (
-    <span className="mui-rating" role="img" aria-label={`${value} / ${max}`}>
+    <span className={`mui-rating${animated ? " anim" : ""}`} role="img" aria-label={`${value} / ${max}`}>
       {Array.from({ length: max }).map((_, i) => (
         <svg key={i} viewBox="0 0 24 24" width={size} height={size}
+          style={{ "--i": i } as React.CSSProperties}
           className={i < value ? "lit" : "dim"} aria-hidden>
-          <path d="M12 2.6l2.9 6.1 6.7.9-4.9 4.6 1.2 6.6L12 17.6l-5.9 3.2 1.2-6.6L2.4 9.6l6.7-.9z"/>
+          <path d="M12 17.4l-5.16 3.06c-.5.3-1.1-.14-.98-.7l1.36-5.85-4.53-3.93c-.44-.38-.2-1.1.38-1.15l5.97-.52L11.32 3.7c.23-.54.94-.54 1.17 0l2.28 5.51 5.97.52c.58.05.82.77.38 1.15l-4.53 3.93 1.36 5.85c.12.56-.48 1-.98.7L12 17.4z"/>
         </svg>
       ))}
     </span>

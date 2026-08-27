@@ -7,6 +7,7 @@ import {
   TextField, SelectField, Switch, Checkbox, RadioGroup, RangeField,
   Modal, ConfirmModal, Lightbox,
   Card, Table, Tabs, Accordion, Pagination, EmptyState, Skeleton,
+  PageTransition, viewNavigate, Spinner, Progress, CountUp, LazyImage,
   type SkinId,
 } from "../src";
 
@@ -51,7 +52,7 @@ function Atoms() {
         <div style={{ display: "flex", flexWrap: "wrap", gap: 10, margin: "22px 0" }}>
           <Badge tone="gold">镇馆藏品</Badge><Badge tone="ok">已鉴定</Badge><Badge tone="info">借展中</Badge>
           <Badge tone="warn">修复期</Badge><Badge tone="err">禁止触摸</Badge>
-          <Rating value={4} /><Rating value={5} /><Rating value={2} />
+          <Rating value={4} size={18} /><Rating value={5} size={18} /><Rating value={2} size={18} />
         </div>
       </Reveal>
       <Reveal delay={200}>
@@ -194,6 +195,93 @@ function Content() {
   );
 }
 
+/* ---------- 页面切换实验室 ---------- */
+function RouteLab() {
+  const [view, setView] = useState<"gallery" | "essay">("gallery");
+  return (
+    <section id="route-lab">
+      <SectionHead kicker="05 · Page Transition" title="页面切换实验室"
+        sub="SPA 切页用 PageTransition；跨页 / 锚点跳转走 viewNavigate —— 浏览器合成器接管，60fps。" />
+      <Reveal>
+        <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 28 }}>
+          <Button variant={view === "gallery" ? "primary" : "outline"}
+            onClick={() => { setView("gallery"); }}>陈列视图</Button>
+          <Button variant={view === "essay" ? "primary" : "outline"}
+            onClick={() => { setView("essay"); }}>文章视图</Button>
+          <Button variant="glass" onClick={() => viewNavigate("#loading-lab")}>
+            锚点跳转 · View Transition
+          </Button>
+          <Button variant="glass" onClick={() => viewNavigate("#top")}>过渡回顶</Button>
+        </div>
+      </Reveal>
+      <div style={{ marginTop: 30 }}>
+        <PageTransition pageKey={view} variant={view === "essay" ? "slideL" : "slideR"}>
+          {view === "gallery" ? (
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(250px,1fr))", gap: 26 }}>
+              {WORKS.slice(0, 3).map((w) => (
+                <Card key={w.no} kicker={<><span>{w.era}</span><span>{w.no}</span></>}
+                  title={w.zh} subtitle={w.en}
+                  footer={<><span>{`仿 · ${w.artist}`}</span><Rating value={w.stars} /></>} />
+              ))}
+            </div>
+          ) : (
+            <article style={{ maxWidth: 680 }}>
+              <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 26, marginBottom: 12 }}>
+                湖面的水位，就是留白的度量衡
+              </h3>
+              <p style={{ color: "var(--text-dim)", fontSize: 15 }}>
+                排版的第一原则不是对齐，是呼吸。牛来站在镜面湖上之所以好看，是因为它周围什么都没有——
+                没有岩虾，没有浮萍，没有多余的礁石。留白不是空，是把所有注意力让给你的主角。</p>
+              <span className="mui-hand" style={{ fontSize: 27, color: "var(--accent)", display: "inline-block", marginTop: 14 }}>
+                — the curator, on negative space
+              </span>
+            </article>
+          )}
+        </PageTransition>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Loading 画廊 ---------- */
+function LoadingLab() {
+  return (
+    <section id="loading-lab">
+      <SectionHead kicker="06 · Loading & Lazy" title="加载与懒加载"
+        sub="四种 Spinner 口味 · 进度条 · 数字滚动 · LazyImage 进入视口才拉取并 blur-up 淡入。" />
+      <Reveal>
+        <div style={{ display: "flex", gap: 44, alignItems: "center", flexWrap: "wrap", marginTop: 32 }}>
+          <Spinner variant="ring" /><Spinner variant="dots" /><Spinner variant="bars" />
+          <Spinner variant="pulse" />
+          <div style={{ flex: 1, minWidth: 240 }}><Progress value={64} label="修复进度" /></div>
+        </div>
+      </Reveal>
+      <Reveal delay={120}>
+        <div style={{ display: "flex", gap: "clamp(28px,6vw,80px)", flexWrap: "wrap", margin: "42px 0" }}>
+          {[["Artworks", 32, " 件"], ["Footage", 30, " s"], ["Sequels", 2, " 部"]].map(([cap, n, suf]) => (
+            <div key={cap as string} style={{ textAlign: "center" }}>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 600,
+                fontSize: 52, lineHeight: 1, color: "var(--accent)" }}>
+                <CountUp to={n as number} suffix={suf as string} />
+              </div>
+              <div style={{ fontSize: 10.5, letterSpacing: ".3em", textTransform: "uppercase",
+                color: "var(--text-dim)", marginTop: 8 }}>{cap}</div>
+            </div>
+          ))}
+        </div>
+      </Reveal>
+      <Reveal delay={160}>
+        <LazyImage
+          src={"data:image/svg+xml;charset=utf-8," + encodeURIComponent(
+            `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'><defs><radialGradient id='g' cx='32%' cy='76%' r='90%'><stop offset='0%' stop-color='#ffeec4'/><stop offset='42%' stop-color='#eed493'/><stop offset='100%' stop-color='#8fa9b6'/></radialGradient></defs><rect width='800' height='500' fill='url(#g)'/><g transform='translate(400,330) scale(1.6)'><circle cx='0' cy='-40' r='44' fill='#cf9a52'/><ellipse cx='0' cy='-6' rx='17' ry='12' fill='#ecd2b4'/><circle cx='-11' cy='-47' r='4' fill='#33291f'/><circle cx='11' cy='-47' r='4' fill='#33291f'/><path d='M-28 -60 Q-36 -78 -22 -83 Q-16 -72 -14 -64Z' fill='#2e2620'/><path d='M28 -60 Q36 -78 22 -83 Q16 -72 14 -64Z' fill='#2e2620'/></g></svg>`)}
+          ratio="16 / 10" alt="镜面湖上的牛来示意" />
+        <p style={{ marginTop: 12, textAlign: "center", fontSize: 12.5, color: "var(--text-dim)" }}>
+          LazyImage 演示 · 占位 shimmer → 进入视口拉取 → blur-up 淡入</p>
+      </Reveal>
+    </section>
+  );
+}
+
 function App() {
   return (
     <SkinProvider persistKey="musee-ui-demo">
@@ -204,16 +292,19 @@ function App() {
           <a href="#" className="mui-kicker" style={{ textDecoration: "none", fontSize: 13 }}>MUSÉE UI</a>
           <ThemeConsole />
         </header>
-        <main style={{ maxWidth: 1100, margin: "0 auto", padding: "70px 28px 90px" }}>
+        <main style={{ maxWidth: 1100, margin: "0 auto", padding: "70px 28px 90px" }} id="top">
           <Reveal>
-            <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 300,
-              fontSize: "clamp(38px,5vw,64px)", lineHeight: 1.12 }}>
+            <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 600,
+              fontSize: "clamp(38px,5vw,64px)", lineHeight: 1.1, letterSpacing: "-0.015em" }}>
               一套结构，<em style={{ color: "var(--accent)" }}>任意换皮</em>。
             </h1>
             <p className="mui-sechead__sub" style={{ marginTop: 16 }}>
               Musée UI v0.1 · 多皮肤主题引擎 React 组件库。右上角切换皮肤与昼夜，整站变量即时换血。</p>
+            <span className="mui-hand" style={{ display: "inline-block", marginTop: 14,
+              fontSize: 30, color: "var(--accent)" }}>Curated with love — Musée du Niu Lai</span>
           </Reveal>
           <Atoms /><Forms /><Overlays /><Content />
+          <RouteLab /><LoadingLab />
         </main>
       </ToastProvider>
     </SkinProvider>
