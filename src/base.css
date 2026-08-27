@@ -19,6 +19,21 @@ body {
 /* 手写/签名强调（英文为主，中文回退楷体系） */
 .mui-hand { font-family: var(--font-hand); }
 
+/* 全站磨砂颗粒：极低透明度噪点，哑光质感的最后一层 */
+body::after { content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  opacity: .045; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E"); }
+body[data-mode="night"]::after { mix-blend-mode: screen; opacity: .035; }
+
+/* 通用玻璃面板（浮于图像/内容之上才见真章） */
+.mui-glass { background: color-mix(in srgb, var(--surface) 52%, transparent);
+  backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid color-mix(in srgb, #ffffff 38%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 14px 34px rgba(0,0,0,.12);
+  border-radius: var(--mui-radius-lg); }
+body[data-mode="night"] .mui-glass { border-color: color-mix(in srgb, #ffffff 14%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 14px 34px rgba(0,0,0,.4); }
+
 /* View Transitions：MPA / SPA 页面级跳转的合成器级过渡（60fps 由浏览器接管） */
 ::view-transition-old(root) { animation: mui-vt-out .3s var(--mui-ease-out) both; }
 ::view-transition-new(root) { animation: mui-vt-in .42s var(--mui-ease-out) both; }

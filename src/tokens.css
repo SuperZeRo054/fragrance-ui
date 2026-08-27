@@ -31,21 +31,21 @@
   --font-hand: "Caveat", "Xingkai SC", "STKaiti", cursive;
 }
 
-/* ---------------- Skin 01 · musée（象牙纸×古铜金 策展） ---------------- */
+/* ---------------- Skin 01 · musée（银白冷调 × 灰黑夜航） ---------------- */
 [data-skin="musee"] { }
 [data-skin="musee"][data-mode="day"] {
-  --surface: #f4f0e8; --surface-raised: #ebe5d9; --surface-inset: rgba(26,23,18,.05);
-  --text: #1a1712; --text-dim: #6d6555; --text-inverse: #fdf9ef;
-  --accent: #a8894f; --accent-soft: #c9b183; --on-accent: #ffffff;
-  --success: #6f7d4f; --warning: #b3833a; --danger: #a4543e; --info: #5a7285;
-  --line: rgba(26,23,18,.14);
+  --surface: #eef0f2; --surface-raised: #e4e7ea; --surface-inset: rgba(24,28,34,.05);
+  --text: #17191d; --text-dim: #5f6670; --text-inverse: #f5f6f8;
+  --accent: #8b939e; --accent-soft: #b8bfc7; --on-accent: #ffffff;
+  --success: #5f7d63; --warning: #a08238; --danger: #a04b40; --info: #56718a;
+  --line: rgba(24,28,34,.13);
 }
 [data-skin="musee"][data-mode="night"] {
-  --surface: #0a1120; --surface-raised: #111c30; --surface-inset: rgba(180,200,225,.06);
-  --text: #e8eef6; --text-dim: #9fb2c9; --text-inverse: #0a1120;
-  --accent: #c9b183; --accent-soft: #ddc79a; --on-accent: #0a1120;
-  --success: #93ab72; --warning: #d9a95e; --danger: #cf8471; --info: #8fb0c9;
-  --line: rgba(180,200,225,.14);
+  --surface: #0f1114; --surface-raised: #171a1f; --surface-inset: rgba(220,228,238,.05);
+  --text: #e9ecf1; --text-dim: #9aa3ae; --text-inverse: #0f1114;
+  --accent: #aab2bc; --accent-soft: #c8cfd6; --on-accent: #101216;
+  --success: #8dab8f; --warning: #cfa856; --danger: #d3766a; --info: #89aac6;
+  --line: rgba(220,228,238,.12);
 }
 
 /* ---------------- Skin 02 · graphite（石墨暗室×熔铜 高对比） ---------------- */

@@ -5,7 +5,7 @@ import {
   Reveal, Button, Badge, Kicker, SectionHead, ChipGroup, Rating, Avatar, Tooltip,
   OxMark, SheepMark,
   TextField, SelectField, Switch, Checkbox, RadioGroup, RangeField,
-  Modal, ConfirmModal, Lightbox,
+  Modal, ConfirmModal, ErrorModal, Lightbox,
   Card, Table, Tabs, Accordion, Pagination, EmptyState, Skeleton,
   PageTransition, viewNavigate, Spinner, Progress, CountUp, LazyImage,
   type SkinId,
@@ -76,7 +76,9 @@ function Atoms() {
 }
 
 function Forms() {
+  const toast = useToast();
   const [mail, setMail] = useState("moo@moo");
+  const [mailShake, setMailShake] = useState(0);
   const [sw, setSw] = useState(true);
   const [ck, setCk] = useState(true);
   const [rd, setRd] = useState("day");
@@ -87,7 +89,7 @@ function Forms() {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(230px,1fr))", gap: 20, marginTop: 30 }}>
         <Reveal><TextField label="访客姓名" placeholder="可匿名观展"
           hint="可以留空，匿名观展" state="success" /></Reveal>
-        <Reveal delay={80}><TextField label="邮箱" value={mail} onChange={(e) => setMail(e.target.value)}
+        <Reveal delay={80} key={mailShake}><TextField label="邮箱" value={mail} onChange={(e) => setMail(e.target.value)}
           hint="这不是一个合法的邮箱" state="error" /></Reveal>
         <Reveal delay={160}><SelectField label="最想参观的年代"
           options={["印象派 · 睡莲池畔", "浮世绘 · 冲浪现场", "史前 · 洞窟涂鸦区"]} /></Reveal>
@@ -99,6 +101,10 @@ function Forms() {
           <RadioGroup name="session" options={[{ value: "day", label: "日场" }, { value: "night", label: "夜场" }]}
             value={rd} onChange={setRd} />
           <RangeField value={rng} suffix="%" onChange={setRng} />
+          <Button variant="primary" size="sm" onClick={() => {
+            if (!mail.includes("@")) { setMailShake((k) => k + 1); toast("邮箱格式不正确"); }
+            else toast("登记成功，见字如面");
+          }}>提交登记</Button>
         </div>
       </Reveal>
     </section>
@@ -108,14 +114,17 @@ function Forms() {
 function Overlays() {
   const [modal, setModal] = useState(false);
   const [confirm, setConfirm] = useState(false);
+  const [err, setErr] = useState(false);
   const [lb, setLb] = useState(false);
   return (
     <section>
-      <SectionHead kicker="03 · Overlays" title="覆盖层系统" sub="Modal / Confirm / Lightbox / Toast · Esc 与遮罩点击均可关闭。" />
+      <SectionHead kicker="03 · Overlays" title="覆盖层系统"
+        sub="Modal / Confirm / Error（入场震动）/ Lightbox / Toast · Esc 与遮罩点击均可关闭。" />
       <Reveal>
         <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 30 }}>
           <Button onClick={() => setModal(true)}>打开 Modal</Button>
           <Button variant="danger" onClick={() => setConfirm(true)}>打开 Confirm</Button>
+          <Button variant="outline" onClick={() => setErr(true)}>打开报错弹窗</Button>
           <Button variant="outline" onClick={() => setLb(true)}>打开 Lightbox</Button>
         </div>
       </Reveal>
@@ -128,6 +137,8 @@ function Overlays() {
       <ConfirmModal open={confirm} onClose={() => setConfirm(false)} onCancel={() => {}}
         title="清空收藏夹？" body="此操作不可撤销：你收藏的全部金样本将被移除并喂给隔壁的羊。"
         dangerText="确认清空" />
+      <ErrorModal open={err} onClose={() => setErr(false)}
+        title="网络波动，馆长暂时失联" body="请求超时（ETIMEDOUT）。请检查网络后重试；若持续失败，馆长可能在假装没看见。" />
       {/* 用一段内联 SVG 当 lightbox 的演示图 —— 零位图传统 */}
       <Lightbox open={lb} onClose={() => setLb(false)}
         src={"data:image/svg+xml;charset=utf-8," + encodeURIComponent(
@@ -172,10 +183,11 @@ function Content() {
           rows={WORKS as never[]} />
       </div>
       <div style={{ maxWidth: 720, marginTop: 44 }}>
-        <Tabs items={[
-          { id: "1", label: "① 定妆照", content: "第一条 prompt 永远是角色定妆照：姜黄蓬松短绒毛、呆萌圆脸、黑尖短角。全部分镜以它为首帧参考锁定一致性。" },
-          { id: "2", label: "② 装配", content: "A 中景缓推 → B 蹄部特写 → 叠化 C 大全景 → D 面部凝视被晨雾吞没 → 回切 A 尾帧成无缝循环。" },
-          { id: "3", label: "③ 交付", content: "ffmpeg -r 24 -an crf20 · 1280×720 与原站同规格。" },
+        <Tabs variant="steps" items={[
+          { id: "1", label: "定妆照", content: "第一条 prompt 永远是角色定妆照：姜黄蓬松短绒毛、呆萌圆脸、黑尖短角。全部分镜以它为首帧参考锁定一致性。" },
+          { id: "2", label: "Prompt 工程", content: "风格契约前缀 + 主语槽位 + 负面词，参考图最多 10 张；组图参数保证整套出图主体不跑。" },
+          { id: "3", label: "装配", content: "A 中景缓推 → B 蹄部特写 → 叠化 C 大全景 → D 面部凝视被晨雾吞没 → 回切 A 尾帧成无缝循环。" },
+          { id: "4", label: "交付", content: "ffmpeg -r 24 -an crf20 · 1280×720 与原站同规格；离屏自动暂停解码。" },
         ]} />
         <div style={{ marginTop: 34 }}>
           <Accordion defaultOpen={0} items={[
@@ -271,12 +283,19 @@ function LoadingLab() {
         </div>
       </Reveal>
       <Reveal delay={160}>
-        <LazyImage
-          src={"data:image/svg+xml;charset=utf-8," + encodeURIComponent(
-            `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'><defs><radialGradient id='g' cx='32%' cy='76%' r='90%'><stop offset='0%' stop-color='#ffeec4'/><stop offset='42%' stop-color='#eed493'/><stop offset='100%' stop-color='#8fa9b6'/></radialGradient></defs><rect width='800' height='500' fill='url(#g)'/><g transform='translate(400,330) scale(1.6)'><circle cx='0' cy='-40' r='44' fill='#cf9a52'/><ellipse cx='0' cy='-6' rx='17' ry='12' fill='#ecd2b4'/><circle cx='-11' cy='-47' r='4' fill='#33291f'/><circle cx='11' cy='-47' r='4' fill='#33291f'/><path d='M-28 -60 Q-36 -78 -22 -83 Q-16 -72 -14 -64Z' fill='#2e2620'/><path d='M28 -60 Q36 -78 22 -83 Q16 -72 14 -64Z' fill='#2e2620'/></g></svg>`)}
-          ratio="16 / 10" alt="镜面湖上的牛来示意" />
+        <div style={{ position: "relative" }}>
+          <LazyImage
+            src={"data:image/svg+xml;charset=utf-8," + encodeURIComponent(
+              `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'><defs><radialGradient id='g' cx='32%' cy='76%' r='90%'><stop offset='0%' stop-color='#ffeec4'/><stop offset='42%' stop-color='#eed493'/><stop offset='100%' stop-color='#8fa9b6'/></radialGradient></defs><rect width='800' height='500' fill='url(#g)'/><g transform='translate(400,330) scale(1.6)'><circle cx='0' cy='-40' r='44' fill='#cf9a52'/><ellipse cx='0' cy='-6' rx='17' ry='12' fill='#ecd2b4'/><circle cx='-11' cy='-47' r='4' fill='#33291f'/><circle cx='11' cy='-47' r='4' fill='#33291f'/><path d='M-28 -60 Q-36 -78 -22 -83 Q-16 -72 -14 -64Z' fill='#2e2620'/><path d='M28 -60 Q36 -78 22 -83 Q16 -72 14 -64Z' fill='#2e2620'/></g></svg>`)}
+            ratio="16 / 10" alt="镜面湖上的牛来示意" />
+          <div className="mui-glass" style={{ position: "absolute", left: 18, bottom: 18,
+            padding: "14px 20px", display: "flex", gap: 16, alignItems: "center" }}>
+            <span className="mui-hand" style={{ fontSize: 24, color: "var(--text)" }}>Live by the lake</span>
+            <Button variant="glass" size="sm">进入直播</Button>
+          </div>
+        </div>
         <p style={{ marginTop: 12, textAlign: "center", fontSize: 12.5, color: "var(--text-dim)" }}>
-          LazyImage 演示 · 占位 shimmer → 进入视口拉取 → blur-up 淡入</p>
+          LazyImage 演示 · 占位 shimmer → 进入视口拉取 → blur-up 淡入 ｜ 玻璃卡悬浮于图像之上，糊化肉眼可见</p>
       </Reveal>
     </section>
   );

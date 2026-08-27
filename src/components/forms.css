@@ -11,7 +11,8 @@
 .mui-field :is(input, select, textarea):focus {
   outline: none; border-color: var(--accent);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); }
-.mui-field--error input, .mui-field--error select { border-color: var(--danger); }
+.mui-field--error input, .mui-field--error select { border-color: var(--danger);
+  animation: mui-shake .45s var(--mui-ease-out); }
 .mui-field__msg { font-size: 12px; margin-top: 6px; color: inherit; }
 .mui-field__msg.error { color: var(--danger); }
 .mui-field__msg.success { color: var(--success); }

@@ -27,3 +27,12 @@
 .mui-lightbox__img { width: 100%; border-radius: var(--mui-radius-md); display: block; }
 .mui-lightbox__cap { margin-top: 14px !important; text-align: center;
   font-family: var(--font-display); font-style: italic; font-size: 14.5px; }
+
+/* 抖动：错误弹窗入场 / 表单校验失败 */
+.mui-shake { animation: mui-shake .5s var(--mui-ease-out) both; }
+@keyframes mui-shake {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(3px); }
+  30%, 50%, 70% { transform: translateX(-6px); }
+  40%, 60% { transform: translateX(6px); }
+}

@@ -35,6 +35,30 @@
   animation: mui-fade-up .5s var(--mui-ease-out); }
 @keyframes mui-fade-up { from { opacity: 0; transform: translateY(10px); } }
 
+/* steps 步骤条：号码徽标 + 联动连接线，完成态打勾 */
+.mui-tabs--steps { align-items: center; border-bottom: 0; gap: 0; padding-bottom: 6px; }
+.mui-step { display: inline-flex; align-items: center; gap: 10px;
+  background: none; border: 0; cursor: pointer; padding: 8px 4px;
+  font-family: var(--font-body); font-size: 13px; letter-spacing: .1em;
+  color: var(--text-dim); transition: color var(--mui-dur-fast); }
+.mui-step .no { display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 1.5px solid var(--line); font-size: 11px; font-weight: 500;
+  font-family: var(--mono, ui-monospace, monospace);
+  color: var(--text-dim); transition: all var(--mui-dur-base) var(--mui-ease-out); }
+.mui-step:hover { color: var(--text); }
+.mui-step.active { color: var(--text); }
+.mui-step.active .no { border-color: var(--accent); background: var(--accent);
+  color: var(--on-accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent); }
+.mui-step.done .no { border-color: var(--accent); color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.mui-step-line { flex: 1 1 24px; height: 1.5px; min-width: 18px; margin-inline: 6px;
+  background: var(--line); position: relative; overflow: hidden; }
+.mui-step-line::after { content: ""; position: absolute; inset: 0;
+  background: var(--accent); transform: scaleX(0); transform-origin: 0 50%;
+  transition: transform .5s var(--mui-ease-out); }
+.mui-step-line.done::after { transform: scaleX(1); }
+
 .mui-acc details { border-bottom: 1px solid var(--line); }
 .mui-acc summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between;
   align-items: center; padding: 17px 2px; font-size: 15px; letter-spacing: .06em; }

@@ -48,8 +48,39 @@ export function Table<T extends Record<string, unknown>>({ columns, rows, rowKey
 }
 
 /* ---------------- Tabs ---------------- */
-export function Tabs({ items }: { items: { id: string; label: string; content: React.ReactNode }[] }) {
+/* ---------------- Tabs（underline 常规 / steps 步骤条：连接线联动 + 勾态） ---------------- */
+export function Tabs({ items, variant = "underline" }: {
+  items: { id: string; label: string; content: React.ReactNode }[];
+  variant?: "underline" | "steps";
+}) {
   const [active, setActive] = useState(items[0]?.id);
+  const activeIdx = items.findIndex((it) => it.id === active);
+  if (variant === "steps") {
+    return (
+      <div>
+        <div className="mui-tabs mui-tabs--steps" role="tablist">
+          {items.map((it, i) => (
+            <React.Fragment key={it.id}>
+              {i > 0 && <i className={`mui-step-line${i <= activeIdx ? " done" : ""}`} aria-hidden />}
+              <button role="tab" aria-selected={active === it.id}
+                className={`mui-step${active === it.id ? " active" : ""}${i < activeIdx ? " done" : ""}`}
+                onClick={() => setActive(it.id)}>
+                <b className="no">{i < activeIdx ? (
+                  <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden>
+                    <path d="M4.5 12.5l4.6 4.6L19.5 6.7" fill="none" stroke="currentColor"
+                      strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                ) : String(i + 1).padStart(2, "0")}</b>
+                <span>{it.label}</span>
+              </button>
+            </React.Fragment>
+          ))}
+        </div>
+        {items.map((it) => active === it.id && (
+          <div key={it.id} role="tabpanel" className="mui-tabpanel">{it.content}</div>))}
+      </div>
+    );
+  }
   return (
     <div>
       <div className="mui-tabs" role="tablist">
