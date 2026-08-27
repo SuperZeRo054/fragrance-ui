@@ -7,5 +7,11 @@ export default defineConfig({
   build: {
     outDir: "docs",
     emptyOutDir: true,
+    target: "es2020",
+    rollupOptions: {
+      output: {
+        manualChunks: { react: ["react", "react-dom"] },
+      },
+    },
   },
 });
