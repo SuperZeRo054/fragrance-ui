@@ -28,13 +28,16 @@
 .mui-lightbox__cap { margin-top: 14px !important; text-align: center;
   font-family: var(--font-display); font-style: italic; font-size: 14.5px; }
 
-/* 抖动：错误弹窗入场 / 表单校验失败 */
-.mui-shake { animation: mui-shake .5s var(--mui-ease-out) both; }
+/* 抖动：弹簧衰减式 —— 幅度递减 + 微倾角，段间缓动平滑不生硬 */
+.mui-shake { animation: mui-shake .62s cubic-bezier(.36,.07,.19,.97) both; }
 @keyframes mui-shake {
-  10%, 90% { transform: translateX(-2px); }
-  20%, 80% { transform: translateX(3px); }
-  30%, 50%, 70% { transform: translateX(-6px); }
-  40%, 60% { transform: translateX(6px); }
+  0% { transform: translateX(0) rotate(0deg); }
+  15% { transform: translateX(-6px) rotate(-.7deg); }
+  30% { transform: translateX(5px) rotate(.55deg); }
+  45% { transform: translateX(-3.5px) rotate(-.4deg); }
+  60% { transform: translateX(2.5px) rotate(.28deg); }
+  75% { transform: translateX(-1.2px) rotate(-.12deg); }
+  100% { transform: translateX(0) rotate(0deg); }
 }
 
 /* ---------- 移动端：Modal 收紧 ---------- */
