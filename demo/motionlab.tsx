@@ -14,7 +14,7 @@ export function StateCat() {
         onClick={() => setSt((s) => (s === "idle" ? "groom" : s === "groom" ? "alert" : "groom"))}
         title="点击切换状态，悬停会竖耳"
       >
-        <CatFull tone="cream" width={230} className="state-cat" />
+        <CatFull tone="cream" width={230} className={`state-cat st-${st}`} />
         <span className="state-badge">{st === "idle" ? "IDLE · 发呆" : st === "groom" ? "GROOM · 舔毛" : "ALERT · 竖耳"}</span>
       </div>
       <div className="lab-row">
@@ -179,30 +179,47 @@ export function ShaderSilk() {
 /* ============ F. 涂鸦猫（rough.js 手绘风） ============ */
 export function RoughCat() {
   const ref = useRef<HTMLCanvasElement>(null);
+  const [err, setErr] = useState("");
   const draw = async () => {
-    const mod: any = await import("roughjs");
-    const RC = mod.RoughCanvas ?? mod.default?.RoughCanvas;
-    const cv = ref.current; if (!cv || !RC) return;
-    cv.getContext("2d")?.clearRect(0, 0, cv.width, cv.height);
-    const rc = new RC(cv);
-    const col = getComputedStyle(document.body).getPropertyValue("--accent").trim() || "#8b939e";
-    const dim = getComputedStyle(document.body).getPropertyValue("--text-dim").trim() || "#98a0af";
-    const o = { stroke: col, strokeWidth: 1.6, roughness: 1.6, bowing: 2 };
-    rc.circle(70, 64, 62, o);
-    rc.linearPath([[52, 38], [44, 16], [66, 28]], o);
-    rc.linearPath([[88, 38], [96, 16], [74, 28]], o);
-    rc.ellipse(70, 74, 16, 12, { ...o, fill: dim, fillStyle: "hachure", hachureGap: 5 });
-    rc.circle(60, 60, 5, { stroke: col }); rc.circle(80, 60, 5, { stroke: col });
-    rc.ellipse(168, 108, 118, 66, { ...o, fill: col, fillStyle: "hachure", hachureGap: 7 });
-    rc.curve([[96, 128], [130, 138], [150, 118]], { ...o, strokeWidth: 2.4 });
-    rc.line(96, 132, 116, 132, { ...o });
+    setErr("");
+    try {
+      const mod: any = await import("roughjs");
+      const rough = mod.default ?? mod;
+      if (!rough?.canvas) throw new Error("找不到 rough.canvas：[" + Object.keys(mod).join(",") + "]");
+      const cv = ref.current; if (!cv) return;
+      const ctx = cv.getContext("2d"); if (!ctx) return;
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      const rc = rough.canvas(cv);
+      const cs = getComputedStyle(document.body);
+      const col = cs.getPropertyValue("--accent").trim() || "#8b939e";
+      const dim = cs.getPropertyValue("--text-dim").trim() || "#98a0af";
+      const o = { stroke: col, strokeWidth: 1.6, roughness: 1.6, bowing: 2 };
+      rc.circle(70, 64, 62, o);
+      rc.linearPath([[52, 38], [44, 16], [66, 28]], o);
+      rc.linearPath([[88, 38], [96, 16], [74, 28]], o);
+      rc.ellipse(70, 74, 16, 12, { ...o, fill: dim, fillStyle: "hachure", hachureGap: 5 });
+      rc.circle(60, 60, 5, { stroke: col }); rc.circle(80, 60, 5, { stroke: col });
+      rc.ellipse(168, 108, 118, 66, { ...o, fill: col, fillStyle: "hachure", hachureGap: 7 });
+      rc.curve([[96, 128], [130, 138], [150, 118]], { ...o, strokeWidth: 2.4 });
+      rc.line(96, 132, 116, 132, { ...o });
+      // 像素自检：画完必须有墨迹
+      const d = ctx.getImageData(0, 0, cv.width, cv.height).data;
+      let ink = 0;
+      for (let i = 3; i < d.length; i += 4) if (d[i] > 10) ink++;
+      if (ink < 80) throw new Error("绘制像素不足(" + ink + ")");
+    } catch (e: any) {
+      setErr("rough 初始化失败 → " + (e?.message || e));
+    }
   };
   useEffect(() => { draw(); }, []);
   return (
     <div className="lab-card">
       <div className="rough-box">
         <canvas ref={ref} width={280} height={170} aria-label="rough.js 涂鸦猫" />
-        <Button size="sm" variant="outline" onClick={draw}>↺ 换一张笔触</Button>
+        <div>
+          <Button size="sm" variant="outline" onClick={draw}>↺ 换一张笔触</Button>
+          {err && <p className="lab-note" style={{ color: "var(--danger)", maxWidth: 180 }}>{err}</p>}
+        </div>
       </div>
       <p className="lab-note">rough.js：同一组几何，每次渲染都是新的手绘笔触——程序员白板风，适合空状态与彩蛋。</p>
     </div>
