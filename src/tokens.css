@@ -31,16 +31,16 @@
   --font-hand: "Caveat", "Xingkai SC", "STKaiti", cursive;
 }
 
-/* ---------------- Skin 01 · musée（银白冷调 × 灰黑夜航） ---------------- */
-[data-skin="musee"] { }
-[data-skin="musee"][data-mode="day"] {
+/* ---------------- Skin 01 · fragrance（银白冷调 × 灰黑夜航） ---------------- */
+[data-skin="fragrance"] { }
+[data-skin="fragrance"][data-mode="day"] {
   --surface: #eef0f2; --surface-raised: #e4e7ea; --surface-inset: rgba(24,28,34,.05);
   --text: #17191d; --text-dim: #5f6670; --text-inverse: #f5f6f8;
   --accent: #8b939e; --accent-soft: #b8bfc7; --on-accent: #ffffff;
   --success: #5f7d63; --warning: #a08238; --danger: #a04b40; --info: #56718a;
   --line: rgba(24,28,34,.13);
 }
-[data-skin="musee"][data-mode="night"] {
+[data-skin="fragrance"][data-mode="night"] {
   --surface: #0f1114; --surface-raised: #171a1f; --surface-inset: rgba(220,228,238,.05);
   --text: #e9ecf1; --text-dim: #9aa3ae; --text-inverse: #0f1114;
   --accent: #aab2bc; --accent-soft: #c8cfd6; --on-accent: #101216;

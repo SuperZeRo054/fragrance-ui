@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect } from "react";
 
-export type SkinId = "musee" | "graphite";
+export type SkinId = "fragrance" | "graphite";
 export type Mode = "day" | "night";
 
 interface ThemeState { skin: SkinId; mode: Mode }
@@ -9,14 +9,14 @@ interface ThemeCtx extends ThemeState {
   setMode: (m: Mode) => void;
 }
 
-const Ctx = createContext<ThemeCtx>({ skin: "musee", mode: "day", setSkin: () => {}, setMode: () => {} });
+const Ctx = createContext<ThemeCtx>({ skin: "fragrance", mode: "day", setSkin: () => {}, setMode: () => {} });
 
 /** 把皮肤/模式写到 <html> 的 data 属性 —— CSS 变量整组换血的唯一入口 */
 export function SkinProvider({
   children,
-  defaultSkin = "musee",
+  defaultSkin = "fragrance",
   defaultMode = "day",
-  persistKey = "mui-theme",
+  persistKey = "fragrance-ui",
 }: {
   children: React.ReactNode;
   defaultSkin?: SkinId;

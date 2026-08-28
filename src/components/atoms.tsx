@@ -38,49 +38,40 @@ export function Button({
   return <button className={cls} disabled={loading || rest.disabled} {...rest}>{inner}</button>;
 }
 
-/* ---------------- 品牌标记：零位图动物（替代一切 emoji） ---------------- */
-export function OxMark({ size = 44 }: { size?: number }) {
+/* ---------------- 品牌标记：两位猫咪馆长（奶油 & 蓝灰，零位图） ---------------- */
+export function CatMark({ tone = "cream", size = 44 }: {
+  tone?: "cream" | "blue"; size?: number;
+}) {
+  const coats = {
+    cream: { fur: "#e2cda0", ear: "#d9bd8c", inner: "#eab8a4", eye: "#6f9a6b", muzzle: "#f4ead2" },
+    blue: { fur: "#9aa4ad", ear: "#8b959f", inner: "#d8b3a8", eye: "#7fa8c9", muzzle: "#efe7da" },
+  }[tone];
   return (
     <svg viewBox="0 0 64 64" width={size} height={size} aria-hidden>
-      {OX_HEAD}
+      {/* 耳朵 */}
+      <path d="M15 26 Q11 10 20 7 Q26 14 27 21 Z" fill={coats.ear}/>
+      <path d="M49 26 Q53 10 44 7 Q38 14 37 21 Z" fill={coats.ear}/>
+      <path d="M18 22 Q16 13 21 11 Q24 16 24.5 20 Z" fill={coats.inner}/>
+      <path d="M46 22 Q48 13 43 11 Q40 16 39.5 20 Z" fill={coats.inner}/>
+      {/* 头 */}
+      <circle cx="32" cy="35" r="22" fill={coats.fur}/>
+      {tone === "blue" && <ellipse cx="32" cy="44" rx="13" ry="9" fill="#f2ece0"/>}
+      {/* 眼睛 */}
+      <ellipse cx="24.5" cy="31" rx="4.4" ry="4.8" fill={coats.eye}/>
+      <ellipse cx="39.5" cy="31" rx="4.4" ry="4.8" fill={coats.eye}/>
+      <circle cx="25.6" cy="30.2" r="1.3" fill="#fff" opacity=".9"/>
+      <circle cx="40.6" cy="30.2" r="1.3" fill="#fff" opacity=".9"/>
+      {/* 鼻+嘴 */}
+      <path d="M30 38.5 L34 38.5 L32 41 Z" fill="#d8988a"/>
+      <path d="M32 41 Q32 43.5 29.5 44 M32 41 Q32 43.5 34.5 44" stroke="#b9987e" strokeWidth="1.6" fill="none" strokeLinecap="round"/>
+      {/* 胡须 */}
+      <g stroke="#00000030" strokeWidth="1.1" strokeLinecap="round">
+        <path d="M20 38 L9 36.5"/><path d="M20 41 L10 42"/>
+        <path d="M44 38 L55 36.5"/><path d="M44 41 L54 42"/>
+      </g>
     </svg>
   );
 }
-export function SheepMark({ size = 44 }: { size?: number }) {
-  return (
-    <svg viewBox="0 0 64 64" width={size} height={size} aria-hidden>
-      {/* 云朵绒身 */}
-      <g fill="var(--accent-soft,#c9b183)">
-        <circle cx="20" cy="34" r="10"/><circle cx="32" cy="27" r="12"/>
-        <circle cx="45" cy="33" r="11"/><circle cx="33" cy="39" r="13"/>
-      </g>
-      <g fill="#6b4a35">
-        <rect x="22" y="46" width="7" height="12" rx="3.5"/>
-        <rect x="37" y="46" width="7" height="12" rx="3.5"/>
-      </g>
-      {/* 黑尖小角 + 淡脸 */}
-      <path d="M26 18 Q21 9 28 6 Q31 12 32 16Z" fill="#2e2620"/>
-      <path d="M38 18 Q43 9 36 6 Q33 12 32 16Z" fill="#2e2620"/>
-      <ellipse cx="32" cy="26" rx="9.5" ry="8.5" fill="#efe0c6"/>
-      <circle cx="28.4" cy="23.5" r="1.7" fill="#33291f"/><circle cx="35.6" cy="23.5" r="1.7" fill="#33291f"/>
-      <ellipse cx="32" cy="29.5" rx="4.6" ry="3.2" fill="#d8b694"/>
-    </svg>
-  );
-}
-const OX_HEAD = (
-  <g>
-    <path d="M22 20 Q17 11 24 8 Q27 14 28 18Z" fill="#2e2620"/>
-    <path d="M42 20 Q47 11 40 8 Q37 14 36 18Z" fill="#2e2620"/>
-    <circle cx="17" cy="30" r="8"/><circle cx="47" cy="30" r="8"/>
-    <circle cx="32" cy="32" r="23" fill="var(--accent,#a8894f)"/>
-    <ellipse cx="32" cy="41" rx="12.5" ry="9" fill="#ecd2b4"/>
-    <circle cx="27" cy="39" r="1.9" fill="#b98d68"/><circle cx="37" cy="39" r="1.9" fill="#b98d68"/>
-    <path d="M28 45 q4 2.4 8 0" stroke="#caa87e" strokeWidth="2" fill="none" strokeLinecap="round"/>
-    <circle cx="25" cy="28" r="3.6" fill="#33291f"/><circle cx="39" cy="28" r="3.6" fill="#33291f"/>
-    <circle cx="26.2" cy="26.8" r="1.1" fill="#fff" opacity=".85"/>
-    <circle cx="40.2" cy="26.8" r="1.1" fill="#fff" opacity=".85"/>
-  </g>
-);
 
 /* ---------------- Badge / Kicker ---------------- */
 export function Badge({ tone = "gold", children }: {
@@ -144,7 +135,7 @@ export function Avatar({ children, shape = "circle", size = 88 }:
   { children?: React.ReactNode; shape?: "circle" | "rounded"; size?: number }) {
   return (
     <span className={`mui-avatar mui-avatar--${shape}`} style={{ width: size, height: size }}>
-      {children ?? <OxMark size={size * .58} />}
+      {children ?? <CatMark tone="cream" size={size * .58} />}
     </span>
   );
 }

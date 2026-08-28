@@ -1,8 +1,8 @@
 {
-  "name": "musee-ui",
+  "name": "fragrance-ui",
   "private": true,
   "version": "0.1.0",
-  "description": "Musée UI — 多皮肤主题引擎驱动的个人品牌 React 组件库。Structure over style: 一套结构，任意换皮。",
+  "description": "Fragrance UI — 多皮肤主题引擎驱动的个人品牌 React 组件库。一套结构，任意换皮。两位猫咪馆长督阵。",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -17,6 +17,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "puppeteer-core": "^25.9.0",
     "typescript": "^5.5.3",
     "vite": "^5.4.0"
   }
