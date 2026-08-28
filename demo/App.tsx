@@ -314,7 +314,8 @@ function App() {
         <main style={{ maxWidth: 1100, margin: "0 auto", padding: "70px 28px 90px" }} id="top">
           <Reveal>
             <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 600,
-              fontSize: "clamp(38px,5vw,64px)", lineHeight: 1.1, letterSpacing: "-0.015em" }}>
+              fontSize: "clamp(30px, 8vw, 64px)", lineHeight: 1.1, letterSpacing: "-0.015em",
+              overflowWrap: "anywhere" }}>
               一套结构，<em style={{ color: "var(--accent)" }}>任意换皮</em>。
             </h1>
             <p className="mui-sechead__sub" style={{ marginTop: 16 }}>
