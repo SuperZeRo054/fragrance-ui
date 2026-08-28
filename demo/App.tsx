@@ -319,7 +319,7 @@ function App() {
             </h1>
             <p className="mui-sechead__sub" style={{ marginTop: 16 }}>
               Musée UI v0.1 · 多皮肤主题引擎 React 组件库。右上角切换皮肤与昼夜，整站变量即时换血。</p>
-            <span className="mui-hand" style={{ display: "inline-block", marginTop: 14,
+            <span className="mui-hand hero-sig" style={{ display: "inline-block", marginTop: 14,
               fontSize: 30, color: "var(--accent)" }}>Curated with love — Musée du Niu Lai</span>
           </Reveal>
           <Atoms /><Forms /><Overlays /><Content />

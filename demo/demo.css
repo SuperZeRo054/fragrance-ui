@@ -10,6 +10,11 @@
 section { margin-top: 84px; }
 
 /* ---------- 移动端适配 ---------- */
+.hero-sig { font-size: 30px; }
+@media (max-width: 640px) {
+  .hero-sig { font-size: 21px; }
+}
+
 @media (max-width: 640px) {
   header { padding: 10px 14px; }
   header .brand, header a.mui-kicker { font-size: 14px; letter-spacing: .22em; }
