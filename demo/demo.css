@@ -8,3 +8,18 @@
 .console button.on { border-color: var(--accent); color: var(--on-accent); background: var(--accent); }
 
 section { margin-top: 84px; }
+
+/* ---------- 移动端适配 ---------- */
+@media (max-width: 640px) {
+  header { padding: 10px 14px; }
+  header .brand, header a.mui-kicker { font-size: 14px; letter-spacing: .22em; }
+  .console { gap: 6px; }
+  .console .cap, .console i { display: none; }
+  .console button { padding: 6px 10px; font-size: 11px; }
+  main { padding: 46px 16px 70px !important; }
+  section { margin-top: 60px; }
+  .glass-float { left: 10px !important; bottom: 10px !important;
+    padding: 10px 12px !important; gap: 10px !important; }
+  .glass-float .mui-hand { font-size: 18px !important; }
+  .result-card { padding: 26px 18px; }
+}

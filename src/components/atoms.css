@@ -95,3 +95,8 @@ body[data-mode="night"] .mui-btn--glass { box-shadow: inset 0 1px 0 rgba(255,255
 .mui-tooltip__bubble::before { content: attr(data-tip); }
 .mui-tooltip:hover .mui-tooltip__bubble,
 .mui-tooltip:focus-visible .mui-tooltip__bubble { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---------- 移动端：气泡允许折行不顶出屏幕 ---------- */
+@media (max-width: 640px) {
+  .mui-tooltip__bubble { white-space: normal; width: max-content; max-width: 230px; text-align: center; }
+}

@@ -36,3 +36,11 @@
   30%, 50%, 70% { transform: translateX(-6px); }
   40%, 60% { transform: translateX(6px); }
 }
+
+/* ---------- 移动端：Modal 收紧 ---------- */
+@media (max-width: 640px) {
+  .mui-backdrop { padding: 14px; }
+  .mui-modal { padding: 26px 22px; border-radius: var(--mui-radius-md); }
+  .mui-modal__title { font-size: 23px; }
+  .mui-modal__actions { gap: 10px; }
+}

@@ -59,6 +59,18 @@
   transition: transform .5s var(--mui-ease-out); }
 .mui-step-line.done::after { transform: scaleX(1); }
 
+/* ---------- 移动端：步骤条转竖排 ---------- */
+@media (max-width: 640px) {
+  .mui-tabs--steps { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .mui-step { padding: 2px 0; }
+  .mui-step-line { width: 1.5px; height: 20px; flex: none; margin: 0 0 0 13px; }
+  .mui-step-line::after { transform: scaleY(0); transform-origin: 50% 0; }
+  .mui-step-line.done::after { transform: scaleY(1); }
+
+  .mui-pagi { flex-wrap: wrap; }
+  .mui-pagi button { min-width: 38px; height: 38px; font-size: 13px; }
+}
+
 .mui-acc details { border-bottom: 1px solid var(--line); }
 .mui-acc summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between;
   align-items: center; padding: 17px 2px; font-size: 15px; letter-spacing: .06em; }

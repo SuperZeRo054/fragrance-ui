@@ -288,7 +288,7 @@ function LoadingLab() {
             src={"data:image/svg+xml;charset=utf-8," + encodeURIComponent(
               `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'><defs><radialGradient id='g' cx='32%' cy='76%' r='90%'><stop offset='0%' stop-color='#ffeec4'/><stop offset='42%' stop-color='#eed493'/><stop offset='100%' stop-color='#8fa9b6'/></radialGradient></defs><rect width='800' height='500' fill='url(#g)'/><g transform='translate(400,330) scale(1.6)'><circle cx='0' cy='-40' r='44' fill='#cf9a52'/><ellipse cx='0' cy='-6' rx='17' ry='12' fill='#ecd2b4'/><circle cx='-11' cy='-47' r='4' fill='#33291f'/><circle cx='11' cy='-47' r='4' fill='#33291f'/><path d='M-28 -60 Q-36 -78 -22 -83 Q-16 -72 -14 -64Z' fill='#2e2620'/><path d='M28 -60 Q36 -78 22 -83 Q16 -72 14 -64Z' fill='#2e2620'/></g></svg>`)}
             ratio="16 / 10" alt="镜面湖上的牛来示意" />
-          <div className="mui-glass" style={{ position: "absolute", left: 18, bottom: 18,
+          <div className="mui-glass glass-float" style={{ position: "absolute", left: 18, bottom: 18,
             padding: "14px 20px", display: "flex", gap: 16, alignItems: "center" }}>
             <span className="mui-hand" style={{ fontSize: 24, color: "var(--text)" }}>Live by the lake</span>
             <Button variant="glass" size="sm">进入直播</Button>
