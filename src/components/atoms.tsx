@@ -85,21 +85,21 @@ export function catLoafGroup(tone: "cream" | "blue" = "cream"): string {
   const c = CAT_COATS[tone];
   const paws = tone === "cream" ? "#f0e3c8" : "#e8e2d6";
   return `<g>
-    <path d="M150 120 Q174 116 172 100 Q170 88 156 90" fill="none" stroke="${c.fur2}" stroke-width="13" stroke-linecap="round"/>
+    <path class="cat-tail" d="M150 120 Q174 116 172 100 Q170 88 156 90" fill="none" stroke="${c.fur2}" stroke-width="13" stroke-linecap="round"/>
     <path d="M30 128 Q26 92 56 82 Q96 68 140 78 Q168 86 171 110 Q173 128 150 128 Z" fill="${c.fur}"/>
     ${tone === "cream" ? `<g stroke="${c.fur2}" stroke-width="6" opacity=".35" fill="none" stroke-linecap="round">
       <path d="M78 84 q6 14 2 26"/><path d="M100 80 q6 16 2 30"/><path d="M122 80 q6 14 2 28"/></g>` : ""}
     ${tone === "blue" ? `<ellipse cx="86" cy="112" rx="30" ry="16" fill="${c.chest}" opacity=".92"/>` : ""}
     <rect x="66" y="118" width="19" height="13" rx="6.5" fill="${paws}"/>
     <rect x="92" y="120" width="19" height="13" rx="6.5" fill="${paws}"/>
-    <path d="M41 27 Q32 13 44 8 Q51 15 52 26 Z" fill="${c.ear}"/>
-    <path d="M62 25 Q66 11 77 14 Q77 24 70 29 Z" fill="${c.ear}"/>
+    <path class="cat-ear cat-ear-l" d="M41 27 Q32 13 44 8 Q51 15 52 26 Z" fill="${c.ear}"/>
+    <path class="cat-ear cat-ear-r" d="M62 25 Q66 11 77 14 Q77 24 70 29 Z" fill="${c.ear}"/>
     <path d="M44 23.5 Q40 16 45.5 13 Q48.5 17.5 49 22.5 Z" fill="${c.inner}"/>
     <circle cx="58" cy="52" r="27" fill="${c.fur}"/>
     <circle cx="44" cy="60" r="9" fill="${c.fur}"/><circle cx="73" cy="60" r="9" fill="${c.fur}"/>
     ${tone === "blue" ? `<ellipse cx="58" cy="70" rx="14" ry="9" fill="${c.chest}"/>` : ""}
     <ellipse cx="58" cy="63" rx="12" ry="8.5" fill="${c.muzzle}"/>
-    <ellipse cx="50.5" cy="50" rx="4.6" ry="5" fill="${c.eye}"/><ellipse cx="65.5" cy="50" rx="4.6" ry="5" fill="${c.eye}"/>
+    <g class="cat-eyes"><ellipse cx="50.5" cy="50" rx="4.6" ry="5" fill="${c.eye}"/><ellipse cx="65.5" cy="50" rx="4.6" ry="5" fill="${c.eye}"/></g>
     <circle cx="51.8" cy="49" r="1.4" fill="#fff" opacity=".9"/><circle cx="66.8" cy="49" r="1.4" fill="#fff" opacity=".9"/>
     <path d="M56 59.5 L60 59.5 L58 62 Z" fill="#d8988a"/>
     <path d="M58 62 Q58 64.5 55.5 65 M58 62 Q58 64.5 60.5 65" stroke="#b9987e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
@@ -109,13 +109,12 @@ export function catLoafGroup(tone: "cream" | "blue" = "cream"): string {
     </g>
   </g>`;
 }
-export function CatFull({ tone = "cream", width = 180 }: {
-  tone?: "cream" | "blue"; width?: number;
+export function CatFull({ tone = "cream", width = 180, className = "" }: {
+  tone?: "cream" | "blue"; width?: number; className?: string;
 }) {
   return (
-    <svg viewBox="0 0 200 140" width={width} aria-hidden style={{ display: "block" }}>
-      {catLoafGroup(tone)}
-    </svg>
+    <svg viewBox="0 0 200 140" width={width} aria-hidden className={className}
+      style={{ display: "block" }} dangerouslySetInnerHTML={{ __html: catLoafGroup(tone) }} />
   );
 }
 

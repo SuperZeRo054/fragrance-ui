@@ -10,6 +10,7 @@ import {
   PageTransition, viewNavigate, Spinner, Progress, CountUp, LazyImage,
   type SkinId,
 } from "../src";
+import { MotionLab } from "./motionlab";
 
 /* ---------- 换肤控制台：引擎的活体证明 ---------- */
 function ThemeConsole() {
@@ -343,7 +344,7 @@ function App() {
               fontSize: 30, color: "var(--accent)" }}>Curated by two cats — Fragrance UI</span>
           </Reveal>
           <Atoms /><Forms /><Overlays /><Content />
-          <RouteLab /><LoadingLab />
+          <RouteLab /><LoadingLab /><MotionLab />
         </main>
       </ToastProvider>
     </SkinProvider>

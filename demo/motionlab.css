@@ -1,0 +1,111 @@
+/* ===== 动效与画法实验室 ===== */
+.lab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 36px; }
+.lab-grid > div { min-width: 0; }
+.lab-h { font-family: var(--font-display); font-weight: 600; font-size: 17px;
+  letter-spacing: .02em; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.lab-tag { font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--accent); border: 1px solid var(--accent-soft); border-radius: 999px; padding: 2px 10px; font-weight: 500; }
+.lab-card { background: var(--surface-raised); border: 1px solid var(--line);
+  border-radius: var(--mui-radius-lg); padding: 22px; }
+.lab-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
+.lab-note { font-size: 12.5px; color: var(--text-dim); margin-top: 12px; line-height: 1.8; }
+
+/* A. 状态机猫 */
+.state-cat-box { position: relative; display: inline-block; cursor: pointer;
+  background: var(--surface-inset); border-radius: var(--mui-radius-md); padding: 8px; }
+.state-cat-box svg { overflow: visible; }
+.state-badge { position: absolute; top: 12px; right: 12px; font-size: 10px;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
+  border: 1px solid var(--accent-soft); border-radius: 999px; padding: 3px 10px;
+  background: var(--surface); }
+.state-cat .cat-tail { transform-box: fill-box; transform-origin: 20% 80%;
+  animation: tail-wag 3.4s ease-in-out infinite; }
+@keyframes tail-wag { 0%,100% { transform: rotate(0); } 50% { transform: rotate(9deg); } }
+.state-cat .cat-eye { transform-box: fill-box; transform-origin: center;
+  animation: cat-blink 4.6s infinite; }
+@keyframes cat-blink { 0%,91%,100% { transform: scaleY(1); } 94% { transform: scaleY(.08); } 97% { transform: scaleY(1); } }
+.state-cat .cat-ear { transform-box: fill-box; transform-origin: 50% 100%;
+  transition: transform .45s var(--mui-ease-spring); }
+.state-cat.st-alert .cat-ear-l { transform: rotate(-14deg) translateY(-3px); }
+.state-cat.st-alert .cat-ear-r { transform: rotate(14deg) translateY(-3px); }
+.state-cat.st-groom .cat-tail { animation-duration: 1.1s; }
+.state-cat svg { animation: cat-breathe 3.8s ease-in-out infinite; }
+@keyframes cat-breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+
+/* B. DrawSVG */
+.draw-box { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+
+/* C. 滚动驱动 */
+.sd-progress { position: sticky; top: 0; height: 3px; z-index: 2;
+  background: var(--surface); border-radius: 99px; overflow: hidden; }
+.sd-progress i, .sd-progress::before { content: ""; display: block; height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+  transform-origin: 0 50%; }
+.sd-track { display: grid; gap: 18px; padding: 22px 4px; }
+.sd-card { border: 1px solid var(--line); border-radius: var(--mui-radius-md);
+  padding: 20px 22px; font-size: 15px; background: var(--surface);
+  display: flex; align-items: center; gap: 14px; }
+.sd-card b { font-family: var(--font-display); font-weight: 600;
+  font-size: 24px; color: var(--gold, var(--accent)); }
+@supports (animation-timeline: view()) {
+  .sd-progress::before { width: 100%;
+    animation: sd-grow linear both; animation-timeline: scroll(nearest block); }
+  @keyframes sd-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .sd-card { animation: sd-in linear both;
+    animation-timeline: view(); animation-range: entry 5% cover 34%; }
+  @keyframes sd-in { from { opacity: 0; transform: translateY(46px) rotate(-2deg); } }
+}
+
+/* D. 爪印路径 */
+.paw-track { position: relative; height: 240px; overflow: hidden;
+  border-radius: var(--mui-radius-md); background: var(--surface-inset); }
+.paw-guide { position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='240'%3E%3Cpath d='M20,200 C140,30 280,230 420,70 S600,190 780,60' fill='none' stroke='%23a8894f30' stroke-width='2' stroke-dasharray='6 8'/%3E%3C/svg%3E");
+  background-size: 100% 100%; }
+.paw { position: absolute; top: 0; left: 0; width: 26px; height: 26px;
+  offset-path: path("M20,200 C140,30 280,230 420,70 S600,190 780,60");
+  offset-rotate: auto; opacity: 0;
+  animation: paw-walk 5.4s linear infinite; animation-delay: calc(var(--i) * -.9s); }
+@keyframes paw-walk {
+  0% { offset-distance: 0%; opacity: 0; transform: scale(.7); }
+  8% { opacity: 1; transform: scale(1); }
+  22% { opacity: 0; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+/* E. 雾面着色器 */
+.shader-wrap { border-radius: var(--mui-radius-md); overflow: hidden; line-height: 0; }
+.shader-wrap canvas { width: 100%; height: 280px; display: block; }
+
+/* F. rough */
+.rough-box { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+/* G. mesh 渐变面板 */
+.mesh-panel { height: 210px; border-radius: var(--mui-radius-md);
+  background:
+    radial-gradient(60% 90% at 18% 22%, color-mix(in srgb, var(--accent-soft) 55%, transparent), transparent 60%),
+    radial-gradient(50% 80% at 82% 30%, #cdd6df, transparent 65%),
+    radial-gradient(70% 90% at 60% 88%, #aab4c0, transparent 62%),
+    var(--surface-raised);
+  filter: saturate(1.05);
+  animation: mesh-drift 26s ease-in-out infinite alternate; }
+@keyframes mesh-drift {
+  0% { background-position: 0% 0%, 100% 0%, 50% 100%, 0 0; }
+  100% { background-position: 60% 40%, 30% 60%, 20% 40%, 0 0; }
+}
+
+/* H. cataas */
+.cataas-img { display: block; width: 100%; max-width: 320px; aspect-ratio: 4/3;
+  object-fit: cover; border-radius: var(--mui-radius-md); margin-top: 16px;
+  animation: mui-fade-up .6s var(--mui-ease-out); }
+
+@media (max-width: 640px) {
+  .lab-grid { grid-template-columns: 1fr; }
+  .lab-card { padding: 18px; }
+  .paw-track { height: 190px; }
+  .shader-wrap canvas { height: 210px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .state-cat .cat-tail, .state-cat .cat-eye, .state-cat svg, .state-cat .cat-ear { animation: none !important; }
+  .paw, .mesh-panel { animation: none !important; }
+}
