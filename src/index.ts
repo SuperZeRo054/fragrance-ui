@@ -10,7 +10,7 @@ import "./components/loading.css";
 export { SkinProvider, useTheme } from "./theme/SkinProvider";
 export type { SkinId, Mode } from "./theme/SkinProvider";
 
-export { Reveal, Button, Badge, Kicker, SectionHead, ChipGroup, Rating, Avatar, Tooltip, CatMark } from "./components/atoms";
+export { Reveal, Button, Badge, Kicker, SectionHead, ChipGroup, Rating, Avatar, Tooltip, CatMark, CatFull, catLoafGroup } from "./components/atoms";
 export { TextField, SelectField, Switch, Checkbox, RadioGroup, RangeField } from "./components/forms";
 export { Modal, ConfirmModal, ErrorModal, ToastProvider, useToast, Lightbox } from "./components/overlays";
 export { Card, Table, Tabs, Accordion, Pagination, EmptyState, Skeleton } from "./components/content";

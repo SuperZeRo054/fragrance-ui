@@ -3,15 +3,13 @@ import { createRoot } from "react-dom/client";
 import {
   SkinProvider, useTheme, ToastProvider, useToast,
   Reveal, Button, Badge, Kicker, SectionHead, ChipGroup, Rating, Avatar, Tooltip,
-  CatMark,
+  CatMark, CatFull, catLoafGroup,
   TextField, SelectField, Switch, Checkbox, RadioGroup, RangeField,
   Modal, ConfirmModal, ErrorModal, Lightbox,
   Card, Table, Tabs, Accordion, Pagination, EmptyState, Skeleton,
   PageTransition, viewNavigate, Spinner, Progress, CountUp, LazyImage,
   type SkinId,
 } from "../src";
-import catCream from "./photos/cat-cream.jpg";
-import catBlue from "./photos/cat-blue.jpg";
 
 /* ---------- 换肤控制台：引擎的活体证明 ---------- */
 function ThemeConsole() {
@@ -209,6 +207,24 @@ function Content() {
   );
 }
 
+/* ---------- 双猫窗台场景（运行时 SVG） ---------- */
+function windowScene(){const HY=320;const g1=catLoafGroup('cream');const g2=catLoafGroup('blue');
+const s="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'>"
++"<defs><linearGradient id='w' x1='0' y1='0' x2='0' y2='1'><stop offset='0%' stop-color='#eceff2'/><stop offset='62%' stop-color='#cdd4db'/><stop offset='100%' stop-color='#b7c0c9'/></linearGradient>"
++"<linearGradient id='wood' x1='0' y1='0' x2='0' y2='1'><stop offset='0%' stop-color='#c9a870'/><stop offset='100%' stop-color='#a5824e'/></linearGradient>"
++"<radialGradient id='sun' cx='50%' cy='50%' r='50%'><stop offset='0%' stop-color='#ffffff' stop-opacity='.5'/><stop offset='100%' stop-color='#ffffff' stop-opacity='0'/></radialGradient></defs>"
++"<rect width='800' height='"+HY+"' fill='url(#w)'/><circle cx='415' cy='170' r='170' fill='url(#sun)'/>"
++"<g stroke='#9fb0bd' stroke-width='9' fill='#f4f7f9'><rect x='96' y='52' width='230' height='268'/><line x1='211' y1='52' x2='211' y2='320'/><line x1='96' y1='186' x2='326' y2='186'/></g>"
++"<rect y='"+HY+"' width='800' height='180' fill='url(#wood)'/><rect y='"+HY+"' width='800' height='7' fill='#8a6b3e'/>"
++"<ellipse cx='345' cy='"+(HY+6)+"' rx='120' ry='10' fill='#5c452a' opacity='.28'/><ellipse cx='585' cy='"+(HY+8)+"' rx='105' ry='9' fill='#5c452a' opacity='.24'/>"
++"<g transform='translate(262,"+(HY-99)+") scale(.75)'>"+g1+"</g><g transform='translate(655,"+(HY-95)+") scale(-.7,.7)'>"+g2+"</g></svg>";
+return s}
+function portraitScene(tone){const c=tone==='cream'?{a:'#efe3c4',b:'#d9c08c'}:{a:'#dfe3e8',b:'#96a1ab'};const g=catLoafGroup(tone);
+return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'>"
++"<defs><radialGradient id='p-'+tone+'"+" cx='50%' cy='34%' r='85%'><stop offset='0%' stop-color='"+c.a+"'/><stop offset='100%' stop-color='"+c.b+"'/></radialGradient></defs>"
++"<rect width='400' height='300' fill='url(#p-'+tone+')'/><ellipse cx='200' cy='242' rx='120' ry='13' fill='#00000022'/>"
++"<g transform='translate(200,238) scale(.92)'>"+g+"</g></svg>"}
+
 /* ---------- 页面切换实验室 ---------- */
 function RouteLab() {
   const [view, setView] = useState<"gallery" | "essay">("gallery");
@@ -286,7 +302,7 @@ function LoadingLab() {
       </Reveal>
       <Reveal delay={160}>
         <div style={{ position: "relative" }}>
-          <LazyImage src={catCream} ratio="16 / 10" alt="奶油馆长实拍" />
+          <LazyImage src={"data:image/svg+xml;charset=utf-8," + encodeURIComponent(windowScene())} ratio="16 / 10" alt="窗台上的两位馆长" />
           <div className="mui-glass glass-float" style={{ position: "absolute", left: 18, bottom: 18,
             padding: "14px 20px", display: "flex", gap: 16, alignItems: "center" }}>
             <span className="mui-hand" style={{ fontSize: 24, color: "var(--text)" }}>Live by the two cats</span>
@@ -294,8 +310,8 @@ function LoadingLab() {
           </div>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 22, marginTop: 22 }}>
-          <LazyImage src={catCream} ratio="4 / 3" alt="奶油馆长" />
-          <LazyImage src={catBlue} ratio="4 / 3" alt="蓝灰馆长" />
+          <LazyImage src={"data:image/svg+xml;charset=utf-8," + encodeURIComponent(portraitScene("cream"))} ratio="4 / 3" alt="奶油馆长" />
+          <LazyImage src={"data:image/svg+xml;charset=utf-8," + encodeURIComponent(portraitScene("blue"))} ratio="4 / 3" alt="蓝灰馆长" />
         </div>
         <p style={{ marginTop: 12, textAlign: "center", fontSize: 12.5, color: "var(--text-dim)" }}>
           LazyImage 演示 · 两位馆长实拍：占位 shimmer → 进入视口拉取 → blur-up 淡入 ｜ 玻璃卡悬浮其上，糊化肉眼可见</p>
