@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   SkinProvider, useTheme, ToastProvider, useToast,
@@ -11,6 +11,14 @@ import {
   type SkinId,
 } from "../src";
 import { MotionLab } from "./motionlab";
+import catCream from "./gallery/frg-portrait-cream.jpg";
+import catBlue from "./gallery/frg-portrait-blue.jpg";
+import frgWave from "./gallery/frg-greatwave.jpg";
+import frgWaterlilies from "./gallery/frg-waterlilies.jpg";
+import frgStarry from "./gallery/frg-starrynight.jpg";
+import frgPearl from "./gallery/frg-pearlearring.jpg";
+import frgAthens from "./gallery/frg-athens.jpg";
+import frgSill from "./gallery/frg-windowsill.jpg";
 
 /* ---------- 换肤控制台：引擎的活体证明 ---------- */
 function ThemeConsole() {
@@ -150,29 +158,40 @@ function Overlays() {
 }
 
 const WORKS = [
-  { no: "FRG·IMP-01", zh: "睡莲中的猫", en: "Cat Among Water Lilies", era: "印象派", artist: "Claude Monet", year: "1916", stars: 4 },
-  { no: "FRG·UKI-01", zh: "神奈川冲浪猫", en: "The Great Wave Cat", era: "浮世绘", artist: "Hokusai", year: "c. 1831", stars: 4 },
-  { no: "FRG·MOD-01", zh: "构成八号猫", en: "Composition VIII Cat", era: "现代", artist: "Kandinsky", year: "1923", stars: 5 },
+ {no:'FRG·UKI-01',zh:'神奈川冲浪猫',en:'The Great Wave Cat',era:'浮世绘',artist:'葛饰北斋',year:'c. 1831',stars:5,img:frgWave,orig:'仿《神奈川冲浪里》',
+  story:'巨浪以普鲁士蓝扑向船头，两只猫在船板上圆睁双眼、一动不动——浪再大，呆滞不动如山。'},
+ {no:'FRG·IMP-01',zh:'睡莲中的猫',en:'Cat Among Water Lilies',era:'印象派',artist:'Claude Monet',year:'1916',stars:5,img:frgWaterlilies,orig:'仿《睡莲》与日本桥',
+  story:'莫奈画了三十年的水面，这次的主角换成了两位馆长：一位占桥，一位守岸。'},
+ {no:'FRG·POS-01',zh:'星月夜猫',en:'Starry Night Cat',era:'后印象派',artist:'Vincent van Gogh',year:'1889',stars:5,img:frgStarry,orig:'仿《星月夜》',
+  story:'旋涡星云下，蓝灰馆长坐在尖顶屋顶仰望，奶油馆长在窗台探出头——柏树如火焰，猫如灯塔。'},
+ {no:'FRG·DUT-01',zh:'戴珍珠耳环的猫',en:'Cat with a Pearl Earring',era:'荷兰黄金时代',artist:'Johannes Vermeer',year:'c. 1665',stars:5,img:frgPearl,orig:'仿《戴珍珠耳环的少女》',
+  story:'回眸的一瞬被永远定格。珍珠是借的，眼神是自己的。'},
+ {no:'FRG·REN-01',zh:'雅典学院猫',en:'Cats of the Athens School',era:'文艺复兴',artist:'Raphael',year:'1511',stars:4,img:frgAthens,orig:'仿《雅典学院》',
+  story:'台阶正中并肩而坐，如两位哲学家。诸位学者环绕——但他们才是这幅画真正的主角。'},
 ];
 
 function Content() {
   const [page, setPage] = useState(2);
+  const [lbWork, setLbWork] = useState<any>(null);
   return (
-    <section>
+    <section id="gallery">
       <SectionHead kicker="04 · Content" title="数据与内容展示" sub="卡片 / 名录表 / 标签页 / 手风琴 / 分页 / 空态与骨架屏。" />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(250px,1fr))", gap: 32, marginTop: 34 }}>
-        {[WORKS[0], WORKS[1], WORKS[2]].map((w, i) => (
-          <Reveal key={w.no} delay={i * 90}>
-            <Card kicker={<><span>{w.era}</span><span>{w.no}</span></>}
-              title={w.zh} subtitle={w.en}
-              footer={<><span>{`仿 · ${w.artist}`}</span><Rating value={w.stars} /></>} />
+        {WORKS.map((w, i) => (
+          <Reveal key={w.no} delay={i * 80}>
+            <Card media={<LazyImage src={w.img} ratio="4 / 3" alt={w.zh} />}
+              kicker={<><span>{w.era}</span><span>{w.no}</span></>}
+              title={w.zh} subtitle={w.en} onClick={() => setLbWork(w)}
+              footer={<><span>{w.orig}</span><Rating value={w.stars} /></>} />
           </Reveal>
         ))}
+        <Lightbox open={!!lbWork} onClose={() => setLbWork(null)} src={lbWork?.img || ""}
+          alt={lbWork?.zh} caption={lbWork ? `${lbWork.no} · ${lbWork.orig} · ${lbWork.year}` : ""} />
       </div>
       <div style={{ marginTop: 46 }}>
         <Table
           rowKey={(r) => r.no as string}
-          onRowClick={(r) => alert(`灯箱会在这里打开：${r.zh}`)}
+          onRowClick={(r) => setLbWork(r)}
           columns={[
             { key: "no", label: "馆藏编号" },
             { key: "zh", label: "作品名称" },
@@ -208,24 +227,6 @@ function Content() {
   );
 }
 
-/* ---------- 双猫窗台场景（运行时 SVG） ---------- */
-function windowScene(){const HY=320;const g1=catLoafGroup('cream');const g2=catLoafGroup('blue');
-const s="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'>"
-+"<defs><linearGradient id='w' x1='0' y1='0' x2='0' y2='1'><stop offset='0%' stop-color='#eceff2'/><stop offset='62%' stop-color='#cdd4db'/><stop offset='100%' stop-color='#b7c0c9'/></linearGradient>"
-+"<linearGradient id='wood' x1='0' y1='0' x2='0' y2='1'><stop offset='0%' stop-color='#c9a870'/><stop offset='100%' stop-color='#a5824e'/></linearGradient>"
-+"<radialGradient id='sun' cx='50%' cy='50%' r='50%'><stop offset='0%' stop-color='#ffffff' stop-opacity='.5'/><stop offset='100%' stop-color='#ffffff' stop-opacity='0'/></radialGradient></defs>"
-+"<rect width='800' height='"+HY+"' fill='url(#w)'/><circle cx='415' cy='170' r='170' fill='url(#sun)'/>"
-+"<g stroke='#9fb0bd' stroke-width='9' fill='#f4f7f9'><rect x='96' y='52' width='230' height='268'/><line x1='211' y1='52' x2='211' y2='320'/><line x1='96' y1='186' x2='326' y2='186'/></g>"
-+"<rect y='"+HY+"' width='800' height='180' fill='url(#wood)'/><rect y='"+HY+"' width='800' height='7' fill='#8a6b3e'/>"
-+"<ellipse cx='345' cy='"+(HY+6)+"' rx='120' ry='10' fill='#5c452a' opacity='.28'/><ellipse cx='585' cy='"+(HY+8)+"' rx='105' ry='9' fill='#5c452a' opacity='.24'/>"
-+"<g transform='translate(262,"+(HY-99)+") scale(.75)'>"+g1+"</g><g transform='translate(655,"+(HY-95)+") scale(-.7,.7)'>"+g2+"</g></svg>";
-return s}
-function portraitScene(tone){const c=tone==='cream'?{a:'#efe3c4',b:'#d9c08c'}:{a:'#dfe3e8',b:'#96a1ab'};const g=catLoafGroup(tone);
-return "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'>"
-+"<defs><radialGradient id='p-'+tone+'"+" cx='50%' cy='34%' r='85%'><stop offset='0%' stop-color='"+c.a+"'/><stop offset='100%' stop-color='"+c.b+"'/></radialGradient></defs>"
-+"<rect width='400' height='300' fill='url(#p-'+tone+')'/><ellipse cx='200' cy='242' rx='120' ry='13' fill='#00000022'/>"
-+"<g transform='translate(200,238) scale(.92)'>"+g+"</g></svg>"}
-
 /* ---------- 页面切换实验室 ---------- */
 function RouteLab() {
   const [view, setView] = useState<"gallery" | "essay">("gallery");
@@ -250,9 +251,10 @@ function RouteLab() {
           {view === "gallery" ? (
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(250px,1fr))", gap: 26 }}>
               {WORKS.slice(0, 3).map((w) => (
-                <Card key={w.no} kicker={<><span>{w.era}</span><span>{w.no}</span></>}
+                <Card key={w.no} media={<LazyImage src={w.img} ratio="4 / 3" alt={w.zh} />}
+                  kicker={<><span>{w.era}</span><span>{w.no}</span></>}
                   title={w.zh} subtitle={w.en}
-                  footer={<><span>{`仿 · ${w.artist}`}</span><Rating value={w.stars} /></>} />
+                  footer={<><span>{w.orig}</span><Rating value={w.stars} /></>} />
               ))}
             </div>
           ) : (
@@ -303,7 +305,7 @@ function LoadingLab() {
       </Reveal>
       <Reveal delay={160}>
         <div style={{ position: "relative" }}>
-          <LazyImage src={"data:image/svg+xml;charset=utf-8," + encodeURIComponent(windowScene())} ratio="16 / 10" alt="窗台上的两位馆长" />
+          <LazyImage src={"data:image/svg+xml;charset=utf-8," + frgSill} ratio="16 / 10" alt="窗台双猫 · GPT 生图" />
           <div className="mui-glass glass-float" style={{ position: "absolute", left: 18, bottom: 18,
             padding: "14px 20px", display: "flex", gap: 16, alignItems: "center" }}>
             <span className="mui-hand" style={{ fontSize: 24, color: "var(--text)" }}>Live by the two cats</span>
@@ -311,17 +313,29 @@ function LoadingLab() {
           </div>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 22, marginTop: 22 }}>
-          <LazyImage src={"data:image/svg+xml;charset=utf-8," + encodeURIComponent(portraitScene("cream"))} ratio="4 / 3" alt="奶油馆长" />
-          <LazyImage src={"data:image/svg+xml;charset=utf-8," + encodeURIComponent(portraitScene("blue"))} ratio="4 / 3" alt="蓝灰馆长" />
+          <LazyImage src={"data:image/svg+xml;charset=utf-8," + catCream} ratio="4 / 3" alt="定妆照 · 奶油馆长" />
+          <LazyImage src={"data:image/svg+xml;charset=utf-8," + catBlue} ratio="4 / 3" alt="定妆照 · 蓝灰馆长" />
         </div>
         <p style={{ marginTop: 12, textAlign: "center", fontSize: 12.5, color: "var(--text-dim)" }}>
-          LazyImage 演示 · 两位馆长实拍：占位 shimmer → 进入视口拉取 → blur-up 淡入 ｜ 玻璃卡悬浮其上，糊化肉眼可见</p>
+          LazyImage 演示 · GPT 生图：shimmer 占位 → 进入视口拉取 → blur-up 淡入｜ 玻璃卡悬浮其上，糊化肉眼可见</p>
       </Reveal>
     </section>
   );
 }
 
 function App() {
+  // SPA 锚点：挂载后补跳 + 监听 hash 变化（含 viewNavigate 的同页跳转）
+  useEffect(() => {
+    const go = () => {
+      const h = location.hash;
+      if (!h || h === "#top") { window.scrollTo({ top: 0 }); return; }
+      const el = document.querySelector(h);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    };
+    go();
+    addEventListener("hashchange", go);
+    return () => removeEventListener("hashchange", go);
+  }, []);
   return (
     <SkinProvider persistKey="fragrance-ui-demo">
       <ToastProvider>
