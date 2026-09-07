@@ -122,3 +122,18 @@ section { margin-top: 84px; }
 .icon-cell:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
 .icon-cell span { font-size: 10px; letter-spacing: .04em; color: var(--text-dim); }
 .icon-cell:hover span { color: var(--accent); }
+
+/* ===== 找形对比 ===== */
+.icon-compare { margin-top: 16px; display: grid; }
+.cmp-row { display: grid; grid-template-columns: 172px repeat(6, 1fr);
+  align-items: center; padding: 9px 0; border-top: 1px dashed var(--line); }
+.cmp-row.cmp-headrow { border-top: 0; padding-bottom: 2px; }
+.cmp-set b { display: block; font-size: 13px; font-weight: 600; }
+.cmp-set span { display: block; margin-top: 3px; font-size: 10.5px; color: var(--text-dim); }
+.cmp-cell { display: grid; place-items: center; padding: 8px 0; color: var(--text); }
+.cmp-row:not(.cmp-headrow):hover .cmp-cell { color: var(--accent); }
+.cmp-gname { font-size: 10px; letter-spacing: .12em; color: var(--text-dim); }
+@media (max-width: 700px) {
+  .cmp-row { grid-template-columns: 104px repeat(6, 1fr); }
+  .cmp-set span { display: none; }
+}

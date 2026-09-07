@@ -10,8 +10,10 @@ import {
   LinkSimple, DownloadSimple,
   Sparkle, Robot, Cpu, TerminalWindow, Waveform, PaperPlaneRight, CircleNotch,
   ArrowRight,
+  Star,
   type IconWeight, type Icon,
 } from "../src";
+import { COMPARE_SETS, GLYPH_KEYS } from "./iconcompare-data";
 
 type IconComp = Icon;
 
@@ -65,7 +67,43 @@ export function IconShelf() {
             ))}
           </div>
           <p className="lab-note">
-            默认 light 字重正好压住银色细线；导航、关闭这类实-高频位可以升 regular，强调位换 duotone 让 accent 从双层里透出来。
+            默认 light 字重正好压住银色细线；导航、关闭这类高频位可以升 regular，强调位换 duotone 让 accent 从双层里透出来。
+          </p>
+        </div>
+      </Reveal>
+
+      {/* 找形对比：同一个词，六家笔迹 */}
+      <Reveal delay={120}>
+        <div className="lab-card" style={{ marginTop: 22 }}>
+          <span className="cap">FIND-FORM · 同一个词，六家笔迹</span>
+          <div className="icon-compare">
+            <div className="cmp-row cmp-headrow">
+              <div className="cmp-set" />
+              {GLYPH_KEYS.map((g) => <div className="cmp-cell cmp-gname" key={g}>{g}</div>)}
+            </div>
+            <div className="cmp-row">
+              <div className="cmp-set"><b>Phosphor</b><span>MIT · 6 档字重 · 本库主力</span></div>
+              {([MagnifyingGlass, Heart, Gear, PaperPlaneRight, CalendarBlank, Star]).map((Ic, i) => (
+                <div className="cmp-cell" key={i}><Ic size={26} weight="light" /></div>
+              ))}
+            </div>
+            {COMPARE_SETS.map((cs) => (
+              <div className="cmp-row" key={cs.set}>
+                <div className="cmp-set"><b>{cs.set}</b><span>{cs.spec}</span></div>
+                {GLYPH_KEYS.map((g) => {
+                  const it = cs.glyphs[g];
+                  return (
+                    <div className="cmp-cell" key={g}>
+                      <svg viewBox={it.vb} width={26} height={26} {...it.at}
+                        dangerouslySetInnerHTML={{ __html: it.body }} />
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+          <p className="lab-note">
+            同一个词摆在一起看笔迹：Phosphor、Lucide、Tabler 是同一条几何细线路，混搭不违和，Tabler 胜在量大；Iconoir 最轻，1.5px 压得住银底；Heroicons 更敦实保守；Remix 是填充式线版，棱角偏方，点缀可以，整套换会伤风格。
           </p>
         </div>
       </Reveal>
