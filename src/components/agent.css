@@ -1,0 +1,167 @@
+/* ============================================================
+   Fragrance UI · Agent Native 套件
+   为「机器正在工作」设计的界面词汇。动效纪律照旧：只碰
+   opacity / transform；reduced-motion 全部降级为终态。
+   ============================================================ */
+
+/* ===== StreamText：LLM 式流式输出 ===== */
+.mui-stream__caret {
+  display: inline-block; width: .55em; height: 1.05em;
+  background: var(--accent); border-radius: 1.5px;
+  margin-left: 3px; vertical-align: -.14em;
+  animation: mui-caret 1s steps(2) infinite; }
+.mui-stream.done .mui-stream__caret { animation: mui-caret-out .45s var(--mui-ease-out) forwards; }
+@keyframes mui-caret { 0%, 100% { opacity: 1; } 50% { opacity: .12; } }
+@keyframes mui-caret-out { to { opacity: 0; } }
+
+/* ===== ThinkingText：扫光 + 呼吸点 ===== */
+.mui-thinking { display: inline-flex; align-items: center; gap: 9px; }
+.mui-thinking__label {
+  letter-spacing: .06em; font-size: 14px;
+  background: linear-gradient(90deg, var(--text-dim) 18%, var(--text) 46%, var(--text-dim) 70%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: mui-think 1.7s linear infinite; }
+@keyframes mui-think { to { background-position: -250% 0; } }
+.mui-thinking__dots { display: inline-flex; gap: 4px; }
+.mui-thinking__dots i { width: 4px; height: 4px; border-radius: 50%;
+  background: var(--accent); animation: mui-thinkdot 1.15s var(--mui-ease-out) infinite; }
+.mui-thinking__dots i:nth-child(2) { animation-delay: .14s; }
+.mui-thinking__dots i:nth-child(3) { animation-delay: .28s; }
+@keyframes mui-thinkdot { 0%, 100% { transform: translateY(0); opacity: .35; } 50% { transform: translateY(-4px); opacity: 1; } }
+
+/* ===== TextScramble：解码（等宽收字） ===== */
+.mui-scramble { font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+
+/* ===== TextRotate：轮换栈位 ===== */
+.mui-rotate { display: inline-grid; vertical-align: bottom; text-align: left; }
+.mui-rotate > span { grid-area: 1 / 1; white-space: nowrap;
+  transition: opacity .5s var(--mui-ease-out), transform .5s var(--mui-ease-out), filter .5s var(--mui-ease-out); }
+.mui-rotate > span.on { opacity: 1; transform: none; filter: none; }
+.mui-rotate > span.off { opacity: 0; transform: translateY(.65em); filter: blur(5px); pointer-events: none; }
+
+/* ===== AgentSteps：任务时间线 ===== */
+.mui-steps { list-style: none; margin: 0; padding: 0; }
+.mui-steps__item { position: relative; display: flex; gap: 12px; padding: 9px 0; }
+.mui-steps__item::before { content: ""; position: absolute; left: 9px; top: 30px; bottom: -9px;
+  width: 1px; background: var(--line); }
+.mui-steps__item:last-child::before { display: none; }
+.mui-steps__node { flex: none; width: 19px; height: 19px; margin-top: 1px;
+  border-radius: 50%; border: 1px solid var(--line); background: var(--surface);
+  display: grid; place-items: center; }
+.mui-steps__dot { width: 5px; height: 5px; border-radius: 50%; background: var(--text-dim); opacity: .5; }
+.mui-steps__spin { width: 11px; height: 11px; border-radius: 50%;
+  border: 1.5px solid var(--accent); border-top-color: transparent;
+  animation: mui-rot .7s linear infinite; }
+@keyframes mui-rot { to { transform: rotate(360deg); } }
+.mui-steps__check, .mui-steps__cross { width: 11px; height: 11px; fill: none;
+  stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.mui-steps__check { stroke: var(--accent); }
+.mui-steps__item.is-done .mui-steps__check path { stroke-dasharray: 14; stroke-dashoffset: 14;
+  animation: mui-check .45s var(--mui-ease-out) forwards; }
+@keyframes mui-check { to { stroke-dashoffset: 0; } }
+.mui-steps__cross { stroke: var(--danger); }
+.mui-steps__body { min-width: 0; }
+.mui-steps__label { display: block; font-size: 13.5px; line-height: 19px; }
+.mui-steps__item.is-pending .mui-steps__label { color: var(--text-dim); opacity: .6; }
+.mui-steps__item.is-running .mui-steps__label { font-weight: 500; }
+.mui-steps__detail { display: block; margin-top: 3px; font-size: 11.5px; color: var(--text-dim);
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mui-steps__detail.err { color: var(--danger); }
+.mui-steps__item.is-error { animation: mui-shake .5s var(--mui-ease-out); }
+.mui-steps__item.is-error .mui-steps__node { border-color: var(--danger); }
+@keyframes mui-shake { 20% { transform: translateX(-3px); } 40% { transform: translateX(3px); }
+  60% { transform: translateX(-2px); } 80% { transform: translateX(2px); } }
+
+/* ===== ToolCallCard：工具调用卡 ===== */
+.mui-tool { border: 1px solid var(--line); border-radius: var(--mui-radius-md);
+  background: color-mix(in srgb, var(--surface) 55%, transparent); overflow: hidden;
+  font-size: 12.5px; }
+.mui-tool__head { display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+  border-bottom: 1px solid var(--line); }
+.mui-tool__glyph { width: 13px; height: 13px; fill: none; stroke: var(--accent);
+  stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.mui-tool__name { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 600; font-size: 12px; letter-spacing: .02em; }
+.mui-tool__state { margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
+  font-size: 9.5px; letter-spacing: .22em; color: var(--text-dim); }
+.mui-tool.is-running .mui-tool__state::before { content: ""; width: 9px; height: 9px;
+  border-radius: 50%; border: 1.2px solid var(--accent); border-top-color: transparent;
+  animation: mui-rot .7s linear infinite; }
+.mui-tool.is-done .mui-tool__state { color: var(--accent); }
+.mui-tool.is-error .mui-tool__state { color: var(--danger); }
+.mui-tool__body { display: grid; gap: 5px; padding: 9px 12px;
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace; }
+.mui-tool__args { font-size: 11.5px; color: var(--text-dim);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mui-tool__meta { display: flex; align-items: baseline; gap: 10px; }
+.mui-tool__result { font-size: 11.5px; color: var(--text-dim);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mui-tool__ms { margin-left: auto; font-size: 11.5px; color: var(--accent);
+  font-variant-numeric: tabular-nums; }
+.mui-tool.is-error .mui-tool__ms { color: var(--danger); }
+
+/* ===== PromptBar：指令输入条 ===== */
+.mui-prompt { display: grid; gap: 10px; }
+.mui-prompt__hints { display: flex; flex-wrap: wrap; gap: 8px; }
+.mui-prompt__hints button { font-family: var(--font-body); font-size: 12px; color: var(--text-dim);
+  background: transparent; border: 1px solid var(--line); border-radius: var(--mui-radius-sm);
+  padding: 6px 12px; cursor: pointer; transition: color .25s, border-color .25s, transform .25s var(--mui-ease-spring); }
+.mui-prompt__hints button:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-1px); }
+.mui-prompt__field { display: flex; align-items: center; gap: 10px;
+  padding: 6px 6px 6px 16px; border: 1px solid var(--line); border-radius: 14px;
+  transition: border-color .3s, box-shadow .3s; }
+.mui-prompt__field:focus-within {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent); }
+.mui-prompt__field input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent;
+  font-family: var(--font-body); font-size: 14.5px; color: var(--text); padding: 9px 0; }
+.mui-prompt__field input::placeholder { color: var(--text-dim); opacity: .7; }
+.mui-prompt__send { flex: none; width: 37px; height: 37px; border: 0; border-radius: 10px;
+  background: var(--accent); color: var(--on-accent); display: grid; place-items: center;
+  cursor: pointer; transition: transform .35s var(--mui-ease-spring), opacity .25s; }
+.mui-prompt__send svg { width: 15px; height: 15px; fill: none; stroke: currentColor;
+  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.mui-prompt__send:hover:not(:disabled) { transform: translateY(-1.5px); }
+.mui-prompt__send:active:not(:disabled) { transform: translateY(0) scale(.96); }
+.mui-prompt__send:disabled { opacity: .35; cursor: default; }
+
+/* ===== StatusDot：状态点 ===== */
+.mui-status { display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-dim); }
+.mui-status i { flex: none; width: 8px; height: 8px; border-radius: 50%; position: relative; }
+.mui-status.is-idle i { background: transparent; border: 1.5px solid var(--text-dim); }
+.mui-status.is-busy i { background: var(--accent); }
+.mui-status.is-busy i::after { content: ""; position: absolute; inset: -4px; border-radius: 50%;
+  border: 1px solid var(--accent); animation: mui-ping 1.6s var(--mui-ease-out) infinite; }
+@keyframes mui-ping { 0% { transform: scale(.5); opacity: .9; } 100% { transform: scale(1.6); opacity: 0; } }
+.mui-status.is-done i { background: var(--success); }
+.mui-status.is-error i { background: var(--danger); animation: mui-shake .5s var(--mui-ease-out); }
+
+/* ===== VoiceBars：活动均衡条 ===== */
+.mui-vbars { display: inline-flex; align-items: flex-end; gap: 3px; height: 22px; }
+.mui-vbars i { width: 3px; height: 100%; border-radius: 2px; background: var(--accent);
+  transform: scaleY(var(--lo, .2)); transform-origin: bottom;
+  animation: mui-vbar 0.9s ease-in-out infinite alternate; animation-play-state: paused; }
+.mui-vbars.on i { animation-play-state: running; }
+@keyframes mui-vbar { from { transform: scaleY(var(--lo, .2)); } to { transform: scaleY(var(--hi, 1)); } }
+
+/* ===== LiveCounter：活计数器 ===== */
+.mui-live { display: inline-flex; align-items: baseline; gap: 5px;
+  font-variant-numeric: tabular-nums; }
+.mui-live__num { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 600; font-size: 26px; line-height: 1; color: var(--accent);
+  animation: mui-live-tick .35s var(--mui-ease-out); }
+.mui-live__unit { font-size: 11px; letter-spacing: .14em; color: var(--text-dim); }
+@keyframes mui-live-tick { from { opacity: .2; transform: translateY(5px); } }
+
+/* ===== reduced-motion：一律终态 ===== */
+@media (prefers-reduced-motion: reduce) {
+  .mui-stream__caret, .mui-thinking__label, .mui-thinking__dots i,
+  .mui-steps__spin, .mui-steps__item.is-done .mui-steps__check path,
+  .mui-vbars i, .mui-status.is-busy i::after { animation: none; }
+  .mui-thinking__label { color: var(--text-dim); -webkit-text-fill-color: currentcolor; }
+  .mui-vbars i { transform: scaleY(var(--lo, .2)); }
+  .mui-rotate > span { transition: none; }
+}

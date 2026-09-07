@@ -7,6 +7,7 @@ import "./components/content.css";
 import "./components/motion.css";
 import "./components/loading.css";
 import "./components/effects.css";
+import "./components/agent.css";
 
 export { SkinProvider, useTheme } from "./theme/SkinProvider";
 export type { SkinId, Mode } from "./theme/SkinProvider";
@@ -21,3 +22,5 @@ export type { PageVariant } from "./components/motion";
 export { Spinner, Progress, CountUp, LazyImage } from "./components/loading";
 export { TypingText, TextReveal, GradientText, Marquee, Magnetic, Tilt, Beam, Aurora } from "./components/effects";
 export { ThreeShapes, ParticleField } from "./components/three-canvas";
+export { StreamText, ThinkingText, TextScramble, TextRotate, AgentSteps, ToolCallCard, PromptBar, StatusDot, VoiceBars, LiveCounter } from "./components/agent";
+export type { AgentStepStatus } from "./components/agent";

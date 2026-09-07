@@ -27,6 +27,7 @@ import "fragrance-ui/styles.css";
 动效：PageTransition · viewNavigate · Spinner×4 · Progress · CountUp · LazyImage(blur-up)
 现代特效：TypingText · TextReveal · GradientText · Marquee · Magnetic · Tilt · Beam(流光边框) · Aurora
 三维/画布：ThreeShapes(three.js 银色多面体) · ParticleField(粒子网络) · 纯 CSS 画猫(见 demo)
+Agent 原生：StreamText(LLM 式流式) · ThinkingText(扫光思考) · TextScramble(解码) · TextRotate(轮换) · AgentSteps(任务时间线) · ToolCallCard(工具调用卡+活计时) · PromptBar(指令输入) · StatusDot · VoiceBars · LiveCounter
 
 ## Roadmap
 - v0.2 → Drawer / CommandPalette / Stepper / Blog Prose 排版
