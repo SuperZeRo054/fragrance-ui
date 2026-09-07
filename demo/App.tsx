@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   SkinProvider, useTheme, ToastProvider, useToast,
@@ -14,6 +14,9 @@ import { MotionLab } from "./motionlab";
 import { ModernEffects, ThreeLab } from "./modernlab";
 import { AgentLab } from "./agentlab";
 import { ArtHero } from "./arthero";
+
+/* icon 货架动态分包：45 枚 Phosphor 连字重 defs 不进主包 */
+const IconShelf = React.lazy(() => import("./iconshelf").then((m) => ({ default: m.IconShelf })));
 import catCream from "./gallery/frg-portrait-cream.jpg";
 import catBlue from "./gallery/frg-portrait-blue.jpg";
 import frgWave from "./gallery/frg-greatwave.jpg";
@@ -360,7 +363,9 @@ function App() {
         <main style={{ maxWidth: 1100, margin: "0 auto", padding: "70px 28px 90px" }} id="top">
           <ArtHero />
           <Atoms /><Forms /><Overlays /><Content />
-          <RouteLab /><LoadingLab /><ModernEffects /><ThreeLab /><AgentLab /><MotionLab />
+          <RouteLab /><LoadingLab /><ModernEffects /><ThreeLab /><AgentLab />
+          <Suspense fallback={<div style={{ minHeight: 180 }} />}><IconShelf /></Suspense>
+          <MotionLab />
         </main>
       </ToastProvider>
     </SkinProvider>

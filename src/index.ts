@@ -24,3 +24,4 @@ export { TypingText, TextReveal, GradientText, Marquee, Magnetic, Tilt, Beam, Au
 export { ThreeShapes, ParticleField } from "./components/three-canvas";
 export { StreamText, ThinkingText, TextScramble, TextRotate, AgentSteps, ToolCallCard, PromptBar, StatusDot, VoiceBars, LiveCounter } from "./components/agent";
 export type { AgentStepStatus } from "./components/agent";
+export * from "./icons";

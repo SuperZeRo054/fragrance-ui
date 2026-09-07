@@ -112,3 +112,13 @@ section { margin-top: 84px; }
 @media (max-width: 640px) {
   .console select.font-select { padding: 6px 6px; font-size: 11px; max-width: 88px; }
 }
+
+/* ===== 11 · Icon 货架 ===== */
+.lab-card .cap { font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: var(--text-dim); }
+.icon-shelf { display: grid; grid-template-columns: repeat(auto-fill, minmax(94px, 1fr)); gap: 6px; margin-top: 16px; }
+.icon-cell { display: grid; justify-items: center; gap: 7px; padding: 14px 6px 11px;
+  border: 1px solid var(--line); border-radius: var(--mui-radius-sm); color: var(--text);
+  transition: color .25s, border-color .25s, transform .25s var(--mui-ease-spring); }
+.icon-cell:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+.icon-cell span { font-size: 10px; letter-spacing: .04em; color: var(--text-dim); }
+.icon-cell:hover span { color: var(--accent); }
