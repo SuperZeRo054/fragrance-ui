@@ -64,3 +64,21 @@
 }
 
 /* 新皮肤只需复制一个 [data-skin="xxx"] 块 —— 引擎到此为止。 */
+
+/* ---------------- Font Packs（data-font 覆写排版层，皮肤管颜色、字体包管笔迹） ---------------- */
+[data-font="serif"] {
+  --font-display: "Didot", "Bodoni 72", "Songti SC", "Noto Serif SC", Georgia, serif;
+  --font-body: "Songti SC", "Noto Serif SC", Georgia, serif;
+}
+[data-font="mono"] {
+  --font-display: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-body: ui-monospace, "SF Mono", Menlo, Consolas, "PingFang SC", monospace;
+}
+[data-font="rounded"] {
+  --font-display: ui-rounded, "SF Pro Rounded", -apple-system, "Yuanti SC", "PingFang SC", "Noto Sans SC", sans-serif;
+  --font-body: ui-rounded, "SF Pro Rounded", -apple-system, "Yuanti SC", "PingFang SC", "Noto Sans SC", sans-serif;
+}
+[data-font="kaiti"] {
+  --font-display: "Kaiti SC", "STKaiti", "KaiTi", "Noto Serif SC", serif;
+  --font-body: "Kaiti SC", "STKaiti", "KaiTi", "Noto Serif SC", serif;
+}

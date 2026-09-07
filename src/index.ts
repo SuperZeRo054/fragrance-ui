@@ -10,7 +10,7 @@ import "./components/effects.css";
 import "./components/agent.css";
 
 export { SkinProvider, useTheme } from "./theme/SkinProvider";
-export type { SkinId, Mode } from "./theme/SkinProvider";
+export type { SkinId, Mode, FontId } from "./theme/SkinProvider";
 
 export { Reveal, Button, Badge, Kicker, SectionHead, ChipGroup, Rating, Avatar, Tooltip, CatMark, CatFull, catLoafGroup } from "./components/atoms";
 export { TextField, SelectField, Switch, Checkbox, RadioGroup, RangeField } from "./components/forms";

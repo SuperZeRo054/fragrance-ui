@@ -8,7 +8,7 @@ import {
   Modal, ConfirmModal, ErrorModal, Lightbox,
   Card, Table, Tabs, Accordion, Pagination, EmptyState, Skeleton,
   PageTransition, viewNavigate, Spinner, Progress, CountUp, LazyImage,
-  type SkinId,
+  type SkinId, type FontId,
 } from "../src";
 import { MotionLab } from "./motionlab";
 import { ModernEffects, ThreeLab } from "./modernlab";
@@ -24,8 +24,11 @@ import frgAthens from "./gallery/frg-athens.jpg";
 import frgSill from "./gallery/frg-windowsill.jpg";
 
 /* ---------- 换肤控制台：引擎的活体证明 ---------- */
+const FONT_LABELS: [FontId, string][] = [
+  ["system", "系统"], ["serif", "衬线"], ["mono", "等宽"], ["rounded", "圆体"], ["kaiti", "楷体"],
+];
 function ThemeConsole() {
-  const { skin, mode, setSkin, setMode } = useTheme();
+  const { skin, mode, font, setSkin, setMode, setFont } = useTheme();
   return (
     <div className="console">
       <span className="cap">SKIN</span>
@@ -33,6 +36,12 @@ function ThemeConsole() {
         <button key={s} className={skin === s ? "on" : ""}
           onClick={() => setSkin(s)}>{s}</button>
       ))}
+      <i />
+      <span className="cap">FONT</span>
+      <select className="font-select" value={font} aria-label="字体包"
+        onChange={(e) => setFont(e.target.value as FontId)}>
+        {FONT_LABELS.map(([id, label]) => <option key={id} value={id}>{label}</option>)}
+      </select>
       <i />
       <span className="cap">MODE</span>
       <button onClick={() => setMode(mode === "day" ? "night" : "day")}>

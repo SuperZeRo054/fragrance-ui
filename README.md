@@ -34,4 +34,6 @@ Agent 原生：StreamText(LLM 式流式) · ThinkingText(扫光思考) · TextSc
 - v0.3 → npm 发布 + token CLI
 - 皮肤征集：按 `src/tokens.css` 块格式提交你的皮
 
+主题引擎：SkinProvider（皮肤 / 昼夜 / 字体三维度）· 字体五包：系统 / 衬线 / 等宽 / 圆体 / 楷体
+
 License: MIT · Curated by two cats
