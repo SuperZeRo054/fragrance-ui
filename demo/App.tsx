@@ -13,6 +13,7 @@ import {
 import { MotionLab } from "./motionlab";
 import { ModernEffects, ThreeLab } from "./modernlab";
 import { AgentLab } from "./agentlab";
+import { ArtHero } from "./arthero";
 import catCream from "./gallery/frg-portrait-cream.jpg";
 import catBlue from "./gallery/frg-portrait-blue.jpg";
 import frgWave from "./gallery/frg-greatwave.jpg";
@@ -348,17 +349,7 @@ function App() {
           <ThemeConsole />
         </header>
         <main style={{ maxWidth: 1100, margin: "0 auto", padding: "70px 28px 90px" }} id="top">
-          <Reveal>
-            <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 600,
-              fontSize: "clamp(30px, 8vw, 64px)", lineHeight: 1.1, letterSpacing: "-0.015em",
-              overflowWrap: "anywhere" }}>
-              一套结构，<em style={{ color: "var(--accent)" }}>任意换皮</em>。
-            </h1>
-            <p className="mui-sechead__sub" style={{ marginTop: 16 }}>
-              Fragrance UI v0.1 · 多皮肤主题引擎 React 组件库，两位猫咪馆长督阵。右上角切换皮肤与昼夜，整站变量即时换血。</p>
-            <span className="mui-hand hero-sig" style={{ display: "inline-block", marginTop: 14,
-              fontSize: 30, color: "var(--accent)" }}>Curated by two cats — Fragrance UI</span>
-          </Reveal>
+          <ArtHero />
           <Atoms /><Forms /><Overlays /><Content />
           <RouteLab /><LoadingLab /><ModernEffects /><ThreeLab /><AgentLab /><MotionLab />
         </main>

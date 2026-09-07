@@ -1,0 +1,144 @@
+/* ===== 首页 · 美术馆门厅（六画派轮换 + 杂志排版） ===== */
+.art-hero {
+  position: relative;
+  overflow-x: clip;
+  --serif: "Didot", "Bodoni 72", "Songti SC", "Noto Serif SC", Georgia, serif;
+}
+.art-hero::before { content: ""; position: absolute; inset: -46px 0 0; pointer-events: none;
+  background: radial-gradient(900px 430px at 50% -8%,
+    color-mix(in srgb, var(--mv-accent) 8%, transparent), transparent 72%); }
+
+.art-kicker { text-align: center; font-size: 10.5px; letter-spacing: .46em;
+  text-transform: uppercase; color: var(--text-dim); }
+.art-title { text-align: center; margin-top: 18px; }
+.art-serifit { display: block; font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: clamp(24px, 4.2vw, 46px); line-height: 1.15; letter-spacing: .01em;
+  color: var(--mv-accent); transition: color 1s; }
+.art-title__main { display: block; margin-top: 10px; font-family: var(--font-display);
+  font-weight: 600; font-size: clamp(34px, 7.4vw, 76px); line-height: 1.1;
+  letter-spacing: -.015em; overflow-wrap: anywhere; }
+
+/* 描边字（画派色随轮换流转） */
+.stroke-word { display: inline-block; font-family: var(--serif); font-weight: 700; color: transparent;
+  -webkit-text-stroke: 2px var(--mv-accent);
+  text-decoration-line: underline; text-decoration-style: wavy;
+  text-decoration-color: var(--mv-accent); text-decoration-thickness: 2.5px;
+  text-underline-offset: .16em;
+  transition: -webkit-text-stroke-color 1s, text-decoration-color 1s;
+  padding: 0 .05em; }
+@supports not (-webkit-text-stroke: 1px #000) { .stroke-word { color: var(--mv-accent); } }
+
+.hand-word { display: inline-block; font-family: "Caveat", "Xingkai SC", "STKaiti", "KaiTi", cursive;
+  font-weight: 600; font-size: 1.05em; padding: 0 .05em;
+  color: var(--mv-accent); transition: color 1s; }
+
+.art-sub { text-align: center; max-width: 620px; margin: 18px auto 0;
+  font-size: 14px; line-height: 2; color: var(--text-dim); }
+
+/* ===== 画布与铭牌 ===== */
+.art-stage { display: grid; grid-template-columns: 1.5fr .9fr; gap: 28px;
+  margin-top: 36px; align-items: stretch; }
+.art-canvas { position: relative; border-radius: var(--mui-radius-lg); overflow: hidden;
+  border: 1px solid var(--line); background: #ece7df;
+  box-shadow: 0 34px 64px -34px rgba(10, 12, 16, .35); }
+.art-canvas svg { display: block; width: 100%; height: auto; }
+.art-canvas__grain { position: absolute; inset: 0; pointer-events: none; opacity: .05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E"); }
+
+.plaque-wrap { display: flex; flex-direction: column; gap: 16px; }
+.plaque { flex: 1; position: relative; overflow: hidden;
+  background: var(--surface-raised); border: 1px solid var(--line);
+  border-radius: var(--mui-radius-md); padding: 24px 26px 18px;
+  animation: plaque-in .6s var(--mui-ease-out) both; }
+@keyframes plaque-in { from { opacity: 0; transform: translateY(12px); } }
+.plaque::before { content: ""; position: absolute; top: 0; left: 26px; right: 26px; height: 3px;
+  background: linear-gradient(90deg, var(--mv-accent), transparent); }
+.plaque__no { font-size: 10px; letter-spacing: .3em; color: var(--text-dim); }
+.plaque__zh { font-family: var(--serif); font-size: clamp(26px, 3vw, 36px); font-weight: 700;
+  margin: 10px 0 3px; }
+.plaque__en { font-size: 10.5px; letter-spacing: .34em; color: var(--mv-accent);
+  text-transform: uppercase; transition: color 1s; }
+.plaque__note { margin-top: 12px; font-size: 13.5px; line-height: 1.95; color: var(--text-dim); }
+.plaque__foot { display: flex; align-items: center; justify-content: space-between;
+  margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--line); }
+.plaque__chips { display: inline-flex; gap: 6px; }
+.plaque__chips i { width: 14px; height: 14px; border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, .14); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3); }
+.plaque__sig { font-family: "Caveat", "Xingkai SC", cursive; font-size: 19px; color: var(--text-dim); }
+
+/* 方形选段钮（铁律：不要圆形分页） */
+.art-dots { display: flex; gap: 8px; }
+.art-dots button { width: 28px; height: 8px; border-radius: 2px; border: 1px solid var(--line);
+  background: transparent; cursor: pointer;
+  transition: background .3s, border-color .3s; }
+.art-dots button:hover { border-color: var(--mv-accent); }
+.art-dots button.on { background: var(--mv-accent); border-color: var(--mv-accent); }
+
+/* ===== SVG 画派引擎：部件消费变量，画派供血 ===== */
+.mv { opacity: 0; transition: opacity .9s ease; pointer-events: none; }
+.mv.on { opacity: 1; }
+
+#ga-catA .p-fur   { fill: var(--furA); }
+#ga-catA .p-fur2  { fill: var(--furA2); }
+#ga-catA .p-earin { fill: var(--earinA); }
+#ga-catA .p-eye   { fill: var(--eyeA); }
+#ga-catB .p-fur   { fill: var(--furB); }
+#ga-catB .p-fur2  { fill: var(--furB2); }
+#ga-catB .p-earin { fill: var(--earinB); }
+#ga-catB .p-eye   { fill: var(--eyeB); }
+.p-fur   { stroke: var(--lnk, transparent); stroke-width: var(--lw, 0); }
+.p-pupil { fill: var(--ink); }
+.p-glint { fill: var(--glint, #fff); opacity: .9; }
+.p-nose  { fill: var(--nose); }
+.p-line  { stroke: var(--ink); stroke-width: 1.6; fill: none; stroke-linecap: round; }
+.p-whisk path { stroke: var(--ink); stroke-width: 1.5; fill: none; opacity: .5; stroke-linecap: round; }
+.p-shadow { fill: #000; opacity: .1; }
+
+/* 六画派调色 */
+.mv-realism { --furA: url(#ga-furA); --furA2: #f6ecd8; --earinA: #cf9d78; --eyeA: #4f7d43;
+  --furB: url(#ga-furB); --furB2: #c3cedb; --earinB: #57677e; --eyeB: #46639e;
+  --nose: #b06a55; --ink: #33291f; --lnk: transparent; --lw: 0px; }
+.mv-impres { --furA: #d9b485; --furA2: #ecd9b8; --earinA: #c08a6a; --eyeA: #57804a;
+  --furB: #8496ab; --furB2: #b9c5d3; --earinB: #5d6f88; --eyeB: #4d6aa2;
+  --nose: #b56a58; --ink: #3a3348; --lnk: transparent; --lw: 0px; }
+.mv-ukiyo { --furA: #eadfc4; --furA2: #f4ecd8; --earinA: #b8563e; --eyeA: #2c3a55;
+  --furB: #2e4a7d; --furB2: #4a6795; --earinB: #b8563e; --eyeB: #eadfc4;
+  --nose: #a63c2e; --ink: #1c2434; --lnk: #1c2434; --lw: 2.5px; }
+.mv-bauhaus { --furA: #e8c98f; --furA2: #f0dcb4; --earinA: #c2452d; --eyeA: #191919;
+  --furB: #5a7391; --furB2: #7d93ab; --earinB: #e8c531; --eyeB: #191919;
+  --nose: #191919; --ink: #191919; --lnk: #191919; --lw: 3.5px; }
+.mv-pop { --furA: #f6d8a0; --furA2: #fce9c6; --earinA: #e8442e; --eyeA: #1a1a1a;
+  --furB: #9db3c8; --furB2: #cdd9e5; --earinB: #e8442e; --eyeB: #1a1a1a;
+  --nose: #1a1a1a; --ink: #141414; --lnk: #141414; --lw: 4px; }
+.mv-abst { --furA: #c78d5e; --furA2: #a96f45; --earinA: #8c6a9e; --eyeA: #e8c531;
+  --furB: #5e7d8c; --furB2: #46626f; --earinB: #c78d5e; --eyeB: #c78d5e;
+  --nose: #e8c531; --ink: #e9e4da; --lnk: transparent; --lw: 0px; }
+
+/* 画派专属氛围动效（全部 transform / opacity） */
+.mv-impres use { filter: blur(1.3px) saturate(1.12); }
+.fl-dapple { animation: fl-drift 7s ease-in-out infinite alternate; }
+@keyframes fl-drift { to { transform: translate(16px, -11px); } }
+.fl-bob { animation: fl-bob 3.2s ease-in-out infinite alternate; }
+@keyframes fl-bob { to { transform: translateY(7px); } }
+.fl-rot, .fl-orbit { transform-box: fill-box; transform-origin: center;
+  animation: fl-rot 18s linear infinite; }
+@keyframes fl-rot { to { transform: rotate(360deg); } }
+.fl-orbit { animation-duration: 30s; animation-direction: alternate; }
+.fl-slide { animation: fl-slide 3.2s linear infinite; }
+@keyframes fl-slide { to { transform: translateX(-32px); } }
+.fl-breathe { animation: fl-breathe 8s ease-in-out infinite alternate; }
+@keyframes fl-breathe { from { opacity: .16; } to { opacity: .38; } }
+.pop-word { font-family: "Caveat", cursive; font-size: 54px; fill: #e8442e;
+  stroke: #141414; stroke-width: 1; paint-order: stroke; letter-spacing: .05em; }
+
+/* ===== 响应与降级 ===== */
+@media (max-width: 900px) {
+  .art-stage { grid-template-columns: 1fr; gap: 20px; }
+  .art-kicker { letter-spacing: .26em; }
+  .plaque { padding: 20px 20px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mv { transition: none; }
+  .fl-dapple, .fl-bob, .fl-rot, .fl-orbit, .fl-slide, .fl-breathe { animation: none; }
+  .plaque { animation: none; }
+}
