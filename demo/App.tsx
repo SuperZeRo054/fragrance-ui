@@ -236,7 +236,7 @@ function RouteLab() {
   return (
     <section id="route-lab">
       <SectionHead kicker="05 · Page Transition" title="页面切换实验室"
-        sub="SPA 切页用 PageTransition；跨页 / 锚点跳转走 viewNavigate —— 浏览器合成器接管，60fps。" />
+        sub="SPA 切页用 PageTransition。跨页和锚点跳转走 viewNavigate，合成器接管过渡，稳定 60fps。" />
       <Reveal>
         <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 28 }}>
           <Button variant={view === "gallery" ? "primary" : "outline"}

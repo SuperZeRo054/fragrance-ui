@@ -277,7 +277,7 @@ export function MotionLab() {
   return (
     <section id="motion-lab">
       <SectionHead kicker="07 · Motion & Art Lab" title="动效与画法实验室"
-        sub="状态机 · 描边生长 · 滚动驱动 · 爪印路径 · 雾面着色器 · 涂鸦 · 流体渐变 —— 每件都可单独搬走。" />
+        sub="状态机、描边生长、滚动驱动、爪印路径、雾面着色器、涂鸦、流体渐变，每件都能单独搬走。" />
       <div className="lab-grid">
         <Reveal><h3 className="lab-h">A · 状态机猫 <span className="lab-tag">CSS 状态机</span></h3><StateCat /></Reveal>
         <Reveal><h3 className="lab-h">B · 描边生长 <span className="lab-tag">GSAP DrawSVG</span></h3><DrawCat /></Reveal>

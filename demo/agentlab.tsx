@@ -104,7 +104,7 @@ export function AgentLab() {
   return (
     <section id="agent-lab" ref={secRef}>
       <SectionHead kicker="10 · Agent Native" title="Agent 原生界面"
-        sub="为「机器正在工作」设计的词汇：流式输出 / 思考态 / 工具调用卡 / 任务时间线 / 文字轮换与解码——在下面输入框下达指令，或看它自动跑。" />
+        sub="给「机器正在工作」做的界面：流式输出、思考态、工具调用卡、任务时间线。输入框可以直接指挥，不打字就看它自己跑。" />
 
       <Reveal>
         <div className="agent-hero">

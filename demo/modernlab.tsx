@@ -16,7 +16,7 @@ export function ModernEffects() {
   return (
     <section id="effects-lab">
       <SectionHead kicker="08 · Modern Effects" title="现代特效套件"
-        sub="打字机 / 逐字揭示 / 流光字 / 跑马灯 / 磁吸 / 3D 倾斜 / 流光边框 / 极光背景——全部只碰 opacity 与 transform。" />
+        sub="打字机、逐字揭示、流光字、跑马灯、磁吸、3D 倾斜、流光边框、极光背景。动效只碰 opacity 和 transform。" />
       <div className="effects-hero">
         <Reveal>
           <Kicker>Live Demo</Kicker>
@@ -66,7 +66,7 @@ export function ThreeLab() {
   return (
     <section id="three-lab">
       <SectionHead kicker="09 · 3D & Canvas" title="三维与粒子"
-        sub="需要「深度与光影」就上 Three.js；需要「大量元素的群体行为」就上 Canvas；简单几何吉祥物，纯 CSS 就够。" />
+        sub="Three.js 管深度和光影，Canvas 管粒子群体。至于几何吉祥物，纯 CSS 就够。" />
       <div className="combo-grid">
         <Reveal>
           <div className="lab-card">

@@ -5,22 +5,22 @@ import "./arthero.css";
 /* ================= 六画派数据 ================= */
 const MOVES = [
   { id: "realism", zh: "写实主义", en: "REALISM", yrs: "1840 —",
-    note: "柔渐变塑出体积，毛色按光走——最接近两位馆长的素颜。",
+    note: "渐变塑体积，毛色跟着光走。两位馆长没化妆的样子。",
     chip: ["#c9a06a", "#7c8ba0", "#2f2a26"] },
   { id: "impressionism", zh: "印象派", en: "IMPRESSIONNISME", yrs: "1872 —",
-    note: "碎笔与光斑，轮廓溶进空气里——清晨十点钟的花园。",
+    note: "碎笔和光斑，轮廓融进空气，像清晨十点的花园。",
     chip: ["#a48fd0", "#e0a94a", "#8fa8bf"] },
   { id: "ukiyo", zh: "浮世绘", en: "UKIYO-E", yrs: "1831 —",
-    note: "平涂普鲁士蓝，背景是永不停歇的浪。goochee 一声。",
+    note: "普鲁士蓝平涂，红日当头，底下的浪永不停。",
     chip: ["#274b8f", "#eadfc4", "#a63c2e"] },
   { id: "bauhaus", zh: "包豪斯", en: "BAUHAUS", yrs: "1919 —",
-    note: "圆、三角、方——两位馆长被拆成一份几何构成作业。",
+    note: "圆、三角、方，两位馆长被拆成一份几何作业。",
     chip: ["#c2452d", "#2b5ea7", "#e8c531"] },
   { id: "pop", zh: "波普艺术", en: "POP ART", yrs: "1962 —",
-    note: "网点、重描边、爆炸星——馆长登上漫画封面那一期。",
+    note: "网点、重描边，再加一声 PURR。就是漫画封面那一期。",
     chip: ["#e8442e", "#f5c531", "#141414"] },
   { id: "abstract", zh: "抽象主义", en: "ABSTRACTION", yrs: "1910 —",
-    note: "形散神不散：认不出耳朵，认得出眼神。",
+    note: "认不出耳朵，认得出眼神。",
     chip: ["#c78d5e", "#5e7d8c", "#8c6a9e"] },
 ];
 
@@ -43,18 +43,9 @@ export function ArtHero() {
   return (
     <div className="art-hero" ref={wrapRef} style={{ "--mv-accent": mv.chip[0] } as React.CSSProperties}>
       <Reveal>
-        <p className="art-kicker">FRAGRANCE UI · MUSÉE DES DEUX CHATS</p>
         <h1 className="art-title">
-          <em className="art-serifit">Les deux chats,</em>
-          <span className="art-title__main">
-            <span className="stroke-word">六种画派</span>
-            重绘<span className="hand-word">两位馆长</span>。
-          </span>
+          Fragrance<span className="stroke-word">UI</span>
         </h1>
-        <p className="art-sub">
-          同一个轮廓，六种笔意——纯 CSS 画布自动换装：写实 · 印象派 · 浮世绘 · 包豪斯 · 波普 · 抽象。
-          右上角可切皮肤与昼夜，整站变量即时换血。
-        </p>
       </Reveal>
 
       <div className="art-stage">
