@@ -128,48 +128,64 @@ export function PawPath() {
 
 /* ============ E. 雾面 Shader（OGL WebGL，银色流体） ============ */
 export function ShaderSilk() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const wrapRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const cv = canvasRef.current, wrap = wrapRef.current;
-    if (!cv || !wrap) return;
+  const stopRef = useRef<null | (() => void)>(null);
+  const attach = React.useCallback((cv: HTMLCanvasElement | null) => {
+    if (stopRef.current) { stopRef.current(); stopRef.current = null; }
+    if (!cv) return;
     const gl = cv.getContext("webgl", { antialias: false });
     if (!gl) return;
     const V = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
-    const F = `precision highp float;uniform float uT;uniform vec2 uR;
-      float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
-      float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
-        return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
-      float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*n(p);p*=2.1;a*=.5;}return v;}
-      void main(){vec2 uv=gl_FragCoord.xy/uR;uv.x*=uR.x/uR.y;float t=uT*.06;
-        float k=fbm(uv*2.2+vec2(t,-t*.6)+fbm(uv*3.5-t*.03)*1.4);
-        vec3 s=mix(vec3(.80,.83,.87),vec3(.58,.63,.70),smoothstep(.25,.85,k));
-        s=mix(s,vec3(.93,.94,.96),smoothstep(.72,1.,k)*.6);
-        gl_FragColor=vec4(s,1.);}`;
-    const sh=(t,src)=>{const o=gl.createShader(t)!;gl.shaderSource(o,src);gl.compileShader(o);return o};
-    const vs=sh(gl.VERTEX_SHADER,V),fs=sh(gl.FRAGMENT_SHADER,F);
-    const prog=gl.createProgram()!;gl.attachShader(prog,vs);gl.attachShader(prog,fs);gl.linkProgram(prog);gl.useProgram(prog);
-    const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
-    gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
-    const loc=gl.getAttribLocation(prog,"p");gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
-    const uT=gl.getUniformLocation(prog,"uT"),uR=gl.getUniformLocation(prog,"uR");
-    const size=()=>{const w=wrap.clientWidth||600,h=280,dpr=Math.min(devicePixelRatio,1.5);
-      cv.width=w*dpr;cv.height=h*dpr;gl.viewport(0,0,cv.width,cv.height);gl.uniform2f(uR,cv.width,cv.height);};
-    size();const ro=new ResizeObserver(size);ro.observe(wrap);
-    let raf=0,paused=false;
-    const io=new IntersectionObserver(([e])=>{paused=!e.isIntersecting;});
-    io.observe(wrap);
-    const t0=performance.now();
-    const loop=(t:number)=>{raf=requestAnimationFrame(loop);
-      if(paused)return;
-      gl.uniform1f(uT,(t-t0)*.001);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);};
-    raf=requestAnimationFrame(loop);
-    return ()=>{cancelAnimationFrame(raf);ro.disconnect();io.disconnect();};
+    const F = "precision highp float;uniform float uT;uniform vec2 uR;" +
+      "float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}" +
+      "float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);" +
+      "return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}" +
+      "float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*n(p);p*=2.1;a*=.5;}return v;}" +
+      "void main(){vec2 uv=gl_FragCoord.xy/uR;uv.x*=uR.x/uR.y;float t=uT*.06;" +
+      "float k=fbm(uv*2.2+vec2(t,-t*.6)+fbm(uv*3.5-t*.03)*1.4);" +
+      "vec3 s=mix(vec3(.80,.83,.87),vec3(.58,.63,.70),smoothstep(.25,.85,k));" +
+      "s=mix(s,vec3(.93,.94,.96),smoothstep(.72,1.,k)*.6);" +
+      "gl_FragColor=vec4(s,1.);}";
+    const sh = (t: number, src: string) => {
+      const o = gl.createShader(t)!; gl.shaderSource(o, src); gl.compileShader(o); return o;
+    };
+    const prog = gl.createProgram()!;
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, V));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, F));
+    gl.linkProgram(prog); gl.useProgram(prog);
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, "p");
+    gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const uT = gl.getUniformLocation(prog, "uT"), uR = gl.getUniformLocation(prog, "uR");
+    const dpr = Math.min(devicePixelRatio, 1.5);
+    const size = () => {
+      const w = (cv.clientWidth || 600) * dpr, h = 280 * dpr;
+      cv.width = w; cv.height = h;
+      gl.viewport(0, 0, w, h); gl.uniform2f(uR, w, h);
+    };
+    size();
+    const ro = new ResizeObserver(size); ro.observe(cv);
+    let raf = 0, paused = false;
+    const io = new IntersectionObserver(([e]) => { paused = !e.isIntersecting; });
+    io.observe(cv);
+    const t0 = performance.now();
+    const loop = (t: number) => {
+      raf = requestAnimationFrame(loop);
+      if (paused) return;
+      gl.uniform1f(uT, (t - t0) * .001);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    };
+    raf = requestAnimationFrame(loop);
+    stopRef.current = () => {
+      cancelAnimationFrame(raf); ro.disconnect(); io.disconnect();
+    };
   }, []);
   return (
     <div className="lab-card">
-      <div ref={wrapRef} className="shader-wrap">
-        <canvas ref={canvasRef} aria-label="银色流体雾面着色器背景" />
+      <div className="shader-wrap">
+        <canvas ref={attach} aria-label="银色流体雾面着色器背景"
+          style={{ width: "100%", height: 280, display: "block" }} />
       </div>
       <p className="lab-note">裸 WebGL 片元着色器：fbm 噪声域扭曲的银色流体（哑光）。滚出视口即停止渲染。</p>
     </div>

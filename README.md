@@ -25,6 +25,8 @@ import "fragrance-ui/styles.css";
 覆盖层：Modal · ConfirmModal · ErrorModal(震动) · Lightbox · ToastProvider/useToast
 内容：Card · Table · Tabs(含 steps) · Accordion · Pagination(方形) · EmptyState · Skeleton
 动效：PageTransition · viewNavigate · Spinner×4 · Progress · CountUp · LazyImage(blur-up)
+现代特效：TypingText · TextReveal · GradientText · Marquee · Magnetic · Tilt · Beam(流光边框) · Aurora
+三维/画布：ThreeShapes(three.js 银色多面体) · ParticleField(粒子网络) · 纯 CSS 画猫(见 demo)
 
 ## Roadmap
 - v0.2 → Drawer / CommandPalette / Stepper / Blog Prose 排版

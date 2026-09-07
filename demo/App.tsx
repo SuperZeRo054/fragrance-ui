@@ -11,6 +11,7 @@ import {
   type SkinId,
 } from "../src";
 import { MotionLab } from "./motionlab";
+import { ModernEffects, ThreeLab } from "./modernlab";
 import catCream from "./gallery/frg-portrait-cream.jpg";
 import catBlue from "./gallery/frg-portrait-blue.jpg";
 import frgWave from "./gallery/frg-greatwave.jpg";
@@ -358,7 +359,7 @@ function App() {
               fontSize: 30, color: "var(--accent)" }}>Curated by two cats — Fragrance UI</span>
           </Reveal>
           <Atoms /><Forms /><Overlays /><Content />
-          <RouteLab /><LoadingLab /><MotionLab />
+          <RouteLab /><LoadingLab /><ModernEffects /><ThreeLab /><MotionLab />
         </main>
       </ToastProvider>
     </SkinProvider>

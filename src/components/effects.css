@@ -1,0 +1,81 @@
+/* ===== TypingText ===== */
+.mui-typing__cursor { display: inline-block; width: 2px; height: 1em;
+  background: var(--accent); margin-left: 3px; vertical-align: -0.12em;
+  animation: mui-cursor 1s steps(2) infinite; }
+@keyframes mui-cursor { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* ===== TextReveal ===== */
+.mui-textreveal span { display: inline-block;
+  opacity: 0; transform: translateY(.55em);
+  transition: opacity .5s var(--mui-ease-out), transform .5s var(--mui-ease-out); }
+.mui-textreveal.in span { opacity: 1; transform: none; }
+
+/* ===== GradientText ===== */
+.mui-gradient-text {
+  background: linear-gradient(90deg, var(--accent), var(--accent-soft),
+    var(--info, var(--accent)), var(--accent));
+  background-size: 300% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: mui-gslide 6s linear infinite; }
+@keyframes mui-gslide { to { background-position: 300% 0; } }
+
+/* ===== Marquee ===== */
+.mui-marquee { overflow: hidden; position: relative;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.mui-marquee__track { display: inline-flex; gap: 44px; white-space: nowrap;
+  padding-block: 6px; animation: mui-marquee var(--dur, 26s) linear infinite; }
+.mui-marquee.rev .mui-marquee__track { animation-direction: reverse; }
+.mui-marquee:hover .mui-marquee__track { animation-play-state: paused; }
+@keyframes mui-marquee { to { transform: translateX(-50%); } }
+.mui-marquee__item { display: inline-flex; align-items: center; gap: 10px;
+  font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); }
+
+/* ===== Magnetic ===== */
+.mui-magnetic { display: inline-flex; transition: transform .5s var(--mui-ease-spring); }
+
+/* ===== Tilt ===== */
+.mui-tilt { position: relative; transform-style: preserve-3d;
+  transition: transform .22s var(--mui-ease-out); will-change: transform; }
+.mui-tilt__glare { position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(320px circle at var(--gx,50%) var(--gy,50%),
+    rgba(255,255,255,.32), transparent 55%);
+  opacity: 0; transition: opacity .35s; pointer-events: none; }
+.mui-tilt:hover .mui-tilt__glare { opacity: 1; }
+
+/* ===== Beam（流光边框） ===== */
+@property --mui-beam-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.mui-beam { position: relative; overflow: hidden; border-radius: var(--mui-radius-lg);
+  background: var(--surface-raised); }
+.mui-beam::before { content: ""; position: absolute; inset: 0; border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(from var(--mui-beam-angle),
+    transparent 0%, var(--accent) 11%, var(--accent-soft) 16%, transparent 28%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: mui-beam 3.4s linear infinite; pointer-events: none; }
+@keyframes mui-beam { to { --mui-beam-angle: 360deg; } }
+.mui-beam > * { position: relative; }
+
+/* ===== Aurora ===== */
+.mui-aurora { position: relative; overflow: hidden; isolation: isolate;
+  border-radius: var(--mui-radius-lg); background: var(--surface); }
+.mui-aurora__a, .mui-aurora__b { position: absolute; border-radius: 50%;
+  filter: blur(64px); opacity: .55; z-index: -1; }
+.mui-aurora__a { width: 62%; height: 78%; left: -12%; top: -18%;
+  background: radial-gradient(circle, var(--accent-soft), transparent 68%);
+  animation: mui-aurora-a 16s ease-in-out infinite alternate; }
+.mui-aurora__b { width: 56%; height: 70%; right: -10%; bottom: -20%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--info) 55%, transparent), transparent 66%);
+  animation: mui-aurora-b 21s ease-in-out infinite alternate; }
+@keyframes mui-aurora-a { to { transform: translate(26%, 20%) scale(1.15); } }
+@keyframes mui-aurora-b { to { transform: translate(-22%, -16%) scale(1.1); } }
+.mui-aurora__content { position: relative; }
+
+/* ===== Three 场景 / 粒子 ===== */
+.mui-three-wrap { border-radius: var(--mui-radius-md); overflow: hidden;
+  background: color-mix(in srgb, var(--surface) 82%, var(--surface-raised)); line-height: 0; }
+.mui-three-wrap canvas { display: block; width: 100%; }
+.mui-particles { display: block; width: 100%; border-radius: var(--mui-radius-md);
+  background: color-mix(in srgb, var(--surface) 86%, var(--surface-raised)); }
