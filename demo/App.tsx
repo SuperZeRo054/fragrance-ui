@@ -62,7 +62,7 @@ function Atoms() {
     <section>
       <SectionHead kicker="01 · Atoms" title="原子件" sub="按钮 / 徽章 / 标签组 / 稀有度 / 头像 / 提示词。" />
       <Reveal>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 18, marginTop: 40 }}>
           <Button>主要操作</Button>
           <Button variant="outline">描边次级</Button>
           <Button variant="ghost">软底款</Button>
@@ -73,14 +73,16 @@ function Atoms() {
         </div>
       </Reveal>
       <Reveal delay={120}>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, margin: "30px 0" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 14, marginTop: 60 }}>
           <Badge tone="gold">镇馆藏品</Badge><Badge tone="ok">已鉴定</Badge><Badge tone="info">借展中</Badge>
           <Badge tone="warn">修复期</Badge><Badge tone="err">禁止触摸</Badge>
-          <Rating value={4} size={18} /><Rating value={5} size={18} /><Rating value={2} size={18} />
+          <span style={{ display: "inline-flex", gap: 20, marginLeft: 24 }}>
+            <Rating value={4} size={18} /><Rating value={5} size={18} /><Rating value={2} size={18} />
+          </span>
         </div>
       </Reveal>
       <Reveal delay={200}>
-        <div style={{ display: "flex", gap: 26, alignItems: "center", margin: "26px 0 6px", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: 32, alignItems: "center", margin: "60px 0 10px", flexWrap: "wrap" }}>
           <ChipGroup items={[{ id: "all", label: "全部" }, { id: "imp", label: "印象派" },
             { id: "uki", label: "浮世绘" }, { id: "mod", label: "现代" }]}
             value={era} onChange={setEra} />
