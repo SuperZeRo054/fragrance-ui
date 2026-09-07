@@ -61,60 +61,23 @@
 .art-dots button:hover { border-color: var(--mv-accent); }
 .art-dots button.on { background: var(--mv-accent); border-color: var(--mv-accent); }
 
-/* ===== SVG 画派引擎：部件消费变量，画派供血 ===== */
+/* ===== SVG 画派引擎：每派独立构图，仅共享交叉溶装 ===== */
 .mv { opacity: 0; transition: opacity .9s ease; pointer-events: none; }
 .mv.on { opacity: 1; }
 
-#ga-catA .p-fur   { fill: var(--furA); }
-#ga-catA .p-fur2  { fill: var(--furA2); }
-#ga-catA .p-earin { fill: var(--earinA); }
-#ga-catA .p-eye   { fill: var(--eyeA); }
-#ga-catB .p-fur   { fill: var(--furB); }
-#ga-catB .p-fur2  { fill: var(--furB2); }
-#ga-catB .p-earin { fill: var(--earinB); }
-#ga-catB .p-eye   { fill: var(--eyeB); }
-.p-fur   { stroke: var(--lnk, transparent); stroke-width: var(--lw, 0); }
-.p-pupil { fill: var(--ink); }
-.p-glint { fill: var(--glint, #fff); opacity: .9; }
-.p-nose  { fill: var(--nose); }
-.p-line  { stroke: var(--ink); stroke-width: 1.6; fill: none; stroke-linecap: round; }
-.p-whisk path { stroke: var(--ink); stroke-width: 1.5; fill: none; opacity: .5; stroke-linecap: round; }
-.p-shadow { fill: #000; opacity: .1; }
-
-/* 六画派调色 */
-.mv-realism { --furA: url(#ga-furA); --furA2: #f6ecd8; --earinA: #cf9d78; --eyeA: #4f7d43;
-  --furB: url(#ga-furB); --furB2: #c3cedb; --earinB: #57677e; --eyeB: #46639e;
-  --nose: #b06a55; --ink: #33291f; --lnk: transparent; --lw: 0px; }
-.mv-impres { --furA: #d9b485; --furA2: #ecd9b8; --earinA: #c08a6a; --eyeA: #57804a;
-  --furB: #8496ab; --furB2: #b9c5d3; --earinB: #5d6f88; --eyeB: #4d6aa2;
-  --nose: #b56a58; --ink: #3a3348; --lnk: transparent; --lw: 0px; }
-.mv-ukiyo { --furA: #eadfc4; --furA2: #f4ecd8; --earinA: #b8563e; --eyeA: #2c3a55;
-  --furB: #2e4a7d; --furB2: #4a6795; --earinB: #b8563e; --eyeB: #eadfc4;
-  --nose: #a63c2e; --ink: #1c2434; --lnk: #1c2434; --lw: 2.5px; }
-.mv-bauhaus { --furA: #e8c98f; --furA2: #f0dcb4; --earinA: #c2452d; --eyeA: #191919;
-  --furB: #5a7391; --furB2: #7d93ab; --earinB: #e8c531; --eyeB: #191919;
-  --nose: #191919; --ink: #191919; --lnk: #191919; --lw: 3.5px; }
-.mv-pop { --furA: #f6d8a0; --furA2: #fce9c6; --earinA: #e8442e; --eyeA: #1a1a1a;
-  --furB: #9db3c8; --furB2: #cdd9e5; --earinB: #e8442e; --eyeB: #1a1a1a;
-  --nose: #1a1a1a; --ink: #141414; --lnk: #141414; --lw: 4px; }
-.mv-abst { --furA: #c78d5e; --furA2: #a96f45; --earinA: #8c6a9e; --eyeA: #e8c531;
-  --furB: #5e7d8c; --furB2: #46626f; --earinB: #c78d5e; --eyeB: #c78d5e;
-  --nose: #e8c531; --ink: #e9e4da; --lnk: transparent; --lw: 0px; }
-
-/* 画派专属氛围动效（全部 transform / opacity） */
-.mv-impres use { filter: blur(1.3px) saturate(1.12); }
-.fl-dapple { animation: fl-drift 7s ease-in-out infinite alternate; }
+/* 画派氛围动效（全部 transform / opacity / 局部 blur） */
+.fl-drift { animation: fl-drift 7s ease-in-out infinite alternate; }
 @keyframes fl-drift { to { transform: translate(16px, -11px); } }
 .fl-bob { animation: fl-bob 3.2s ease-in-out infinite alternate; }
 @keyframes fl-bob { to { transform: translateY(7px); } }
-.fl-rot, .fl-orbit { transform-box: fill-box; transform-origin: center;
+.fl-rot { transform-box: fill-box; transform-origin: center;
   animation: fl-rot 18s linear infinite; }
 @keyframes fl-rot { to { transform: rotate(360deg); } }
-.fl-orbit { animation-duration: 30s; animation-direction: alternate; }
 .fl-slide { animation: fl-slide 3.2s linear infinite; }
 @keyframes fl-slide { to { transform: translateX(-32px); } }
-.fl-breathe { animation: fl-breathe 8s ease-in-out infinite alternate; }
-@keyframes fl-breathe { from { opacity: .16; } to { opacity: .38; } }
+.fl-breathe { filter: blur(13px); animation: fl-breathe 8s ease-in-out infinite alternate; }
+@keyframes fl-breathe { from { opacity: .1; } to { opacity: .3; } }
+.fl-soft { filter: blur(11px); }
 .pop-word { font-family: "Caveat", cursive; font-size: 54px; fill: #e8442e;
   stroke: #141414; stroke-width: 1; paint-order: stroke; letter-spacing: .05em; }
 
@@ -125,6 +88,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .mv { transition: none; }
-  .fl-dapple, .fl-bob, .fl-rot, .fl-orbit, .fl-slide, .fl-breathe { animation: none; }
+  .fl-drift, .fl-bob, .fl-rot, .fl-slide, .fl-breathe { animation: none; }
+  .fl-soft { filter: none; }
   .plaque { animation: none; }
 }
