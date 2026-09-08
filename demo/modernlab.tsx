@@ -22,7 +22,7 @@ export function ModernEffects() {
       <div className="effects-hero">
         <Reveal>
           <Kicker>Live Demo</Kicker>
-          <p className="t1"><TypingText text="你好，我们是两位猫咪馆长。" /></p>
+          <p className="t1"><TypingText text="你好，我们是万万和千千。" /></p>
           <p className="t2"><TextReveal text="We draw with code, and purr with pixels." /></p>
           <p style={{ marginTop: 14 }}><GradientText>从此，强调文字自带流光。</GradientText></p>
         </Reveal>

@@ -201,7 +201,7 @@ export function AgentLab() {
         <Reveal>
           <div className="lab-card">
             <Badge tone="info">ThinkingText</Badge>
-            <div style={{ padding: "22px 0" }}><ThinkingText label="正在检索馆藏" /></div>
+            <div style={{ padding: "22px 0" }}><ThinkingText label="正在检索文档" /></div>
             <p className="lab-note">扫光掠过文字 + 三点呼吸。替代裸 Spinner：让用户知道「在忙什么」，而不只是「在忙」。</p>
           </div>
         </Reveal>

@@ -1,7 +1,7 @@
 # Fragrance UI
 
 多皮肤主题引擎驱动的个人品牌 React 组件库。**一套结构，任意换皮。**
-两位猫咪馆长（奶油 × 蓝灰）督阵——所有吉祥物均为运行时内联 SVG，零位图零 emoji。
+吉祥物是两只猫：万万（蓝金渐层，管动效与 Agent 模块）× 千千（重点色，管基础组件与图标）——所有猫均为运行时内联 SVG，零位图零 emoji。定位：适合构建 Agent 服务与现代前端页面的 React UI 库。
 
 - 组件只消费语义令牌（`--surface / --accent / --font-display …`）
 - 皮肤 = 一组挂在 `<html data-skin data-mode>` 上的 CSS 变量，整组换血零闪烁

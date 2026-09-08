@@ -144,8 +144,8 @@ function Atoms() {
       </Reveal>
       <Reveal delay={120}>
         <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 14, marginTop: 60 }}>
-          <Badge tone="gold">镇馆藏品</Badge><Badge tone="ok">已鉴定</Badge><Badge tone="info">借展中</Badge>
-          <Badge tone="warn">修复期</Badge><Badge tone="err">禁止触摸</Badge>
+          <Badge tone="gold">精选</Badge><Badge tone="ok">已发布</Badge><Badge tone="info">文档中</Badge>
+          <Badge tone="warn">重构中</Badge><Badge tone="err">禁止删除</Badge>
           <span style={{ display: "inline-flex", gap: 20, marginLeft: 24 }}>
             <Rating value={4} size={18} /><Rating value={5} size={18} /><Rating value={2} size={18} />
           </span>
@@ -193,7 +193,7 @@ function Forms() {
       </div>
       <Reveal delay={240}>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 26, marginTop: 28, alignItems: "center" }}>
-          <Switch checked={sw} onChange={setSw} label="接收月度展讯" />
+          <Switch checked={sw} onChange={setSw} label="接收版本周报" />
           <Checkbox checked={ck} onChange={setCk} label="同意馆规" />
           <RadioGroup name="session" options={[{ value: "day", label: "日场" }, { value: "night", label: "夜场" }]}
             value={rd} onChange={setRd} />
@@ -226,10 +226,10 @@ function Overlays() {
           <Button variant="outline" onClick={() => setLb(true)}>打开 Lightbox</Button>
         </div>
       </Reveal>
-      <Modal open={modal} onClose={() => setModal(false)} kicker="Reservation" title="预约撸猫时段">
-        <p>两位猫咪馆长亲自带看：奶油负责蹭腿，蓝灰负责凝视。全程禁止提问「它们为什么不理你」。</p>
+      <Modal open={modal} onClose={() => setModal(false)} kicker="Reservation" title="预约组件演示">
+        <p>两位猫吉祥物全程旁听：万万负责踩键盘，千千负责凝视。全程禁止提问「它们为什么不理你」。</p>
         <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 22 }}>
-          <Button sm onClick={() => setModal(false)}>好的，带猫条来</Button>
+          <Button sm onClick={() => setModal(false)}>好的，到时见</Button>
         </div>
       </Modal>
       <ConfirmModal open={confirm} onClose={() => setConfirm(false)} onCancel={() => {}}
@@ -250,9 +250,9 @@ const WORKS = [
  {no:'FRG·UKI-01',zh:'神奈川冲浪猫',en:'The Great Wave Cat',era:'浮世绘',artist:'葛饰北斋',year:'c. 1831',stars:5,img:frgWave,orig:'仿《神奈川冲浪里》',
   story:'巨浪以普鲁士蓝扑向船头，两只猫在船板上圆睁双眼、一动不动——浪再大，呆滞不动如山。'},
  {no:'FRG·IMP-01',zh:'睡莲中的猫',en:'Cat Among Water Lilies',era:'印象派',artist:'Claude Monet',year:'1916',stars:5,img:frgWaterlilies,orig:'仿《睡莲》与日本桥',
-  story:'莫奈画了三十年的水面，这次的主角换成了两位馆长：一位占桥，一位守岸。'},
+  story:'莫奈画了三十年的水面，这次的主角换成了两只猫：一只占桥，一只守岸。'},
  {no:'FRG·POS-01',zh:'星月夜猫',en:'Starry Night Cat',era:'后印象派',artist:'Vincent van Gogh',year:'1889',stars:5,img:frgStarry,orig:'仿《星月夜》',
-  story:'旋涡星云下，蓝灰馆长坐在尖顶屋顶仰望，奶油馆长在窗台探出头——柏树如火焰，猫如灯塔。'},
+  story:'旋涡星云下，蓝灰那只坐在尖顶屋顶仰望，奶油那只从窗台探出头——柏树如火焰，猫如灯塔。'},
  {no:'FRG·DUT-01',zh:'戴珍珠耳环的猫',en:'Cat with a Pearl Earring',era:'荷兰黄金时代',artist:'Johannes Vermeer',year:'c. 1665',stars:5,img:frgPearl,orig:'仿《戴珍珠耳环的少女》',
   story:'回眸的一瞬被永远定格。珍珠是借的，眼神是自己的。'},
  {no:'FRG·REN-01',zh:'雅典学院猫',en:'Cats of the Athens School',era:'文艺复兴',artist:'Raphael',year:'1511',stars:4,img:frgAthens,orig:'仿《雅典学院》',
@@ -300,7 +300,7 @@ function Content() {
           rowKey={(r) => r.no as string}
           onRowClick={(r) => setLbWork(r)}
           columns={[
-            { key: "no", label: "馆藏编号" },
+            { key: "no", label: "编号" },
             { key: "zh", label: "作品名称" },
             { key: "artist", label: "艺术家" },
             { key: "year", label: "年代", align: "right" },
@@ -311,7 +311,7 @@ function Content() {
       </div>
       <div style={{ maxWidth: 720, marginTop: 44 }}>
         <Tabs variant="steps" items={[
-          { id: "1", label: "定妆照", content: "第一条 prompt 永远是猫咪定妆照：奶油短绒毛绿眼（馆长 A）与蓝灰重点色蓝眼（馆长 B），全部分镜以它为首帧参考锁定一致性。" },
+          { id: "1", label: "定妆照", content: "第一条 prompt 永远是猫咪定妆照：奶油金渐层绿眼（万万）与蓝灰重点色蓝眼（千千），全部分镜以它为首帧参考锁定一致性。" },
           { id: "2", label: "Prompt 工程", content: "风格契约前缀 + 主语槽位 + 负面词，参考图最多 10 张；组图参数保证整套出图主体不跑。" },
           { id: "3", label: "装配", content: "A 中景缓推 → B 肉垫特写 → 叠化 C 窗台大全景 → D 凝视镜头被光吞没 → 回切 A 尾帧成无缝循环。" },
           { id: "4", label: "交付", content: "ffmpeg -r 24 -an crf20 · 1280×720；离屏自动暂停解码，猫都嫌它安静。" },
@@ -323,7 +323,7 @@ function Content() {
           ]} />
         </div>
         <div style={{ display: "grid", gap: 18, gridTemplateColumns: "1fr 1fr", alignItems: "start", marginTop: 40 }}>
-          <EmptyState icon={<CatMark tone="blue" size={40} />} title="这里还没有展品" desc="狗还没来，猫先看着。" />
+          <EmptyState icon={<CatMark tone="blue" size={40} />} title="这里还没有内容" desc="狗还没来，猫先看着。" />
           <Skeleton lines={3} /><Skeleton rect />
         </div>
         <div style={{ marginTop: 40 }}>
@@ -400,7 +400,7 @@ function LoadingLab() {
       </Reveal>
       <Reveal delay={120}>
         <div style={{ display: "flex", gap: "clamp(28px,6vw,80px)", flexWrap: "wrap", margin: "42px 0" }}>
-          {[["Toys", 32, " 只"], ["Naps", 30, " h"], ["Curators", 2, " 位"]].map(([cap, n, suf]) => (
+          {[["Components", 48, "+"], ["Icons", 45, " 枚"], ["Cats", 2, " 只"]].map(([cap, n, suf]) => (
             <div key={cap as string} style={{ textAlign: "center" }}>
               <div style={{ fontFamily: "var(--font-display)", fontWeight: 600,
                 fontSize: 52, lineHeight: 1, color: "var(--accent)" }}>
@@ -422,8 +422,8 @@ function LoadingLab() {
           </div>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 22, marginTop: 22 }}>
-          <LazyImage src={"data:image/svg+xml;charset=utf-8," + catCream} ratio="4 / 3" alt="定妆照 · 奶油馆长" />
-          <LazyImage src={"data:image/svg+xml;charset=utf-8," + catBlue} ratio="4 / 3" alt="定妆照 · 蓝灰馆长" />
+          <LazyImage src={"data:image/svg+xml;charset=utf-8," + catCream} ratio="4 / 3" alt="定妆照 · 万万" />
+          <LazyImage src={"data:image/svg+xml;charset=utf-8," + catBlue} ratio="4 / 3" alt="定妆照 · 千千" />
         </div>
         <p style={{ marginTop: 12, textAlign: "center", fontSize: 12.5, color: "var(--text-dim)" }}>
           LazyImage 演示 · GPT 生图：shimmer 占位 → 进入视口拉取 → blur-up 淡入｜ 玻璃卡悬浮其上，糊化肉眼可见</p>

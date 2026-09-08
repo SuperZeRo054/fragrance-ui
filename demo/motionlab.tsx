@@ -94,7 +94,7 @@ export function ScrollDriven() {
     <div className="lab-card">
       <div className="sd-progress" aria-hidden><i /></div>
       <div className="sd-track">
-        {["入职第一年", "开始上桌", "占领键盘", "接管工位", "成为馆长"].map((t, i) => (
+        {["入职第一年", "开始上桌", "占领键盘", "接管工位", "成为门面"].map((t, i) => (
           <div className="sd-card" key={i}>
             <b>0{i + 1}</b>{t}
           </div>
@@ -265,7 +265,7 @@ export function CataasEgg() {
     <div className="lab-card">
       <div className="lab-row">
         <Button variant="glass" size="sm" onClick={() => { setErr(false); setSrc(`https://cataas.com/cat?${Date.now()}`); }}>
-          今日随机馆长
+          今日随机猫猫
         </Button>
         <Badge tone="info">外链彩蛋 · cataas.com</Badge>
       </div>
@@ -292,7 +292,7 @@ export function MotionLab() {
         <Reveal><h3 className="lab-h">E · 雾面着色器 <span className="lab-tag">OGL WebGL</span></h3><ShaderSilk /></Reveal>
         <Reveal><h3 className="lab-h">F · 涂鸦猫 <span className="lab-tag">rough.js</span></h3><RoughCat /></Reveal>
         <Reveal><h3 className="lab-h">G · 流体渐变 <span className="lab-tag">纯 CSS</span></h3><MeshBG /></Reveal>
-        <Reveal><h3 className="lab-h">H · 随机馆长 <span className="lab-tag">彩蛋 API</span></h3><CataasEgg /></Reveal>
+        <Reveal><h3 className="lab-h">H · 随机猫猫 <span className="lab-tag">彩蛋 API</span></h3><CataasEgg /></Reveal>
       </div>
     </section>
   );

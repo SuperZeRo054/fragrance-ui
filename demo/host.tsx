@@ -58,7 +58,7 @@ export function CatSvg({ tone = "wan", className = "", width = 128 }: {
   );
 }
 
-/** 区块策展人：描边猫走进场（滚动擦洗），到场后呼吸 / 摆尾 / 眨眼。 */
+/** 区块吉祥物：描边猫走进场（滚动擦洗），到场后呼吸 / 摆尾 / 眨眼。 */
 export function SectionHost({ host }: { host: HostId }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {

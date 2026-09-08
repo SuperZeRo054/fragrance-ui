@@ -5,7 +5,7 @@ import "./arthero.css";
 /* ================= 六画派数据 ================= */
 const MOVES = [
   { id: "realism", zh: "写实主义", en: "REALISM", yrs: "1840 —",
-    note: "渐变塑体积，毛色跟着光走。两位馆长没化妆的样子。",
+    note: "渐变塑体积，毛色跟着光走。两位吉祥物没化妆的样子。",
     chip: ["#c9a06a", "#7c8ba0", "#2f2a26"] },
   { id: "impressionism", zh: "印象派", en: "IMPRESSIONNISME", yrs: "1872 —",
     note: "碎笔和光斑，轮廓融进空气，像清晨十点的花园。",
@@ -14,7 +14,7 @@ const MOVES = [
     note: "普鲁士蓝平涂，红日当头，底下的浪永不停。",
     chip: ["#274b8f", "#eadfc4", "#a63c2e"] },
   { id: "bauhaus", zh: "包豪斯", en: "BAUHAUS", yrs: "1919 —",
-    note: "圆、三角、方，两位馆长被拆成一份几何作业。",
+    note: "圆、三角、方，两只吉祥物被拆成一份几何作业。",
     chip: ["#c2452d", "#2b5ea7", "#e8c531"] },
   { id: "pop", zh: "波普艺术", en: "POP ART", yrs: "1962 —",
     note: "网点、重描边，再加一声 PURR。就是漫画封面那一期。",
@@ -87,7 +87,7 @@ export function ArtHero() {
 
       <div className="art-stage">
         <Reveal>
-          <div className="art-canvas" aria-label="两位馆长的六种画派轮换画像">
+          <div className="art-canvas" aria-label="两只吉祥物的六种画派轮换画像">
             <svg viewBox="0 0 720 480" role="img">
               <defs>
                 <linearGradient id="ga-furA" x1="0" y1="0" x2="0" y2="1">
@@ -131,7 +131,7 @@ export function ArtHero() {
                 <ellipse cx="300" cy="431" rx="122" ry="12" fill="#000" opacity=".1" />
                 <ellipse cx="506" cy="434" rx="104" ry="11" fill="#000" opacity=".1" />
 
-                {/* 蓝灰馆长 · 圆坐 */}
+                {/* 蓝灰猫 · 圆坐 */}
                 <path d="M196,414 C176,414 168,398 175,384 C181,372 196,371 203,381" fill="none" stroke="#6d8096" strokeWidth="23" strokeLinecap="round" />
                 <path d="M190,424 C190,330 224,298 300,294 C376,298 410,330 410,424 Z" fill="url(#ga-furB)" />
                 <ellipse cx="300" cy="306" rx="30" ry="12" fill="#000" opacity=".08" />
@@ -161,7 +161,7 @@ export function ArtHero() {
                   <path d="M350,248 C364,243 378,242 392,245" /><path d="M349,256 C363,255 377,256 390,260" /><path d="M350,264 C363,267 375,272 386,278" />
                 </g>
 
-                {/* 奶油虎皮馆长 · 端坐 */}
+                {/* 奶油虎皮猫 · 端坐 */}
                 <path d="M560,412 C628,412 654,374 648,336 C645,316 624,314 617,331" fill="none" stroke="#d3ab74" strokeWidth="25" strokeLinecap="round" />
                 <path d="M560,412 C628,412 654,374 648,336 C645,316 624,314 617,331" fill="none" stroke="#b98d55" strokeWidth="25" strokeDasharray="9 30" strokeDashoffset="16" opacity=".55" />
                 <path d="M418,432 C414,346 438,272 500,264 C562,272 586,346 582,432 Z" fill="url(#ga-furA)" />
@@ -212,7 +212,7 @@ export function ArtHero() {
                   <rect x="540" y="250" width="130" height="12" rx="6" fill="#d8a0a8" opacity=".5" />
                 </g>
                 <circle className="fl-soft" cx="622" cy="92" r="42" fill="#f2d488" opacity=".8" />
-                {/* 奶油馆长 */}
+                {/* 奶油猫 */}
                 <ellipse cx="500" cy="340" rx="86" ry="96" fill="#e0c493" opacity=".85" />
                 <circle cx="500" cy="204" r="60" fill="#e2c793" opacity=".9" />
                 <path d="M456,166 C448,122 452,104 462,102 C473,108 487,130 495,148 Z" fill="#d9b485" />
@@ -231,7 +231,7 @@ export function ArtHero() {
                   <path d="M448,212 q-20,-4 -36,0" /><path d="M449,220 q-20,2 -35,7" />
                   <path d="M552,212 q20,-4 36,0" /><path d="M551,220 q20,2 35,7" />
                 </g>
-                {/* 蓝灰馆长 */}
+                {/* 蓝灰猫 */}
                 <ellipse cx="292" cy="366" rx="92" ry="74" fill="#8496ab" opacity=".85" />
                 <circle cx="292" cy="248" r="56" fill="#8ba0b4" opacity=".9" />
                 <path d="M252,214 C245,176 248,160 257,158 C266,163 278,180 285,196 Z" fill="#7d90a8" />
@@ -260,7 +260,7 @@ export function ArtHero() {
                 <circle cx="372" cy="188" r="100" fill="none" stroke="#b23a2a" strokeWidth="2" opacity=".4" />
                 <circle cx="372" cy="188" r="92" fill="none" stroke="#b23a2a" strokeWidth="1.2" opacity=".25" />
 
-                {/* 奶油馆长 · 尾巴竖起 */}
+                {/* 奶油猫 · 尾巴竖起 */}
                 <path d="M556,398 C612,390 632,348 620,306" fill="none" stroke="#1c2434" strokeWidth="31" strokeLinecap="round" />
                 <path d="M556,398 C612,390 632,348 620,306" fill="none" stroke="#eadfc4" strokeWidth="24" strokeLinecap="round" />
                 <path d="M556,398 C612,390 632,348 620,306" fill="none" stroke="#b8563e" strokeWidth="24" strokeDasharray="9 30" strokeDashoffset="14" />
@@ -292,7 +292,7 @@ export function ArtHero() {
                   <path d="M552,214 L590,208" /><path d="M552,222 L592,224" /><path d="M552,230 L588,238" />
                 </g>
 
-                {/* 蓝灰馆长 · 腹部浪纹 */}
+                {/* 蓝灰猫 · 腹部浪纹 */}
                 <path d="M186,418 C168,418 160,402 167,388 C173,377 187,376 194,385" fill="none" stroke="#1c2434" strokeWidth="27" strokeLinecap="round" />
                 <path d="M186,418 C168,418 160,402 167,388 C173,377 187,376 194,385" fill="none" stroke="#2e4a7d" strokeWidth="20" strokeLinecap="round" />
                 <path d="M192,424 C192,330 220,296 296,290 C372,296 400,330 400,424 Z" fill="#2e4a7d" stroke="#1c2434" strokeWidth="3.5" />
@@ -347,7 +347,7 @@ export function ArtHero() {
                 <rect y="444" width="720" height="26" fill="#191919" />
                 <path d="M500,90 V436" stroke="#191919" strokeWidth="1.4" strokeDasharray="4 7" opacity=".3" />
 
-                {/* 奶油馆长 · 构成 */}
+                {/* 奶油猫 · 构成 */}
                 <path d="M556,420 A64,64 0 0 0 620,352" fill="none" stroke="#191919" strokeWidth="20" />
                 <path d="M420,432 V348 A80,80 0 0 1 580,348 V432 Z" fill="#e8c98f" stroke="#191919" strokeWidth="4" />
                 <circle cx="500" cy="396" r="34" fill="#f0dcb4" />
@@ -364,7 +364,7 @@ export function ArtHero() {
                 </g>
                 <circle cx="500" cy="284" r="5.5" fill="#e7e0d3" stroke="#191919" strokeWidth="2.5" />
 
-                {/* 蓝灰馆长 · 构成 */}
+                {/* 蓝灰猫 · 构成 */}
                 <path d="M192,420 C158,414 144,384 152,354" fill="none" stroke="#191919" strokeWidth="18" />
                 <path d="M186,432 V372 C186,326 216,292 296,292 C376,292 406,326 406,372 V432 Z" fill="#5a7391" stroke="#191919" strokeWidth="4" />
                 <circle cx="296" cy="380" r="40" fill="#e8c531" opacity=".38" />

@@ -157,7 +157,7 @@ export function IconWardrobe() {
         <div className="mini-app mui-glass">
           <div className="mini-app__bar">
             <WardIcon name="home" set={set} size={18} />
-            <b>馆长工作台</b>
+            <b>Agent 工作台</b>
             <span style={{ flex: 1 }} />
             <span className="mini-app__bell">
               <WardIcon name="bell" set={set} size={17} /><i />
@@ -166,22 +166,22 @@ export function IconWardrobe() {
           </div>
           <div className="mini-app__search">
             <WardIcon name="search" set={set} size={15} />
-            <span>搜 312 件馆藏…</span>
+            <span>搜组件、图标与文档…</span>
           </div>
           <div className="mini-app__rows">
             <div className="mini-app__row">
               <span className="mini-app__ic"><WardIcon name="image" set={set} /></span>
-              <span className="mini-app__tt"><b>睡莲中的猫</b><i>FRG·IMP-01 · 印象派</i></span>
-              <em>在展</em>
+              <span className="mini-app__tt"><b>首页封面 v3</b><i>SVG · 刚刚交付</i></span>
+              <em>已交付</em>
             </div>
             <div className="mini-app__row">
               <span className="mini-app__ic"><WardIcon name="pencil" set={set} /></span>
-              <span className="mini-app__tt"><b>展讯 prompt 草稿</b><i>改于两小时前</i></span>
+              <span className="mini-app__tt"><b>v0.4 发布说明</b><i>改于两小时前</i></span>
               <em>草稿</em>
             </div>
             <div className="mini-app__row">
               <span className="mini-app__ic"><WardIcon name="calendar" set={set} /></span>
-              <span className="mini-app__tt"><b>十月特展排期</b><i>3 位借展方待确认</i></span>
+              <span className="mini-app__tt"><b>十一发布窗口</b><i>3 个组件待回归</i></span>
               <em>临近</em>
             </div>
           </div>
@@ -191,7 +191,7 @@ export function IconWardrobe() {
             <span><WardIcon name="star" set={set} size={15} /> 4.9 评分</span>
           </div>
           <div className="mini-app__actions">
-            <span className="mini-btn pri"><WardIcon name="plus" set={set} size={14} /> 新增展品</span>
+            <span className="mini-btn pri"><WardIcon name="plus" set={set} size={14} /> 新增组件</span>
             <span className="mini-btn"><WardIcon name="arrow" set={set} size={14} /> 分享</span>
             <span className="mini-btn danger" title="删除"><WardIcon name="trash" set={set} size={14} /></span>
           </div>
