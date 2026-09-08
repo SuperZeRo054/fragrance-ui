@@ -1,15 +1,14 @@
 import React, { useEffect, useRef } from "react";
-import { CatMark } from "../src";
 
 export type HostId = "wanwan" | "qianqian";
 
-const META: Record<HostId, { name: string; tone: "cream" | "blue"; role: string }> = {
-  wanwan: { name: "万万", tone: "cream", role: "蓝金渐层 · 动效与新兴模块" },
-  qianqian: { name: "千千", tone: "blue", role: "重点色 · 基础组件与图标" },
+const META: Record<HostId, { name: string; cls: string; role: string }> = {
+  wanwan: { name: "万万", cls: "wan", role: "蓝金渐层 · 动效与新兴模块" },
+  qianqian: { name: "千千", cls: "qian", role: "重点色 · 基础组件与图标" },
 };
 
-/** 区块策展人引导条：滚进视口即播放。
- *  优先 CSS scroll-driven（animation-timeline: view()），不支持的浏览器走 IO 加 .play。 */
+/** 区块策展人：纯 CSS 动画猫。滚动进度擦洗「走进场」（view() 时间线），
+ *  到场后呼吸 / 尾巴 / 眨眼常驻；不支持 view() 的浏览器由 IO 触发一次完整入场。 */
 export function SectionHost({ host, line }: { host: HostId; line: string }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -17,19 +16,30 @@ export function SectionHost({ host, line }: { host: HostId; line: string }) {
     if (CSS.supports?.("animation-timeline: view()")) return;
     const io = new IntersectionObserver(([e]) => {
       if (e.isIntersecting) { el.classList.add("play"); io.disconnect(); }
-    }, { threshold: .35 });
+    }, { threshold: .4 });
     io.observe(el);
     return () => io.disconnect();
   }, []);
   const meta = META[host];
   return (
-    <div className={`host-strip host-${host}`} ref={ref}>
-      <span className="host-ava" aria-hidden><CatMark tone={meta.tone} size={30} /></span>
-      <span className="host-meta">
-        <i className="host-name">{meta.name}</i>
-        <i className="host-role">{meta.role}</i>
-      </span>
-      <span className="host-line">{line}</span>
+    <div className="host-scene" data-host={host} ref={ref}>
+      <div className="host-walker">
+        <div className={`anicat ${meta.cls}`} aria-hidden>
+          <i className="anicat__tail" />
+          <i className="anicat__ear l" /><i className="anicat__ear r" />
+          <i className="anicat__body" />
+          <i className="anicat__chest" />
+          <i className="anicat__head">
+            <i className="anicat__eye l" /><i className="anicat__eye r" />
+            <i className="anicat__nose" />
+          </i>
+          <i className="anicat__paw l" /><i className="anicat__paw r" />
+        </div>
+      </div>
+      <div className="host-bubble">
+        <b>{meta.name}</b><i>{meta.role}</i>
+        <p>{line}</p>
+      </div>
     </div>
   );
 }
