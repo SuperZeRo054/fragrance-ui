@@ -208,3 +208,55 @@ section { margin-top: 84px; }
 @media (max-width: 640px) {
   .navdock__panel { grid-template-columns: 1fr; min-width: 168px; }
 }
+
+/* ===== 策展人引导条（万万 / 千千）+ 滚动播放 ===== */
+.host-strip { display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  margin: 28px 0 4px; padding: 11px 18px 11px 12px; width: fit-content; max-width: 100%;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-raised) 62%, transparent); }
+.host-ava { flex: none; width: 46px; height: 46px; border-radius: 50%;
+  display: grid; place-items: center; border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.host-meta { display: grid; gap: 1px; }
+.host-name { font-style: normal; font-size: 11px; font-weight: 600;
+  letter-spacing: .22em; color: var(--accent); }
+.host-role { font-style: normal; font-size: 10px; letter-spacing: .06em; color: var(--text-dim); }
+.host-line { font-size: 13.5px; line-height: 1.6; color: var(--text); }
+.host-strip.host-wanwan .host-name { color: var(--warning); }
+.host-strip.host-qianqian .host-name { color: var(--info); }
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .host-strip { animation: host-in linear both;
+      animation-timeline: view(); animation-range: entry 0% cover 16%; }
+    .host-strip .host-ava { animation: host-pop linear both;
+      animation-timeline: view(); animation-range: entry 8% cover 26%; }
+    .host-strip .host-line { animation: host-line linear both;
+      animation-timeline: view(); animation-range: entry 10% cover 30%; }
+  }
+  @supports not (animation-timeline: view()) {
+    .host-strip { opacity: 0; transform: translateY(22px); }
+    .host-strip.play { opacity: 1; transform: none;
+      transition: opacity .7s var(--mui-ease-out), transform .7s var(--mui-ease-out); }
+    .host-strip.play .host-ava { animation: host-pop .6s var(--mui-ease-spring); }
+  }
+}
+@keyframes host-in { from { opacity: 0; transform: translateY(22px); } }
+@keyframes host-pop { from { transform: scale(.55) rotate(-14deg); } }
+@keyframes host-line { from { opacity: 0; transform: translateX(16px); } }
+
+/* ===== 馆藏长廊（横拉框卡片） ===== */
+.rail-card { border: 1px solid var(--line); border-radius: var(--mui-radius-lg);
+  overflow: hidden; background: var(--surface-raised); cursor: pointer;
+  transition: transform .3s var(--mui-ease-spring), border-color .25s; }
+.rail-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+.rail-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.rail-card .rail-foot { display: flex; align-items: baseline; gap: 10px; padding: 11px 14px; }
+.rail-card .rail-no { font-size: 10px; letter-spacing: .16em; color: var(--text-dim);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+.rail-card .rail-zh { font-size: 13px; font-weight: 500; }
+
+/* ===== 滚动进度引导线 ===== */
+.scroll-guide { position: fixed; top: 0; left: 0; height: 2px; z-index: 80;
+  background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+  width: 0; will-change: width; }

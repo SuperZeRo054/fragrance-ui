@@ -8,6 +8,7 @@ import "./components/motion.css";
 import "./components/loading.css";
 import "./components/effects.css";
 import "./components/agent.css";
+import "./components/hscroll.css";
 
 export { SkinProvider, useTheme } from "./theme/SkinProvider";
 export type { SkinId, Mode, FontId } from "./theme/SkinProvider";
@@ -24,4 +25,5 @@ export { TypingText, TextReveal, GradientText, Marquee, Magnetic, Tilt, Beam, Au
 export { ThreeShapes, ParticleField } from "./components/three-canvas";
 export { StreamText, ThinkingText, TextScramble, TextRotate, AgentSteps, ToolCallCard, PromptBar, StatusDot, VoiceBars, LiveCounter } from "./components/agent";
 export type { AgentStepStatus } from "./components/agent";
+export { HScroll } from "./components/hscroll";
 export * from "./icons";

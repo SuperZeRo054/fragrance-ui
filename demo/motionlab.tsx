@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { CatFull, CatMark, Button, Badge, SectionHead, Reveal } from "../src";
+import { SectionHost } from "./host";
 import "./motionlab.css";
 
 /* ============ A. 状态机猫（Rive 思路的 CSS 复刻：idle/groom/alert） ============ */
@@ -278,6 +279,7 @@ export function MotionLab() {
     <section id="motion-lab">
       <SectionHead kicker="07 · Motion & Art Lab" title="动效与画法实验室"
         sub="状态机、描边生长、滚动驱动、爪印路径、雾面着色器、涂鸦、流体渐变，每件都能单独搬走。" />
+      <SectionHost host="wanwan" line="这层全是我的玩具：状态机猫、描边生长、雾面着色器。" />
       <div className="lab-grid">
         <Reveal><h3 className="lab-h">A · 状态机猫 <span className="lab-tag">CSS 状态机</span></h3><StateCat /></Reveal>
         <Reveal><h3 className="lab-h">B · 描边生长 <span className="lab-tag">GSAP DrawSVG</span></h3><DrawCat /></Reveal>

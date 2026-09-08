@@ -14,6 +14,7 @@ import {
   PaperPlaneRight as SendIc, ArrowRight as ArrowIc,
   type IconWeight, type Icon,
 } from "../src";
+import { SectionHost } from "./host";
 import { COMPARE_SETS, GLYPH_KEYS } from "./iconcompare-data";
 import { REMOTE_GLYPHS, REMOTE_SET_SPECS, type RemoteSet } from "./iconsets-data";
 
@@ -51,6 +52,7 @@ export function IconShelf() {
     <section id="icon-lab">
       <SectionHead kicker="11 · Icons" title="图标精选货架"
         sub="取自 Phosphor（MIT）：细线圆头，跟整套库一条笔路。currentColor 上色，随皮肤昼夜自动换装。" />
+      <SectionHost host="qianqian" line="45 枚精选归我管，六档字重、六家笔迹，随你挑。" />
       <Reveal>
         <div className="lab-card">
           <div style={{ display: "flex", flexWrap: "wrap", gap: 16, alignItems: "center" }}>

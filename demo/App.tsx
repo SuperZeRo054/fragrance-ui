@@ -9,9 +9,10 @@ import {
   Card, Table, Tabs, Accordion, Pagination, EmptyState, Skeleton,
   PageTransition, viewNavigate, Spinner, Progress, CountUp, LazyImage,
   House, Atom, Textbox, FrameCorners, Cards, Swap, Cube, SquaresFour, List,
-  CircleNotch, Sparkle, Robot, Waveform,
+  CircleNotch, Sparkle, Robot, Waveform, HScroll,
   type SkinId, type FontId, type Icon,
 } from "../src";
+import { SectionHost } from "./host";
 import { MotionLab } from "./motionlab";
 import { ModernEffects, ThreeLab } from "./modernlab";
 import { AgentLab } from "./agentlab";
@@ -56,6 +57,25 @@ function ThemeConsole() {
   );
 }
 
+
+/* ---------- 滚动进度引导线 ---------- */
+function ScrollGuide() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current!; let raf = 0;
+    const on = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const h = document.documentElement;
+        el.style.width = `${((h.scrollTop / (h.scrollHeight - h.clientHeight || 1)) * 100).toFixed(2)}%`;
+      });
+    };
+    on();
+    addEventListener("scroll", on, { passive: true });
+    return () => { removeEventListener("scroll", on); cancelAnimationFrame(raf); };
+  }, []);
+  return <div className="scroll-guide" ref={ref} aria-hidden />;
+}
 
 /* ---------- 悬停展开的导航舱：icon + 区块，点了平滑跳 ---------- */
 const SECTIONS: { id: string; label: string; icon: Icon }[] = [
@@ -110,6 +130,7 @@ function Atoms() {
   return (
     <section id="atoms">
       <SectionHead kicker="01 · Atoms" title="原子件" sub="按钮 / 徽章 / 标签组 / 稀有度 / 头像 / 提示词。" />
+      <SectionHost host="qianqian" line="地基件都在这：按钮、徽章、评分。先摸熟，再谈花。" />
       <Reveal>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 18, marginTop: 40 }}>
           <Button>主要操作</Button>
@@ -161,6 +182,7 @@ function Forms() {
   return (
     <section id="forms">
       <SectionHead kicker="02 · Forms" title="表单控件全套" sub="含校验错误与成功反馈态、开关、单选复选与滑块。" />
+      <SectionHost host="qianqian" line="输错会抖两下，填对才放行。表单的礼貌全在细节里。" />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(230px,1fr))", gap: 20, marginTop: 30 }}>
         <Reveal><TextField label="访客姓名" placeholder="可匿名观展"
           hint="可以留空，匿名观展" state="success" /></Reveal>
@@ -195,6 +217,7 @@ function Overlays() {
     <section id="overlays">
       <SectionHead kicker="03 · Overlays" title="覆盖层系统"
         sub="Modal / Confirm / Error（入场震动）/ Lightbox / Toast · Esc 与遮罩点击均可关闭。" />
+      <SectionHost host="qianqian" line="弹窗、灯箱、轻提示，Esc 和遮罩都听得懂。" />
       <Reveal>
         <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 30 }}>
           <Button onClick={() => setModal(true)}>打开 Modal</Button>
@@ -242,6 +265,7 @@ function Content() {
   return (
     <section id="gallery">
       <SectionHead kicker="04 · Content" title="数据与内容展示" sub="卡片 / 名录表 / 标签页 / 手风琴 / 分页 / 空态与骨架屏。" />
+      <SectionHost host="qianqian" line="卡片、名录、分页撑场子。下面的长廊，拖着走。" />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(250px,1fr))", gap: 32, marginTop: 34 }}>
         {WORKS.map((w, i) => (
           <Reveal key={w.no} delay={i * 80}>
@@ -253,6 +277,23 @@ function Content() {
         ))}
         <Lightbox open={!!lbWork} onClose={() => setLbWork(null)} src={lbWork?.img || ""}
           alt={lbWork?.zh} caption={lbWork ? `${lbWork.no} · ${lbWork.orig} · ${lbWork.year}` : ""} />
+      </div>
+      <div style={{ marginTop: 52 }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
+          <span style={{ fontSize: 10, letterSpacing: ".28em", textTransform: "uppercase", color: "var(--text-dim)" }}>长廊 · 拖着看</span>
+          <span style={{ fontSize: 12, color: "var(--text-dim)" }}>按住拖动，松手即停；点卡片开灯箱</span>
+        </div>
+        <HScroll>
+          {WORKS.map((w) => (
+            <div className="rail-card" key={w.no} onClick={() => setLbWork(w)}>
+              <img src={w.img} alt={w.zh} loading="lazy" />
+              <div className="rail-foot">
+                <span className="rail-no">{w.no}</span>
+                <span className="rail-zh">{w.zh}</span>
+              </div>
+            </div>
+          ))}
+        </HScroll>
       </div>
       <div style={{ marginTop: 46 }}>
         <Table
@@ -300,6 +341,7 @@ function RouteLab() {
     <section id="route-lab">
       <SectionHead kicker="05 · Page Transition" title="页面切换实验室"
         sub="SPA 切页用 PageTransition。跨页和锚点跳转走 viewNavigate，合成器接管过渡，稳定 60fps。" />
+      <SectionHost host="wanwan" line="翻页也要有戏。合成器接管过渡，丝滑到看不见。" />
       <Reveal>
         <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 28 }}>
           <Button variant={view === "gallery" ? "primary" : "outline"}
@@ -348,6 +390,7 @@ function LoadingLab() {
     <section id="loading-lab">
       <SectionHead kicker="06 · Loading & Lazy" title="加载与懒加载"
         sub="四种 Spinner 口味 · 进度条 · 数字滚动 · LazyImage 进入视口才拉取并 blur-up 淡入。" />
+      <SectionHost host="qianqian" line="等待的焦虑，交给骨架屏和 blur-up 治。" />
       <Reveal>
         <div style={{ display: "flex", gap: 44, alignItems: "center", flexWrap: "wrap", marginTop: 32 }}>
           <Spinner variant="ring" /><Spinner variant="dots" /><Spinner variant="bars" />
@@ -414,6 +457,7 @@ function App() {
             <NavDock />
           </div>
         </header>
+        <ScrollGuide />
         <main style={{ maxWidth: 1100, margin: "0 auto", padding: "70px 28px 90px" }} id="top">
           <ArtHero />
           <Atoms /><Forms /><Overlays /><Content />

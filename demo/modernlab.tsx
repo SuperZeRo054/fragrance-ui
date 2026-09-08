@@ -4,6 +4,7 @@ import {
   TypingText, TextReveal, GradientText, Marquee, Magnetic, Tilt, Beam, Aurora,
   ThreeShapes, ParticleField,
 } from "../src";
+import { SectionHost } from "./host";
 
 /* ============ 纯 CSS 画猫（零 SVG 零图片：div + 圆角 + 渐变） ============ */
 export function CssCat({ tone = "cream" }: { tone?: "cream" | "blue" }) {
@@ -17,6 +18,7 @@ export function ModernEffects() {
     <section id="effects-lab">
       <SectionHead kicker="08 · Modern Effects" title="现代特效套件"
         sub="打字机、逐字揭示、流光字、跑马灯、磁吸、3D 倾斜、流光边框、极光背景。动效只碰 opacity 和 transform。" />
+      <SectionHost host="wanwan" line="打字机、磁吸、流光边框，动效的当代表达都在这。" />
       <div className="effects-hero">
         <Reveal>
           <Kicker>Live Demo</Kicker>
@@ -67,6 +69,7 @@ export function ThreeLab() {
     <section id="three-lab">
       <SectionHead kicker="09 · 3D & Canvas" title="三维与粒子"
         sub="Three.js 管深度和光影，Canvas 管粒子群体。至于几何吉祥物，纯 CSS 就够。" />
+      <SectionHost host="wanwan" line="深度归 three.js，群体行为归 Canvas，几何萌物归 CSS。" />
       <div className="combo-grid">
         <Reveal>
           <div className="lab-card">
