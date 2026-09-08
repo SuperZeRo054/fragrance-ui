@@ -8,7 +8,9 @@ import {
   Modal, ConfirmModal, ErrorModal, Lightbox,
   Card, Table, Tabs, Accordion, Pagination, EmptyState, Skeleton,
   PageTransition, viewNavigate, Spinner, Progress, CountUp, LazyImage,
-  type SkinId, type FontId,
+  House, Atom, Textbox, FrameCorners, Cards, Swap, Cube, SquaresFour, List,
+  CircleNotch, Sparkle, Robot, Waveform,
+  type SkinId, type FontId, type Icon,
 } from "../src";
 import { MotionLab } from "./motionlab";
 import { ModernEffects, ThreeLab } from "./modernlab";
@@ -54,12 +56,55 @@ function ThemeConsole() {
   );
 }
 
+
+/* ---------- 悬停展开的导航舱：icon + 区块，点了平滑跳 ---------- */
+const SECTIONS: { id: string; label: string; icon: Icon }[] = [
+  { id: "top", label: "首页", icon: House },
+  { id: "atoms", label: "原子件", icon: Atom },
+  { id: "forms", label: "表单", icon: Textbox },
+  { id: "overlays", label: "覆盖层", icon: FrameCorners },
+  { id: "gallery", label: "内容展示", icon: Cards },
+  { id: "route-lab", label: "页面切换", icon: Swap },
+  { id: "loading-lab", label: "加载", icon: CircleNotch },
+  { id: "effects-lab", label: "现代特效", icon: Sparkle },
+  { id: "three-lab", label: "三维粒子", icon: Cube },
+  { id: "agent-lab", label: "Agent", icon: Robot },
+  { id: "icon-lab", label: "图标", icon: SquaresFour },
+  { id: "motion-lab", label: "动效实验室", icon: Waveform },
+];
+
+function NavDock() {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="navdock" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+      <button className="navdock__btn" aria-label="站内导航" aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}>
+        <List size={18} weight="light" />
+      </button>
+      <nav className={`navdock__panel mui-glass${open ? " on" : ""}`} aria-hidden={!open}>
+        {SECTIONS.map(({ id, label, icon: Ic }) => (
+          <a key={id} className="navdock__item" href={`#${id}`} tabIndex={open ? 0 : -1}
+            onClick={(e) => {
+              e.preventDefault();
+              setOpen(false);
+              document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+              history.replaceState(null, "", `#${id}`);
+            }}>
+            <Ic size={17} weight="light" />
+            <span>{label}</span>
+          </a>
+        ))}
+      </nav>
+    </div>
+  );
+}
+
 /* ---------- 各分类展示块 ---------- */
 function Atoms() {
   const toast = useToast();
   const [era, setEra] = useState("all");
   return (
-    <section>
+    <section id="atoms">
       <SectionHead kicker="01 · Atoms" title="原子件" sub="按钮 / 徽章 / 标签组 / 稀有度 / 头像 / 提示词。" />
       <Reveal>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 18, marginTop: 40 }}>
@@ -110,7 +155,7 @@ function Forms() {
   const [rd, setRd] = useState("day");
   const [rng, setRng] = useState(64);
   return (
-    <section>
+    <section id="forms">
       <SectionHead kicker="02 · Forms" title="表单控件全套" sub="含校验错误与成功反馈态、开关、单选复选与滑块。" />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(230px,1fr))", gap: 20, marginTop: 30 }}>
         <Reveal><TextField label="访客姓名" placeholder="可匿名观展"
@@ -143,7 +188,7 @@ function Overlays() {
   const [err, setErr] = useState(false);
   const [lb, setLb] = useState(false);
   return (
-    <section>
+    <section id="overlays">
       <SectionHead kicker="03 · Overlays" title="覆盖层系统"
         sub="Modal / Confirm / Error（入场震动）/ Lightbox / Toast · Esc 与遮罩点击均可关闭。" />
       <Reveal>
@@ -360,7 +405,10 @@ function App() {
           justifyContent: "space-between", padding: "14px 28px", background: "color-mix(in srgb, var(--surface) 88%, transparent)",
           backdropFilter: "blur(12px)", borderBottom: "1px solid var(--line)" }}>
           <a href="#" className="mui-kicker" style={{ textDecoration: "none", fontSize: 13 }}>FRAGRANCE UI</a>
-          <ThemeConsole />
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <NavDock />
+            <ThemeConsole />
+          </div>
         </header>
         <main style={{ maxWidth: 1100, margin: "0 auto", padding: "70px 28px 90px" }} id="top">
           <ArtHero />

@@ -10,6 +10,7 @@ export {
   // 基础操作
   MagnifyingGlass, Plus, X, CaretDown, CaretRight, CheckCircle, WarningCircle,
   Info, Question, DotsThree, Gear, List, Star, Bell, House, Trash,
+  Atom, Textbox, FrameCorners, Cards, Swap, Cube, SquaresFour,
   // 内容与博客
   PencilSimple, Notebook, Article, Image, Camera, TagSimple, FolderOpen,
   Clock, CalendarBlank, Eye,
