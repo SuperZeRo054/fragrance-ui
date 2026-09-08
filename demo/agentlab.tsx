@@ -106,7 +106,7 @@ export function AgentLab() {
     <section id="agent-lab" ref={secRef}>
       <SectionHead kicker="10 · Agent Native" title="Agent 原生界面"
         sub="给「机器正在工作」做的界面：流式输出、思考态、工具调用卡、任务时间线。输入框可以直接指挥，不打字就看它自己跑。" />
-      <SectionHost host="wanwan" line="新同事住这层：会打字、会调工具，还会汇报进度。" />
+      <SectionHost host="wanwan" />
 
       <Reveal>
         <div className="agent-hero">

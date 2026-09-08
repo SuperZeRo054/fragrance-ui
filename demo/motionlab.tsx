@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { CatFull, CatMark, Button, Badge, SectionHead, Reveal } from "../src";
-import { SectionHost } from "./host";
+import { Button, Badge, SectionHead, Reveal } from "../src";
+import { SectionHost, CatSvg } from "./host";
 import "./motionlab.css";
 
 /* ============ A. 状态机猫（Rive 思路的 CSS 复刻：idle/groom/alert） ============ */
@@ -15,7 +15,7 @@ export function StateCat() {
         onClick={() => setSt((s) => (s === "idle" ? "groom" : s === "groom" ? "alert" : "groom"))}
         title="点击切换状态，悬停会竖耳"
       >
-        <CatFull tone="cream" width={230} className={`state-cat st-${st}`} />
+        <CatSvg tone="wan" width={230} className={`state-cat st-${st}`} />
         <span className="state-badge">{st === "idle" ? "IDLE · 发呆" : st === "groom" ? "GROOM · 舔毛" : "ALERT · 竖耳"}</span>
       </div>
       <div className="lab-row">
@@ -59,20 +59,24 @@ export function DrawCat() {
   return (
     <div className="lab-card">
       <div ref={boxRef} className="draw-box">
-        <svg ref={svgRef} id="dcat" viewBox="0 0 200 160" width="240" aria-hidden>
-          {/* 轮廓线：描边生长 */}
-          <path className="stroke" d="M62 24 Q52 6 68 2 Q78 12 80 22 Q92 16 104 22 Q106 12 116 2 Q132 6 122 24 Q142 34 144 58 Q146 92 100 96 Q54 92 56 58 Q58 34 62 24 Z"
-            fill="var(--surface-inset)" stroke="var(--accent)" strokeWidth="2.4" fillOpacity="0" style={{ fillOpacity: 0 }} />
-          {/* fillin 组：轮廓完成后淡入的实体 */}
+        <svg ref={svgRef} id="dcat" viewBox="0 0 200 150" width="250" aria-hidden>
+          {/* 头 + 一体耳：轮廓一笔画成，耳朵不可能离位 */}
+          <path className="stroke" d="M100,102 C80,102 71,90 71,75 C71,65 73,54 77,42 C80,34 89,38 93,51 C97,49 103,49 107,51 C111,38 120,34 123,42 C127,54 129,65 129,75 C129,90 120,102 100,102 Z"
+            fill="none" stroke="var(--accent)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+          <g fill="none" stroke="var(--accent)" strokeLinecap="round">
+            <path className="stroke" d="M72,82 C58,80 46,77 36,72" strokeWidth="1.8" />
+            <path className="stroke" d="M74,89 C60,90 48,93 38,98" strokeWidth="1.8" />
+            <path className="stroke" d="M128,82 C142,80 154,77 164,72" strokeWidth="1.8" />
+            <path className="stroke" d="M126,89 C140,90 152,93 162,98" strokeWidth="1.8" />
+            <path className="stroke" d="M100,86 V92 M100,92 Q96,96 91,94 M100,92 Q104,96 109,94" strokeWidth="2" />
+          </g>
           <g className="fillin">
-            <ellipse cx="82" cy="66" rx="8" ry="9" fill="var(--accent)"/><ellipse cx="118" cy="66" rx="8" ry="9" fill="var(--accent)"/>
-            <ellipse cx="100" cy="92" rx="16" ry="11" fill="var(--accent-soft)"/>
-            <path d="M96 88 L104 88 L100 93 Z" fill="var(--danger)"/>
-            <path d="M100 93 Q100 97 94 98 M100 93 Q100 97 106 98" stroke="var(--text-dim)" strokeWidth="2" fill="none" strokeLinecap="round"/>
-            <g stroke="var(--text-dim)" strokeWidth="1.6" opacity=".55" strokeLinecap="round">
-              <path d="M76 92 L46 88"/><path d="M78 98 L48 104"/>
-              <path d="M124 92 L154 88"/><path d="M122 98 L152 104"/>
-            </g>
+            <path d="M80,45 L83,38 L89,48 Z" fill="var(--accent-soft)" />
+            <path d="M120,45 L117,38 L111,48 Z" fill="var(--accent-soft)" />
+            <circle cx="87" cy="73" r="6" fill="var(--accent)" />
+            <circle cx="113" cy="73" r="6" fill="var(--accent)" />
+            <circle cx="89" cy="71" r="1.8" fill="#fff" /><circle cx="115" cy="71" r="1.8" fill="#fff" />
+            <path d="M95,82 L105,82 L100,88 Z" fill="var(--danger)" />
           </g>
         </svg>
         {ready && (
@@ -279,7 +283,7 @@ export function MotionLab() {
     <section id="motion-lab">
       <SectionHead kicker="07 · Motion & Art Lab" title="动效与画法实验室"
         sub="状态机、描边生长、滚动驱动、爪印路径、雾面着色器、涂鸦、流体渐变，每件都能单独搬走。" />
-      <SectionHost host="wanwan" line="这层全是我的玩具：状态机猫、描边生长、雾面着色器。" />
+      <SectionHost host="wanwan" />
       <div className="lab-grid">
         <Reveal><h3 className="lab-h">A · 状态机猫 <span className="lab-tag">CSS 状态机</span></h3><StateCat /></Reveal>
         <Reveal><h3 className="lab-h">B · 描边生长 <span className="lab-tag">GSAP DrawSVG</span></h3><DrawCat /></Reveal>
