@@ -8,8 +8,8 @@ const META: Record<HostId, { name: string; tone: "wan" | "qian" }> = {
 };
 
 const PALETTE = {
-  wan: { ink: "#5c4a32", fur: "#eed9a8", earin: "#cf9d78", iris: "#5c8f46", nose: "#cf8272", chest: "#f6ecd4" },
-  qian: { ink: "#2f3d4e", fur: "#9fb1c4", earin: "#4d6076", iris: "#5b7fb0", nose: "#b06a5c", chest: "#dbe4ee" },
+  wan: { ink: "#5c4a32", fur: "#eed9a8", iris: "#5c8f46", nose: "#cf8272", chest: "#f6ecd4" },
+  qian: { ink: "#2f3d4e", fur: "#9fb1c4", iris: "#5b7fb0", nose: "#b06a5c", chest: "#dbe4ee" },
 };
 
 /** 描边猫：耳朵压在头版之下，与头一体成剪影，不会飞。
@@ -24,16 +24,14 @@ export function CatSvg({ tone = "wan", className = "", width = 128 }: {
         <path d="M103,100 C116,99 123,89 119,79 C117,73 108,74 110,83"
           fill="none" stroke={c.ink} strokeWidth="9" strokeLinecap="round" />
       </g>
-      <path className="cat-ear-l" d="M45,11 L60,31 L31,29 Z"
+      <path className="cat-ear-l" d="M48,6 L61,17 L47,25 Z"
         fill={c.fur} stroke={c.ink} strokeWidth="2.5" strokeLinejoin="round" />
-      <path className="cat-ear-r" d="M95,11 L80,31 L109,29 Z"
+      <path className="cat-ear-r" d="M92,6 L79,17 L93,25 Z"
         fill={c.fur} stroke={c.ink} strokeWidth="2.5" strokeLinejoin="round" />
       <path d="M38,106 C38,76 48,60 70,58 C92,60 102,76 102,106 Z"
         fill={c.fur} stroke={c.ink} strokeWidth="2.5" strokeLinejoin="round" />
       <ellipse cx="70" cy="94" rx="19" ry="13" fill={c.chest} />
       <circle cx="70" cy="40" r="30" fill={c.fur} stroke={c.ink} strokeWidth="2.5" />
-      <path className="cat-ear-l" d="M45,16 L48,10 L54,18 Z" fill={c.earin} />
-      <path className="cat-ear-r" d="M95,16 L92,10 L86,18 Z" fill={c.earin} />
       {tone === "wan" && (
         <g stroke="#c1935a" strokeWidth="3" strokeLinecap="round" opacity=".55">
           <path d="M64,19 v6" /><path d="M70,17 v7" /><path d="M76,19 v6" />
