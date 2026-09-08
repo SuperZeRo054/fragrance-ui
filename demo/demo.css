@@ -183,7 +183,10 @@ section { margin-top: 84px; }
   cursor: pointer; transition: border-color .25s, color .25s, background .25s; }
 .navdock:hover .navdock__btn, .navdock:focus-within .navdock__btn,
 .navdock__btn[aria-expanded="true"] { border-color: var(--accent); color: var(--accent); }
+.navdock:has(.navdock__panel.on)::after { content: ""; position: absolute;
+  top: 100%; right: 0; width: 320px; height: 18px; }
 .navdock__panel { position: absolute; top: calc(100% + 12px); right: 0; z-index: 60;
+  max-height: calc(100vh - 110px); overflow: auto;
   display: grid; grid-template-columns: repeat(2, 138px); gap: 2px; padding: 8px;
   border: 1px solid var(--line); border-radius: var(--mui-radius-lg);
   background: color-mix(in srgb, var(--surface) 97%, transparent);

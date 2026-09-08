@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   SkinProvider, useTheme, ToastProvider, useToast,
@@ -75,8 +75,11 @@ const SECTIONS: { id: string; label: string; icon: Icon }[] = [
 
 function NavDock() {
   const [open, setOpen] = useState(false);
+  const timer = useRef<number>(0);
+  const enter = () => { window.clearTimeout(timer.current); setOpen(true); };
+  const leave = () => { timer.current = window.setTimeout(() => setOpen(false), 220); };
   return (
-    <div className="navdock" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+    <div className="navdock" onMouseEnter={enter} onMouseLeave={leave}>
       <button className="navdock__btn" aria-label="站内导航" aria-expanded={open}
         onClick={() => setOpen((v) => !v)}>
         <List size={18} weight="light" />
@@ -86,6 +89,7 @@ function NavDock() {
           <a key={id} className="navdock__item" href={`#${id}`} tabIndex={open ? 0 : -1}
             onClick={(e) => {
               e.preventDefault();
+              window.clearTimeout(timer.current);
               setOpen(false);
               document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
               history.replaceState(null, "", `#${id}`);
@@ -406,8 +410,8 @@ function App() {
           backdropFilter: "blur(12px)", borderBottom: "1px solid var(--line)" }}>
           <a href="#" className="mui-kicker" style={{ textDecoration: "none", fontSize: 13 }}>FRAGRANCE UI</a>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <NavDock />
             <ThemeConsole />
+            <NavDock />
           </div>
         </header>
         <main style={{ maxWidth: 1100, margin: "0 auto", padding: "70px 28px 90px" }} id="top">
