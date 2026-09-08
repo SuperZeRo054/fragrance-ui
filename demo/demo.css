@@ -184,17 +184,24 @@ section { margin-top: 84px; }
 .navdock:hover .navdock__btn, .navdock:focus-within .navdock__btn,
 .navdock__btn[aria-expanded="true"] { border-color: var(--accent); color: var(--accent); }
 .navdock__panel { position: absolute; top: calc(100% + 12px); right: 0; z-index: 60;
-  display: grid; grid-template-columns: repeat(2, 152px); gap: 2px; padding: 10px;
+  display: grid; grid-template-columns: repeat(2, 138px); gap: 2px; padding: 8px;
   border: 1px solid var(--line); border-radius: var(--mui-radius-lg);
-  box-shadow: 0 26px 52px -26px rgba(10, 12, 16, .35);
-  opacity: 0; transform: translateY(-8px) scale(.98); pointer-events: none;
+  background: color-mix(in srgb, var(--surface) 97%, transparent);
+  -webkit-backdrop-filter: blur(32px) saturate(1.4);
+  backdrop-filter: blur(32px) saturate(1.4);
+  box-shadow: 0 30px 70px -24px rgba(10, 12, 16, .45), 0 2px 8px -2px rgba(10, 12, 16, .12),
+    inset 0 1px 0 color-mix(in srgb, #fff 26%, transparent);
+  transform-origin: top right;
+  opacity: 0; transform: translateY(-8px) scale(.97); pointer-events: none;
   transition: opacity .22s var(--mui-ease-out), transform .22s var(--mui-ease-out); }
 .navdock__panel.on { opacity: 1; transform: none; pointer-events: auto; }
-.navdock__item { display: flex; align-items: center; gap: 10px; padding: 9px 12px;
-  border-radius: var(--mui-radius-sm); color: var(--text-dim); text-decoration: none;
+.navdock__item { display: flex; align-items: center; gap: 10px; padding: 8px 11px;
+  border-radius: var(--mui-radius-sm); color: var(--text); text-decoration: none;
   font-size: 12.5px; transition: background .2s, color .2s; }
-.navdock__item:hover { background: color-mix(in srgb, var(--accent) 10%, transparent);
+.navdock__item svg { color: var(--text-dim); transition: color .2s; }
+.navdock__item:hover { background: color-mix(in srgb, var(--accent) 11%, transparent);
   color: var(--accent); }
+.navdock__item:hover svg { color: var(--accent); }
 @media (max-width: 640px) {
   .navdock__panel { grid-template-columns: 1fr; min-width: 168px; }
 }

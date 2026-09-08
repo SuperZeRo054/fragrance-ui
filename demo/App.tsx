@@ -81,7 +81,7 @@ function NavDock() {
         onClick={() => setOpen((v) => !v)}>
         <List size={18} weight="light" />
       </button>
-      <nav className={`navdock__panel mui-glass${open ? " on" : ""}`} aria-hidden={!open}>
+      <nav className={`navdock__panel${open ? " on" : ""}`} aria-hidden={!open}>
         {SECTIONS.map(({ id, label, icon: Ic }) => (
           <a key={id} className="navdock__item" href={`#${id}`} tabIndex={open ? 0 : -1}
             onClick={(e) => {
