@@ -51,7 +51,7 @@ export function GoldenHome() {
             Fragrance UI 是一个人设计系统，探索如何通过技术、美学与猫，创造更平静、更有意义的数据体验。
           </p>
           <div className="ghome__actions">
-            <a className="ghome__btn pri" href="#golden/home">Explore Work<span>浏览作品</span></a>
+            <a className="ghome__btn pri" href="#golden/project">Explore Work<span>浏览作品</span></a>
             <a className="ghome__btn" href="#golden/home">Read the Story<span>阅读故事</span></a>
           </div>
           <p className="ghome__edge-l">LESS INTERFACE.<br />MORE MEANING.<br /><span>更少的界面，更多的意义。</span></p>
@@ -67,7 +67,7 @@ export function GoldenHome() {
       <section className="ghome__grid">
         <article className="ghome__cell">
           <p className="ghome__cell-no"><b>01</b> / Featured Projects <span>精选作品</span></p>
-          <a className="ghome__proj" href="#golden/home">
+          <a className="ghome__proj" href="#golden/project">
             <img src={athens} alt="雅典学院猫" />
             <span className="ghome__proj-tag">UI System 设计系统</span>
             <span className="ghome__proj-t">Fragrance Design System<span>芳法学院系统</span></span>

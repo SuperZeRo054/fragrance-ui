@@ -1,0 +1,62 @@
+/* G02 Golden Project Detail —— 复用 home.css 的顶栏/引言带/页脚，此处仅页内差异。 */
+.pd-hero { min-height: 78vh; }
+.pd-hero .ghome__hero-img { object-position: 50% 72%; }
+.pd-hero .ghome__hero-copy { max-width: 620px; }
+.pd-edge { position: absolute; left: 48px; bottom: -18px; }
+.pd-meta { line-height: 2; }
+.ghome__nav a.act i { color: var(--g-cream); box-shadow: 0 6px 0 -4px var(--g-cream); }
+
+.pd-row { display: grid; grid-template-columns: 1fr 1.15fr; gap: 40px;
+  padding: 40px 40px 24px; border-top: 1px solid var(--g-line); }
+.pd-row.pd-last { grid-template-columns: 1fr 1fr; }
+.pd-no { margin-bottom: 18px; }
+.pd-side { float: right; font-size: 8.5px; letter-spacing: .2em; color: var(--g-dim);
+  text-transform: uppercase; }
+
+.pd-overview-img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  border-radius: 12px; }
+.pd-kicker { font-size: 9px; letter-spacing: .3em; color: var(--g-dim);
+  margin-bottom: 14px; }
+.pd-kicker span { display: block; margin-top: 3px; }
+.pd-en { font-size: 14px; line-height: 1.8; color: var(--g-text); max-width: 420px; }
+.pd-zh { font-size: 12.5px; line-height: 1.95; color: var(--g-dim); max-width: 420px;
+  margin-top: 8px; }
+
+.pd-principles { display: grid; gap: 22px; }
+.pd-pr { display: flex; gap: 16px; align-items: flex-start; }
+.pd-pr-icon { flex: none; width: 22px; height: 22px; color: var(--g-cream); margin-top: 2px; }
+.pd-pr b { font-size: 14px; font-weight: 600; }
+.pd-pr b span { color: var(--g-dim); font-weight: 400; margin-left: 6px; font-size: 12px; }
+.pd-pr p { margin: 5px 0 0; font-size: 12px; line-height: 1.75; color: var(--g-dim); }
+.pd-pr p span { display: block; margin-top: 3px; }
+
+.pd-motion { position: relative; border-radius: 12px; overflow: hidden; }
+.pd-motion img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.pd-play { position: absolute; inset: 0; margin: auto; width: 52px; height: 52px;
+  border-radius: 50%; background: rgba(20, 20, 22, .6); border: 1px solid var(--g-line);
+  display: grid; place-items: center; color: var(--g-text); }
+.pd-specs { display: grid; gap: 0; margin-top: 14px; }
+.pd-spec { display: flex; justify-content: space-between; gap: 18px;
+  padding: 9px 0; border-top: 1px dashed var(--g-line); font-size: 12px; }
+.pd-spec:first-child { border-top: 0; }
+.pd-spec dt { color: var(--g-text); }
+.pd-spec dt span { color: var(--g-dim); margin-left: 6px; font-size: 11px; }
+.pd-spec dd { margin: 0; color: var(--g-dim); text-align: right; }
+
+.pd-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.pd-strip img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; }
+
+.pd-quote blockquote { font-size: 29px; }
+.pd-info-list { display: grid; gap: 0; }
+.pd-info-row { display: grid; grid-template-columns: 96px 1fr; gap: 14px;
+  padding: 10px 0; border-top: 1px dashed var(--g-line); font-size: 12px; }
+.pd-info-row:first-child { border-top: 0; }
+.pd-info-row dt { color: var(--g-dim); letter-spacing: .08em; }
+.pd-info-row dd { margin: 0; color: var(--g-text); line-height: 1.7; }
+.pd-info-row dd span { color: var(--g-dim); }
+.pd-start { display: inline-grid; margin-top: 18px; }
+
+@media (max-width: 900px) {
+  .pd-row { grid-template-columns: 1fr; gap: 26px; }
+  .pd-strip { grid-template-columns: repeat(3, 1fr); }
+}

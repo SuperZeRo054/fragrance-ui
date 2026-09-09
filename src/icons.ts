@@ -6,7 +6,7 @@
  */
 export {
   // 馆藏与品牌
-  Cat, PawPrint, MoonStars, Sun, Palette, PaintBrush,
+  Cat, PawPrint, MoonStars, Sun, Palette, PaintBrush, Leaf,
   // 基础操作
   MagnifyingGlass, Plus, X, CaretDown, CaretRight, CheckCircle, WarningCircle,
   Info, Question, DotsThree, Gear, List, Star, Bell, House, Trash,

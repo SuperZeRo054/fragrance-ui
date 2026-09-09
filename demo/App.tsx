@@ -15,6 +15,7 @@ import {
 } from "../src";
 import { SectionHost } from "./host";
 import { GoldenHome } from "../golden/home/page";
+import { GoldenProject } from "../golden/project/page";
 import { MotionLab } from "./motionlab";
 import { ModernEffects, ThreeLab } from "./modernlab";
 import { AgentLab } from "./agentlab";
@@ -461,8 +462,13 @@ function LoadingLab() {
 function App() {
   // Golden Sample 路由：#golden/* 渲染金样本页，其余为能力目录
   const [golden, setGolden] = useState(() => location.hash.startsWith("#golden/"));
+  const [goldenView, setGoldenView] = useState(
+    () => location.hash.replace("#golden/", "") || "home");
   useEffect(() => {
-    const on = () => setGolden(location.hash.startsWith("#golden/"));
+    const on = () => {
+      setGolden(location.hash.startsWith("#golden/"));
+      setGoldenView(location.hash.replace("#golden/", "") || "home");
+    };
     addEventListener("hashchange", on);
     return () => removeEventListener("hashchange", on);
   }, []);
@@ -483,8 +489,11 @@ function App() {
   }, []);
   return (
     <>
-      <div style={{ display: golden ? undefined : "none" }}>
+      <div style={{ display: golden && goldenView === "home" ? undefined : "none" }}>
         <GoldenHome />
+      </div>
+      <div style={{ display: golden && goldenView === "project" ? undefined : "none" }}>
+        <GoldenProject />
       </div>
       <div style={{ display: golden ? "none" : undefined }}>
     <SkinProvider persistKey="fragrance-ui-demo">
