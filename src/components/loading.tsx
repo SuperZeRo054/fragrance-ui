@@ -30,6 +30,7 @@ export function Progress({ value, label, showNum = true }: {
 }
 
 /* ---------------- CountUp：数字滚动（进入视口触发，expo-out） ---------------- */
+/* CONTROLLED（DESIGN.md §6.3）：需 Design Intent，勿在长页多处堆叠 */
 export function CountUp({ to, duration = 1300, prefix = "", suffix = "" }: {
   to: number; duration?: number; prefix?: string; suffix?: string;
 }) {

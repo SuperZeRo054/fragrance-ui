@@ -11,7 +11,7 @@
 .fui-btn--primary::after { content: ""; position: absolute; top: 0; left: -80%; width: 50%; height: 100%;
   background: linear-gradient(105deg, transparent, rgba(255,255,255,.45), transparent);
   transform: skewX(-18deg); transition: left .6s var(--fui-ease-out); }
-.fui-btn--primary:hover { transform: translateY(-1px); box-shadow: 0 10px 26px color-mix(in srgb, var(--accent) 35%, transparent); }
+.fui-btn--primary:hover { box-shadow: 0 4px 14px color-mix(in srgb, var(--accent) 22%, transparent); }
 .fui-btn--primary:hover::after { left: 130%; }
 .fui-btn--outline { background: none; color: var(--text); border-color: var(--text); }
 .fui-btn--outline:hover { background: var(--text); color: var(--surface); }
@@ -19,7 +19,7 @@
 .fui-btn--ghost { background: color-mix(in srgb, var(--accent) 10%, transparent);
   color: var(--accent); padding-inline: 22px; }
 .fui-btn--ghost:hover { background: color-mix(in srgb, var(--accent) 20%, transparent);
-  transform: translateY(-1px); }
+  border-color: var(--fui-accent-soft, var(--accent-soft)); }
 /* 毛玻璃款：实时模糊+微透，昼夜皮肤自动适配 */
 .fui-btn--danger { background: none; color: var(--danger); border-color: var(--danger); }
 .fui-btn--danger:hover { background: var(--danger); color: #fff; }
@@ -58,18 +58,17 @@
   background: color-mix(in srgb, var(--accent) 7%, transparent); }
 
 .fui-rating { display: inline-flex; gap: 3px; }
-.fui-rating svg { transition: transform .3s var(--fui-ease-out); transition-delay: calc(var(--i, 0) * 28ms); }
+.fui-rating svg { transition: transform .3s var(--fui-ease-out); transition-delay: calc(var(--i, 0) * 16ms); }
 .fui-rating svg.lit path { fill: var(--accent); }
 .fui-rating svg.dim path { fill: color-mix(in srgb, var(--text-dim) 26%, transparent); }
-.fui-rating:hover svg.lit { transform: translateY(-2px); }
+.fui-rating:hover svg.lit { filter: brightness(1.12); }
 /* 入场：逐颗 spring 弹入，纯 transform —— 合成器 60fps */
 .fui-rating.anim svg { opacity: 0; transform: scale(.2) rotate(-24deg);
-  animation: fui-star-pop .6s var(--fui-ease-spring) forwards;
+  animation: fui-star-pop .45s var(--fui-ease-out) forwards;
   animation-delay: calc(var(--i, 0) * 85ms); }
 @keyframes fui-star-pop {
-  0% { opacity: 0; transform: scale(.2) rotate(-24deg); }
-  62% { opacity: 1; transform: scale(1.24) rotate(4deg); }
-  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  0% { opacity: 0; transform: scale(.88); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 .fui-avatar { display: inline-flex; align-items: center; justify-content: center;

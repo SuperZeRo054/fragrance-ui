@@ -7,10 +7,10 @@
 .fui-pt--wipe::before { content: ""; position: fixed; inset: 0; z-index: 120;
   background: var(--accent); transform-origin: 0 50%; pointer-events: none;
   animation: fui-curtain .9s var(--fui-ease-out) both; }
-@keyframes fui-pt-rise { from { opacity: 0; transform: translateY(22px); } }
+@keyframes fui-pt-rise { from { opacity: 0; transform: translateY(12px); } }
 @keyframes fui-fadept { from { opacity: 0; } }
-@keyframes fui-pt-slideL { from { opacity: 0; transform: translateX(34px); } }
-@keyframes fui-pt-slideR { from { opacity: 0; transform: translateX(-34px); } }
+@keyframes fui-pt-slideL { from { opacity: 0; transform: translateX(18px); } }
+@keyframes fui-pt-slideR { from { opacity: 0; transform: translateX(-18px); } }
 @keyframes fui-curtain {
   0% { transform: scaleX(0); }
   45%, 55% { transform: scaleX(1); transform-origin: 0 50%; }

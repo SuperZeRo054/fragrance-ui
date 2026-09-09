@@ -15,7 +15,7 @@ body {
 :focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 40%, transparent); border-radius: var(--fui-radius-sm); }
 
 /* 渐显工具：配合 <Reveal> 使用，只碰 opacity/transform */
-.fui-reveal { opacity: 0; transform: translateY(22px); transition: opacity .9s var(--fui-ease-out) var(--reveal-delay, 0ms), transform .9s var(--fui-ease-out) var(--reveal-delay, 0ms); }
+.fui-reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s var(--fui-ease-out) var(--reveal-delay, 0ms), transform .6s var(--fui-ease-out) var(--reveal-delay, 0ms); }
 .fui-reveal.in { opacity: 1; transform: none; }
 /* 手写/签名强调（英文为主，中文回退楷体系） */
 .fui-hand { font-family: var(--font-hand); }
