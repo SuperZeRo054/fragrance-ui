@@ -37,12 +37,12 @@ LAB → CORE 禁止直通；晋升走：用例 → Design Intent → Visual Budg
 ## 使用
 
 ```bash
-npm i fragrance-ui        # 宿主自备 react / react-dom（>=18）；three 为可选 peer
+npm i fragrance-ui-react  # 宿主自备 react / react-dom（>=18）；three 为可选 peer
 ```
 
 ```tsx
-import { SkinProvider, Button, Card } from "fragrance-ui";
-import "fragrance-ui/styles.css";
+import { SkinProvider, Button, Card } from "fragrance-ui-react";
+import "fragrance-ui-react/styles.css";
 
 <SkinProvider defaultSkin="fragrance" defaultMode="day" defaultLang="zh">
   <Button variant="primary">开始创作</Button>
