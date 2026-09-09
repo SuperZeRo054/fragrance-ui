@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Badge, SectionHead, Reveal } from "../src";
 import { SectionHost, CatSvg } from "./host";
+import { CatCharacter } from "../src/brand/cat-character";
 import "./motionlab.css";
 
 /* ============ A. 状态机猫（Rive 思路的 CSS 复刻：idle/groom/alert） ============ */
@@ -293,6 +294,14 @@ export function MotionLab() {
         <Reveal><h3 className="lab-h">F · 涂鸦猫 <span className="lab-tag">rough.js</span></h3><RoughCat /></Reveal>
         <Reveal><h3 className="lab-h">G · 流体渐变 <span className="lab-tag">纯 CSS</span></h3><MeshBG /></Reveal>
         <Reveal><h3 className="lab-h">H · 随机猫猫 <span className="lab-tag">彩蛋 API</span></h3><CataasEgg /></Reveal>
+        <Reveal><div className="lab-card" style={{ gridColumn: "1 / -1" }}>
+          <span className="cap" style={{ fontSize: 10, letterSpacing: ".28em", textTransform: "uppercase", color: "var(--fui-text-dim)" }}>M02 · Character State Machine</span>
+          <div style={{ display: "flex", gap: 70, justifyContent: "center", flexWrap: "wrap", padding: "30px 0 4px" }}>
+            <CatCharacter tone="wan" temperament="bold" showState />
+            <CatCharacter tone="qian" temperament="shy" showState />
+          </div>
+          <p className="lab-note">移动光标靠近它们：notice（竖耳）→ watch（目光跟随）→ 停住半秒 curious（歪头）→ 点击 interact（眯眼弹跳）。移开 900ms 后 return → idle。万万社交、千千慢热，两只不会同频。</p>
+        </div></Reveal>
       </div>
     </section>
   );

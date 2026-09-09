@@ -1,0 +1,31 @@
+.ccat { position: relative; display: grid; justify-items: center; }
+.ccat svg { overflow: visible; display: block; }
+.ccat-lean { transform-box: fill-box; transform-origin: 50% 100%;
+  transition: transform .5s var(--fui-ease-spring); }
+.ccat[data-state="curious"] .ccat-lean { transform: translateX(var(--lean, 3px)); }
+.ccat-ear-l, .ccat-ear-r { transform-box: fill-box;
+  transition: transform .32s var(--fui-ease-spring); }
+.ccat[data-state="notice"] .ccat-ear-l, .ccat[data-state="watch"] .ccat-ear-l,
+.ccat[data-state="curious"] .ccat-ear-l { transform: rotate(-6deg); }
+.ccat[data-state="notice"] .ccat-ear-r, .ccat[data-state="watch"] .ccat-ear-r,
+.ccat[data-state="curious"] .ccat-ear-r { transform: rotate(6deg); }
+.ccat-eye { transform-box: fill-box; transform-origin: center;
+  transition: transform .25s var(--fui-ease-out); }
+.ccat[data-state="idle"] .ccat-eye, .ccat[data-state="return"] .ccat-eye {
+  animation: ccat-blink 4.2s infinite; }
+.ccat[data-state="interact"] .ccat-eye { transform: scaleY(.15) translateY(4px); }
+.ccat-tail { transform-box: fill-box; transform-origin: 12% 92%;
+  animation: ccat-tail 2.6s ease-in-out infinite alternate; }
+.ccat[data-state="curious"] .ccat-tail,
+.ccat[data-state="interact"] .ccat-tail { animation-duration: .55s; }
+.ccat[data-state="interact"] .ccat-lean { animation: ccat-hop .5s var(--fui-ease-spring); }
+.ccat-badge { margin-top: 8px; font-style: normal; font-size: 10px;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--fui-text-dim);
+  border: 1px solid var(--fui-line); border-radius: 999px; padding: 3px 10px; }
+@keyframes ccat-blink { 0%, 91%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.08); } }
+@keyframes ccat-tail { from { transform: rotate(-8deg); } to { transform: rotate(9deg); } }
+@keyframes ccat-hop { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-7px); } }
+@media (prefers-reduced-motion: reduce) {
+  .ccat-tail, .ccat-eye { animation: none !important; }
+  .ccat-ear-l, .ccat-ear-r, .ccat-lean, .ccat-eye { transition: none; }
+}

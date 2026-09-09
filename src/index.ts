@@ -35,6 +35,8 @@ export { SharedLightbox } from "./motion/shared-lightbox";
 
 /* BRAND：猫是角色不是装饰（DESIGN.md §6.2） */
 export { CatMark, CatFull, catLoafGroup } from "./brand/cats";
+export { CatCharacter } from "./brand/cat-character";
+export type { CatTemperament } from "./brand/cat-character";
 export { StreamText, ThinkingText, TextScramble, TextRotate, AgentSteps, ToolCallCard, PromptBar, StatusDot, VoiceBars, LiveCounter } from "./components/agent";
 export type { AgentStepStatus } from "./components/agent";
 export { HScroll } from "./components/hscroll";

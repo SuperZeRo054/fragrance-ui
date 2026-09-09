@@ -7,7 +7,7 @@ const META: Record<HostId, { name: string; tone: "wan" | "qian" }> = {
   qianqian: { name: "千千", tone: "qian" },
 };
 
-const PALETTE = {
+export const CAT_PALETTE = {
   wan: { ink: "#5c4a32", fur: "#eed9a8", iris: "#5c8f46", nose: "#cf8272", chest: "#f6ecd4" },
   qian: { ink: "#2f3d4e", fur: "#9fb1c4", iris: "#5b7fb0", nose: "#b06a5c", chest: "#dbe4ee" },
 };
@@ -17,7 +17,7 @@ const PALETTE = {
 export function CatSvg({ tone = "wan", className = "", width = 128 }: {
   tone?: "wan" | "qian"; className?: string; width?: number;
 }) {
-  const c = PALETTE[tone];
+  const c = CAT_PALETTE[tone];
   return (
     <svg className={`hostcat ${tone} ${className}`} viewBox="0 0 140 122" width={width} aria-hidden>
       <g className="cat-tail">
