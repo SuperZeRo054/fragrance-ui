@@ -29,11 +29,13 @@ const ok = (name, cond, detail = "") => {
   page.on("pageerror", (e) => errors.push(String(e).slice(0, 120)));
   for (const { vp, mode, lang } of combos) {
     await page.setViewport({ width: vp.w, height: vp.h, deviceScaleFactor: 1 });
-    await page.evaluateOnNewDocument((m, l) => {
+    // 先落地再写 localStorage 后 reload：evaluateOnNewDocument 会累积注册、顺序不可靠
+    await page.goto(URL + "#lab", { waitUntil: "domcontentloaded" });
+    await page.evaluate((m, l) => {
       localStorage.setItem("fragrance-ui-demo", JSON.stringify({ skin: "fragrance", mode: m, font: "system", lang: l }));
     }, mode, lang);
-    await page.goto(URL, { waitUntil: "networkidle0" });
-    await sleep(1100);
+    await page.reload({ waitUntil: "networkidle0" });
+    await sleep(900);
     const d = await page.evaluate(() => ({
       rendered: (document.getElementById("root")?.children.length ?? 0) > 0,
       sections: document.querySelectorAll("main section").length,
@@ -43,7 +45,7 @@ const ok = (name, cond, detail = "") => {
     }));
     const tag = `${vp.name}/${mode}/${lang}`;
     ok(`${tag} 渲染`, d.rendered && d.sections >= 11);
-    ok(`${tag} data-lang=${lang}`, d.lang === lang);
+    ok(`${tag} data-lang=${lang}`, d.lang === lang, `got ${d.lang}`);
     if (vp.name === "mobile") ok(`${tag} 零溢出`, d.sw === 390, `got ${d.sw}`);
     if (!d.meaning) ok(`${tag} 意义行存在`, false);
   }
@@ -56,7 +58,7 @@ const ok = (name, cond, detail = "") => {
   const errors2 = [];
   page2.on("pageerror", (e) => errors2.push(String(e)));
   await page2.setViewport({ width: 1280, height: 800, deviceScaleFactor: 1 });
-  await page2.goto(URL, { waitUntil: "networkidle0" });
+  await page2.goto(URL + "#lab", { waitUntil: "networkidle0" });
   await sleep(1400);
   await page2.evaluate(() => document.querySelector("#gallery .rail-card")?.scrollIntoView({ block: "center" }));
   await sleep(900);
@@ -75,7 +77,7 @@ const ok = (name, cond, detail = "") => {
   /* ---- 3. a11y ---- */
   console.log("[A11y]");
   await page2.emulateMediaFeatures([]);
-  await page2.goto(URL, { waitUntil: "networkidle0" });
+  await page2.goto(URL + "#lab", { waitUntil: "networkidle0" });
   await sleep(1400);
   const a11y = await page.evaluate(() => {
     const imgs = [...document.querySelectorAll("img")];

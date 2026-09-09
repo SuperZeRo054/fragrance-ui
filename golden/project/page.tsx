@@ -3,6 +3,7 @@ import "../home/home.css";
 import "./project.css";
 import { Leaf, PawPrint, Heart } from "../../src";
 import { SceneHero } from "../scene";
+import { GhomeBar } from "../chrome";
 import windowsill from "../../demo/gallery/frg-windowsill.jpg";
 import wave from "../../demo/gallery/frg-greatwave.jpg";
 import starry from "../../demo/gallery/frg-starrynight.jpg";
@@ -53,23 +54,7 @@ const INFO: [string, string, string][] = [
 export function GoldenProject() {
   return (
     <div className="ghome gproject">
-      <header className="ghome__bar">
-        <a className="ghome__brand" href="#golden/home">
-          Fragrance UI
-          <span className="ghome__brand-sub">FOR A QUIETER WEB<br />为更宁静的网络而设计</span>
-        </a>
-        <nav className="ghome__nav">
-          {[["Work", "作品", true], ["Writing", "文章", false], ["Gallery", "画廊", false], ["About", "关于", false]].map(([en, zh, act]) => (
-            <a key={en as string} href="#golden/project" className={act ? "act" : ""}>
-              <i>{en}</i><span>{zh}</span>
-            </a>
-          ))}
-        </nav>
-        <div className="ghome__bar-r">
-          <a className="ghome__back" href="#top" title="Playground">⌂</a>
-          <a className="ghome__cta" href="#top">Let&apos;s Create<span>开始创作</span></a>
-        </div>
-      </header>
+      <GhomeBar active="work" />
 
       <SceneHero img={catCream} alt="万万 · 蓝金渐层" className="ghome__hero pd-hero">
         <div className="ghome__hero-copy">

@@ -523,14 +523,22 @@ function LoadingLab() {
 }
 
 function App() {
-  // Golden Sample 路由：#golden/* 渲染金样本页，其余为能力目录
-  const [golden, setGolden] = useState(() => location.hash.startsWith("#golden/"));
-  const [goldenView, setGoldenView] = useState(
-    () => location.hash.replace("#golden/", "") || "home");
+  // 路由：根路径与 #golden/* 是金样本（What good looks like）；
+  // #lab 与区块锚点（#atoms…）是能力目录 Playground。
+  const parseRoute = (h: string) => {
+    const isGolden = h === "" || h === "#" || h.startsWith("#golden/");
+    return {
+      golden: isGolden,
+      view: h.startsWith("#golden/") ? (h.replace("#golden/", "") || "home") : "home",
+    };
+  };
+  const [golden, setGolden] = useState(() => parseRoute(location.hash).golden);
+  const [goldenView, setGoldenView] = useState(() => parseRoute(location.hash).view);
   useEffect(() => {
     const on = () => {
-      setGolden(location.hash.startsWith("#golden/"));
-      setGoldenView(location.hash.replace("#golden/", "") || "home");
+      const r = parseRoute(location.hash);
+      setGolden(r.golden);
+      setGoldenView(r.view);
     };
     addEventListener("hashchange", on);
     return () => removeEventListener("hashchange", on);
@@ -540,7 +548,7 @@ function App() {
     const go = () => {
       const h = location.hash;
       if (!h || h === "#top") { window.scrollTo({ top: 0 }); return; }
-      if (h.startsWith("#golden/")) return; // 金样本路由：由视图切换接管
+      if (!h || h === "#" || h === "#lab" || h.startsWith("#golden/")) return; // 由视图切换接管
       try {
         const el = document.querySelector(h);
         if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -570,7 +578,7 @@ function App() {
         <header style={{ position: "sticky", top: 0, zIndex: 50, display: "flex", alignItems: "center",
           justifyContent: "space-between", padding: "14px 28px", background: "color-mix(in srgb, var(--surface) 88%, transparent)",
           backdropFilter: "blur(12px)", borderBottom: "1px solid var(--line)" }}>
-          <a href="#" className="fui-kicker" style={{ textDecoration: "none", fontSize: 13 }}>FRAGRANCE UI</a>
+          <a href="#golden/home" className="fui-kicker" style={{ textDecoration: "none", fontSize: 13 }}>FRAGRANCE UI</a>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <ThemeConsole />
             <NavDock />

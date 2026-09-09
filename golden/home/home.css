@@ -155,3 +155,10 @@
 @media (prefers-reduced-motion: reduce) {
   .ghome * { transition: none !important; }
 }
+
+/* Lab 入口（金样本 ↔ 能力目录 的双向通道） */
+.ghome__lab { display: grid; justify-items: center; gap: 1px; font-size: 12.5px;
+  color: var(--g-dim); border: 1px solid var(--g-line); border-radius: 999px;
+  padding: 8px 18px; transition: color .25s, border-color .25s; }
+.ghome__lab span { font-size: 9.5px; opacity: .8; }
+.ghome__lab:hover { color: var(--g-cream); border-color: var(--g-cream); }

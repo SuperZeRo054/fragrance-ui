@@ -22,8 +22,8 @@ export function GhomeBar({ active }: { active?: "work" | "writing" | "gallery" |
         ))}
       </nav>
       <div className="ghome__bar-r">
-        <a className="ghome__back" href="#top" title="Playground">⌂</a>
-        <a className="ghome__cta" href="#top">Let&apos;s Create<span>开始创作</span></a>
+        <a className="ghome__lab" href="#lab">Lab<span>实验室</span></a>
+        <a className="ghome__cta" href="#lab">Let&apos;s Create<span>开始创作</span></a>
       </div>
     </header>
   );

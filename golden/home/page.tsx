@@ -1,5 +1,6 @@
 import React from "react";
 import { SceneHero } from "../scene";
+import { GhomeBar } from "../chrome";
 import "./home.css";
 import wave from "../../demo/gallery/frg-greatwave.jpg";
 import heroDuo from "./hero-duo.jpg";
@@ -16,22 +17,7 @@ import catBlue from "../../audit/harness-v0.1/references/cat-blue-reference.jpg"
 export function GoldenHome() {
   return (
     <div className="ghome">
-      <header className="ghome__bar">
-        <a className="ghome__brand" href="#golden/home">
-          Fragrance UI
-          <span className="ghome__brand-sub">FOR A QUIETER WEB<br />为更温柔的网站而设计</span>
-        </a>
-        <nav className="ghome__nav">
-          {[["Work", "作品", "#golden/home"], ["Writing", "文章", "#golden/home"],
-            ["Gallery", "画廊", "#golden/gallery"], ["About", "关于", "#golden/home"]].map(([en, zh, href]) => (
-            <a key={en} href={href}><i>{en}</i><span>{zh}</span></a>
-          ))}
-        </nav>
-        <div className="ghome__bar-r">
-          <a className="ghome__back" href="#top" title="Playground">⌂</a>
-          <a className="ghome__cta" href="#golden/home">Let&apos;s Create<span>开始创作</span></a>
-        </div>
-      </header>
+      <GhomeBar />
 
       <SceneHero img={heroDuo} alt="万万 与 千千 · 真实双猫主视觉" className="ghome__hero">
         <div className="ghome__hero-copy">

@@ -20,7 +20,7 @@ const ok = (name, cond, detail = "") => {
 
   console.log("[1] 渲染与锚点");
   await page.setViewport({ width: 1280, height: 800, deviceScaleFactor: 1 });
-  await page.goto(URL, { waitUntil: "networkidle0" });
+  await page.goto(URL + "#lab", { waitUntil: "networkidle0" });
   await sleep(1500);
   const base = await page.evaluate(() => ({
     sections: document.querySelectorAll("main section").length,
