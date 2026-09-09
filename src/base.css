@@ -46,3 +46,12 @@ body[data-mode="night"] .fui-glass { border-color: color-mix(in srgb, #ffffff 14
   .fui-reveal { opacity: 1; transform: none; }
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }
+
+/* ---------------- Bilingual：Equal Authority, Different Rhythm（DESIGN.md §4） ---------------- */
+.hero-meaning { display: grid; gap: 4px; margin-top: 14px; text-align: center; }
+.hero-meaning__en, .hero-meaning__zh { transition: opacity .5s, font-size .5s; }
+[data-lang="en"] .hero-meaning__en { font-size: 16.5px; color: var(--fui-text); }
+[data-lang="en"] .hero-meaning__zh { font-size: 12.5px; color: var(--fui-text-dim); }
+[data-lang="zh"] .hero-meaning__zh { font-size: 15px; color: var(--fui-text); }
+[data-lang="zh"] .hero-meaning__en { font-size: 12px; letter-spacing: .08em;
+  color: var(--fui-text-dim); text-transform: none; }

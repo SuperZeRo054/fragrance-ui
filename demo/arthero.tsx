@@ -83,6 +83,10 @@ export function ArtHero() {
         <h1 className="art-title">
           Fragrance<span className="stroke-word">UI</span>
         </h1>
+        <p className="hero-meaning">
+          <span className="hero-meaning__en">A design language for agent-era frontends.</span>
+          <span className="hero-meaning__zh">面向 Agent 时代前端的一套设计语言。</span>
+        </p>
       </Reveal>
 
       <div className="art-stage">

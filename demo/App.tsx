@@ -10,7 +10,8 @@ import {
   PageTransition, viewNavigate, Spinner, Progress, CountUp, LazyImage,
   House, Atom, Textbox, FrameCorners, Cards, Swap, Cube, SquaresFour, List,
   CircleNotch, Sparkle, Robot, Waveform, HScroll,
-  type SkinId, type FontId, type Icon,
+  type SkinId, type FontId, type Icon, type Lang,
+  CatCharacter,
 } from "../src";
 import { SectionHost } from "./host";
 import { MotionLab } from "./motionlab";
@@ -34,7 +35,7 @@ const FONT_LABELS: [FontId, string][] = [
   ["system", "系统"], ["serif", "衬线"], ["mono", "等宽"], ["rounded", "圆体"], ["kaiti", "楷体"],
 ];
 function ThemeConsole() {
-  const { skin, mode, font, setSkin, setMode, setFont } = useTheme();
+  const { skin, mode, font, lang, setSkin, setMode, setFont, setLang } = useTheme();
   return (
     <div className="console">
       <span className="cap">SKIN</span>
@@ -53,6 +54,13 @@ function ThemeConsole() {
       <button onClick={() => setMode(mode === "day" ? "night" : "day")}>
         {mode === "day" ? "夜间" : "日间"}
       </button>
+      <i />
+      <span className="cap">LANG</span>
+      {(["zh", "en"] as Lang[]).map((l) => (
+        <button key={l} className={lang === l ? "on" : ""} onClick={() => setLang(l)}>
+          {l === "zh" ? "中文" : "EN"}
+        </button>
+      ))}
     </div>
   );
 }
@@ -331,7 +339,7 @@ function Content() {
           ]} />
         </div>
         <div style={{ display: "grid", gap: 18, gridTemplateColumns: "1fr 1fr", alignItems: "start", marginTop: 40 }}>
-          <EmptyState icon={<CatMark tone="blue" size={40} />} title="这里还没有内容" desc="狗还没来，猫先看着。" />
+          <EmptyState icon={<CatCharacter tone="qian" width={96} />} title="这里还没有内容" desc="狗还没来，猫先看着。" />
           <Skeleton lines={3} /><Skeleton rect />
         </div>
         <div style={{ marginTop: 40 }}>
