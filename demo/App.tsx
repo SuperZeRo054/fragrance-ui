@@ -6,7 +6,7 @@ import {
   CatMark, CatFull, catLoafGroup,
   TextField, SelectField, Switch, Checkbox, RadioGroup, RangeField,
   Modal, ConfirmModal, ErrorModal, Lightbox,
-  Card, Table, Tabs, Accordion, Pagination, EmptyState, Skeleton,
+  Card, Table, Tabs, Accordion, Pagination, EmptyState, Skeleton, SharedLightbox,
   PageTransition, viewNavigate, Spinner, Progress, CountUp, LazyImage,
   House, Atom, Textbox, FrameCorners, Cards, Swap, Cube, SquaresFour, List,
   CircleNotch, Sparkle, Robot, Waveform, HScroll,
@@ -262,6 +262,12 @@ const WORKS = [
 function Content() {
   const [page, setPage] = useState(2);
   const [lbWork, setLbWork] = useState<any>(null);
+  const [lbRect, setLbRect] = useState<DOMRect | null>(null);
+  const openWork = (w: any, e: React.MouseEvent<HTMLElement>) => {
+    const img = e.currentTarget.querySelector("img");
+    setLbRect(img?.getBoundingClientRect() ?? null);
+    setLbWork(w);
+  };
   return (
     <section id="gallery">
       <SectionHead kicker="04 · Content" title="数据与内容展示" sub="卡片 / 名录表 / 标签页 / 手风琴 / 分页 / 空态与骨架屏。" />
@@ -271,12 +277,14 @@ function Content() {
           <Reveal key={w.no} delay={i * 80}>
             <Card media={<LazyImage src={w.img} ratio="4 / 3" alt={w.zh} />}
               kicker={<><span>{w.era}</span><span>{w.no}</span></>}
-              title={w.zh} subtitle={w.en} onClick={() => setLbWork(w)}
+              title={w.zh} subtitle={w.en} onClick={(e) => openWork(w, e)}
               footer={<><span>{w.orig}</span><Rating value={w.stars} /></>} />
           </Reveal>
         ))}
-        <Lightbox open={!!lbWork} onClose={() => setLbWork(null)} src={lbWork?.img || ""}
-          alt={lbWork?.zh} caption={lbWork ? `${lbWork.no} · ${lbWork.orig} · ${lbWork.year}` : ""} />
+        <SharedLightbox open={!!lbWork} onClose={() => { setLbWork(null); setLbRect(null); }}
+          src={lbWork?.img || ""} alt={lbWork?.zh}
+          caption={lbWork ? `${lbWork.no} · ${lbWork.orig} · ${lbWork.year}` : ""}
+          origin={lbRect} />
       </div>
       <div style={{ marginTop: 52 }}>
         <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
@@ -285,7 +293,7 @@ function Content() {
         </div>
         <HScroll>
           {WORKS.map((w) => (
-            <div className="rail-card" key={w.no} onClick={() => setLbWork(w)}>
+            <div className="rail-card" key={w.no} onClick={(e) => openWork(w, e)}>
               <img src={w.img} alt={w.zh} loading="lazy" />
               <div className="rail-foot">
                 <span className="rail-no">{w.no}</span>

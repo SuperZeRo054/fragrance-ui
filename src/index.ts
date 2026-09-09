@@ -8,6 +8,7 @@ import "./components/motion.css";
 import "./components/loading.css";
 import "./components/effects.css";
 import "./lab/effects-lab.css";
+import "./motion/shared-lightbox.css";
 import "./components/agent.css";
 import "./components/hscroll.css";
 
@@ -28,6 +29,9 @@ export { TypingText, TextReveal, Magnetic } from "./components/effects"; // Magn
 /* ⚠️ LAB：默认禁止进入正式实现（DESIGN.md §6.4），见 src/lab/README.md */
 export { GradientText, Marquee, Tilt, Beam, Aurora } from "./lab/effects-lab";
 export { ThreeShapes, ParticleField } from "./lab/three-canvas";
+
+/* CONTROLLED · P0：Shared Element Transition（M01/M05，需 Continuity Intent） */
+export { SharedLightbox } from "./motion/shared-lightbox";
 
 /* BRAND：猫是角色不是装饰（DESIGN.md §6.2） */
 export { CatMark, CatFull, catLoafGroup } from "./brand/cats";
