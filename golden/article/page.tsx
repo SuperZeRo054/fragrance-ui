@@ -23,7 +23,7 @@ export function GoldenArticle() {
         <p className="gart-meta">Apr 6, 2024 · 8 min read<span>2024 年 4 月 6 日 · 8 分钟阅读 · 万万 与 千千 监修</span></p>
       </header>
 
-      <img className="gart-cover" src={windowsill} alt="窗台上的两位馆长" />
+      <img className="gart-cover" src={windowsill} alt="窗台上的两只猫" />
 
       <article className="gart-body">
         <p className="gart-lede">

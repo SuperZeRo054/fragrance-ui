@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./atoms.css";
-import { CatMark } from "../brand/cats";
 
 /* ---------------- Reveal：滚动渐显容器（整个库的动效地基） ---------------- */
 export function Reveal({ children, delay = 0, as: Tag = "div" }: {
@@ -97,12 +96,17 @@ export function Rating({ value, max = 5, size = 15, animated = true }: {
   );
 }
 
-/* ---------------- Avatar（SVG 原生：传任意节点即可，不再收 emoji） ---------------- */
+/* ---------------- Avatar（收任意节点；缺省用中性占位，不依赖 BRAND） ---------------- */
 export function Avatar({ children, shape = "circle", size = 88 }:
   { children?: React.ReactNode; shape?: "circle" | "rounded"; size?: number }) {
   return (
     <span className={`fui-avatar fui-avatar--${shape}`} style={{ width: size, height: size }}>
-      {children ?? <CatMark tone="cream" size={size * .58} />}
+      {children ?? (
+        <svg viewBox="0 0 32 32" width={size * .58} height={size * .58} aria-hidden>
+          <circle cx="16" cy="12" r="5.2" fill="currentColor" opacity=".38" />
+          <path d="M6 27c1.6-5 5.4-7.4 10-7.4S24.4 22 26 27Z" fill="currentColor" opacity=".38" />
+        </svg>
+      )}
     </span>
   );
 }

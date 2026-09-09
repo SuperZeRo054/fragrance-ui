@@ -105,7 +105,7 @@ export function GoldenProject() {
       <section className="pd-row">
         <div className="pd-cell">
           <p className="ghome__cell-no pd-no"><b>01</b> / Overview <span>项目概述</span></p>
-          <img className="pd-overview-img" src={windowsill} alt="窗台上的两位馆长" />
+          <img className="pd-overview-img" src={windowsill} alt="窗台上的两只猫" />
         </div>
         <div className="pd-cell pd-overview-copy">
           <p className="pd-kicker">A CALMER DIGITAL LIFE<span>更平静的数字生活</span></p>

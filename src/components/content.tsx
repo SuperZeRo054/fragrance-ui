@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { CatMark } from "../brand/cats";
 import "./content.css";
 
 /* ---------------- Card ---------------- */
@@ -140,7 +139,14 @@ export function EmptyState({ icon, title, desc }: {
 }) {
   return (
     <div className="fui-empty">
-      <span className="ico">{icon ?? <CatMark tone="blue" size={38} />}</span>
+      <span className="ico">{icon ?? (
+        <svg viewBox="0 0 32 32" width={34} height={34} aria-hidden>
+          <rect x="5" y="7" width="22" height="18" rx="2.5" fill="none"
+            stroke="currentColor" strokeWidth="1.6" opacity=".5" />
+          <path d="M9 21l5.5-6 4 4.2L22 16l3 5" fill="none" stroke="currentColor"
+            strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" opacity=".5" />
+        </svg>
+      )}</span>
       <strong>{title}</strong>
       {desc && <p>{desc}</p>}
     </div>

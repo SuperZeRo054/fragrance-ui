@@ -108,7 +108,7 @@
 .fui-prompt__hints button { font-family: var(--font-body); font-size: 12px; color: var(--text-dim);
   background: transparent; border: 1px solid var(--line); border-radius: var(--fui-radius-sm);
   padding: 6px 12px; cursor: pointer; transition: color .25s, border-color .25s, transform .25s var(--fui-ease-spring); }
-.fui-prompt__hints button:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-1px); }
+.fui-prompt__hints button:hover { color: var(--accent); border-color: var(--accent); }
 .fui-prompt__field { display: flex; align-items: center; gap: 10px;
   padding: 6px 6px 6px 16px; border: 1px solid var(--line); border-radius: 14px;
   transition: border-color .3s, box-shadow .3s; }
@@ -123,7 +123,7 @@
   cursor: pointer; transition: transform .35s var(--fui-ease-spring), opacity .25s; }
 .fui-prompt__send svg { width: 15px; height: 15px; fill: none; stroke: currentColor;
   stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.fui-prompt__send:hover:not(:disabled) { transform: translateY(-1.5px); }
+.fui-prompt__send:hover:not(:disabled) { filter: brightness(1.1); }
 .fui-prompt__send:active:not(:disabled) { transform: translateY(0) scale(.96); }
 .fui-prompt__send:disabled { opacity: .35; cursor: default; }
 

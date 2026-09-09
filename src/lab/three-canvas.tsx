@@ -1,4 +1,4 @@
-/* ⚠️ LAB 层（DESIGN.md §6.4）。 */
+/* LAB 层（DESIGN.md §6.4，默认禁用）。 */
 import React, { useEffect, useRef, useState } from "react";
 
 /* ================= ThreeShapes：银色低多边形悬浮群（three.js，进视口才启动） =================

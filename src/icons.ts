@@ -5,7 +5,7 @@
  *  未被引用的图标不会进 bundle。
  */
 export {
-  // 馆藏与品牌
+  // 品牌与吉祥物
   Cat, PawPrint, MoonStars, Sun, Palette, PaintBrush, Leaf,
   // 基础操作
   MagnifyingGlass, Plus, X, CaretDown, CaretRight, CheckCircle, WarningCircle,

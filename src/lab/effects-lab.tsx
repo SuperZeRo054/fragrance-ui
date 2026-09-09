@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import "./effects-lab.css";
 
-/* ⚠️ LAB 层：默认禁止进入正式实现（DESIGN.md §6.4）。 */
+/* LAB 层（默认禁用）：默认禁止进入正式实现（DESIGN.md §6.4）。 */
 
 /* ================= GradientText：流光渐变字 ================= */
 export function GradientText({ children, className = "" }: { children: React.ReactNode; className?: string }) {

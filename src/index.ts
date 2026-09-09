@@ -26,7 +26,7 @@ export { Spinner, Progress, CountUp, LazyImage } from "./components/loading";
 /* CORE / CONTROLLED：基础入场与受控能力 */
 export { TypingText, TextReveal, Magnetic } from "./components/effects"; // Magnetic = CONTROLLED
 
-/* ⚠️ LAB：默认禁止进入正式实现（DESIGN.md §6.4），见 src/lab/README.md */
+/* LAB（默认禁用）：默认禁止进入正式实现（DESIGN.md §6.4），见 src/lab/README.md */
 export { GradientText, Marquee, Tilt, Beam, Aurora } from "./lab/effects-lab";
 export { ThreeShapes, ParticleField } from "./lab/three-canvas";
 
