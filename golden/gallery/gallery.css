@@ -58,3 +58,9 @@
   .gg-detail { position: static; }
   .gg-grid { grid-template-columns: repeat(2, 1fr); }
 }
+/* M04：pointer-relative subtle light（跟随指针的局部微光） */
+.gg-detail__imgwrap::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 40%),
+    rgba(255, 246, 220, .13), transparent 72%); }
+.gg-item { cursor: pointer; }
+.gg-item:focus-visible { outline: 2px solid var(--g-cream); outline-offset: 2px; }

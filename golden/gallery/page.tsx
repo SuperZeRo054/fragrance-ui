@@ -90,7 +90,8 @@ export function GoldenGallery() {
         <div className="gg-grid">
           {items.map((it, i) => (
             <figure key={it.no} className={"gg-item" + (i === sel ? " on" : "")}
-              onClick={() => setSel(i)}>
+              tabIndex={0} onClick={() => setSel(i)}
+              onKeyDown={(e) => e.key === "Enter" && setSel(i)}>
               <img src={it.src} alt={it.en} loading="lazy" />
               <figcaption>
                 <b>{it.no}</b> {it.en} <span>{it.zh}</span>
@@ -101,7 +102,11 @@ export function GoldenGallery() {
         </div>
 
         <aside className="gg-detail">
-          <div className="gg-detail__imgwrap">
+          <div className="gg-detail__imgwrap" onPointerMove={(e) => {
+            const r = e.currentTarget.getBoundingClientRect();
+            e.currentTarget.style.setProperty("--mx", `${(((e.clientX - r.left) / r.width) * 100).toFixed(1)}%`);
+            e.currentTarget.style.setProperty("--my", `${(((e.clientY - r.top) / r.height) * 100).toFixed(1)}%`);
+          }}>
             <img src={cur.src} alt={cur.en} />
             <button className="gg-arrow l" onClick={() => step(-1)} aria-label="previous">←</button>
             <button className="gg-arrow r" onClick={() => step(1)} aria-label="next">→</button>

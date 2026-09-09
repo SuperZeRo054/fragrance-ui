@@ -6,8 +6,10 @@
 
 .fui-modal { background: var(--surface); color: var(--text); border-radius: var(--fui-radius-lg);
   width: 100%; padding: 36px; position: relative; max-height: 88vh; overflow-y: auto;
-  box-shadow: 0 40px 80px rgba(0,0,0,.35); animation: fui-rise .5s var(--fui-ease-out); }
-@keyframes fui-rise { from { opacity: 0; transform: translateY(16px) scale(.96); } to { opacity: 1; transform: none; } }
+  box-shadow: 0 40px 80px rgba(0,0,0,.35);
+  animation: fui-rise .42s cubic-bezier(.22, 1, .36, 1); }
+@keyframes fui-rise { from { opacity: 0; transform: translateY(10px) scale(.995); }
+  60% { opacity: 1; } to { opacity: 1; transform: none; } }
 .fui-modal__close { position: absolute; top: 14px; right: 16px; width: 36px; height: 36px;
   border-radius: 50%; border: 0; background: none; color: var(--text); font-size: 20px;
   cursor: pointer; transition: transform var(--fui-dur-base), background var(--fui-dur-base); }

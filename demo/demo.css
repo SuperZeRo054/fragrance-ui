@@ -119,7 +119,7 @@ section { margin-top: 84px; }
 .icon-cell { display: grid; justify-items: center; gap: 7px; padding: 14px 6px 11px;
   border: 1px solid var(--line); border-radius: var(--fui-radius-sm); color: var(--text);
   transition: color .25s, border-color .25s, transform .25s var(--fui-ease-spring); }
-.icon-cell:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+.icon-cell:hover { color: var(--accent); border-color: var(--accent); }
 .icon-cell span { font-size: 10px; letter-spacing: .04em; color: var(--text-dim); }
 .icon-cell:hover span { color: var(--accent); }
 
@@ -172,7 +172,7 @@ section { margin-top: 84px; }
 .mini-btn { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px;
   padding: 8px 15px; border-radius: 10px; border: 1px solid var(--line);
   color: var(--text); cursor: pointer; transition: transform .25s var(--fui-ease-spring), border-color .25s; }
-.mini-btn:hover { transform: translateY(-1px); border-color: var(--accent); }
+.mini-btn:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
 .mini-btn.pri { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 .mini-btn.danger { color: var(--danger); border-color: color-mix(in srgb, var(--danger) 40%, transparent); padding: 8px 11px; }
 
@@ -269,7 +269,9 @@ section { margin-top: 84px; }
 .rail-card { border: 1px solid var(--line); border-radius: var(--fui-radius-lg);
   overflow: hidden; background: var(--surface-raised); cursor: pointer;
   transition: transform .3s var(--fui-ease-spring), border-color .25s; }
-.rail-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+.rail-card:hover { border-color: var(--accent); }
+.rail-card img { transition: filter .5s var(--fui-ease-out), object-position .6s var(--fui-ease-out); }
+.rail-card:hover img { filter: brightness(1.08); object-position: 50% 42%; }
 .rail-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 .rail-card .rail-foot { display: flex; align-items: baseline; gap: 10px; padding: 11px 14px; }
 .rail-card .rail-no { font-size: 10px; letter-spacing: .16em; color: var(--text-dim);
