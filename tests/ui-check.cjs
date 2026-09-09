@@ -46,7 +46,7 @@ const ok = (name, cond, detail = "") => {
     items: document.querySelectorAll(".navdock__item").length,
   }));
   ok("悬停展开", !!dock.on);
-  ok("12 个入口", dock.items === 12, `got ${dock.items}`);
+  ok("13 个入口（含金样本）", dock.items === 13, `got ${dock.items}`);
 
   console.log("[3] 画廊共享过渡");
   await page.evaluate(() => document.querySelector("#gallery .rail-card")?.scrollIntoView({ block: "center" }));

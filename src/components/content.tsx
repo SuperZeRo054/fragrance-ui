@@ -5,12 +5,12 @@ import "./content.css";
 /* ---------------- Card ---------------- */
 export function Card({ media, kicker, title, subtitle, footer, onClick, interactive = true }: {
   media?: React.ReactNode; kicker?: React.ReactNode; title: string;
-  subtitle?: string; footer?: React.ReactNode; onClick?: () => void; interactive?: boolean;
+  subtitle?: string; footer?: React.ReactNode; onClick?: React.MouseEventHandler<HTMLDivElement>; interactive?: boolean;
 }) {
   return (
     <article className={`fui-card${interactive ? " fui-card--hot" : ""}`}
       onClick={onClick} tabIndex={onClick ? 0 : undefined}
-      onKeyDown={onClick ? (e) => e.key === "Enter" && onClick() : undefined}>
+      onKeyDown={onClick ? (e) => { if (e.key === "Enter") onClick(e as never); } : undefined}>
       {media && <div className="fui-card__media">{media}</div>}
       <div className="fui-card__meta">
         {kicker && <div className="fui-card__era">{kicker}</div>}

@@ -9,11 +9,12 @@ import {
   Card, Table, Tabs, Accordion, Pagination, EmptyState, Skeleton, SharedLightbox,
   PageTransition, viewNavigate, Spinner, Progress, CountUp, LazyImage,
   House, Atom, Textbox, FrameCorners, Cards, Swap, Cube, SquaresFour, List,
-  CircleNotch, Sparkle, Robot, Waveform, HScroll,
+  CircleNotch, Sparkle, Robot, Waveform, HScroll, Star,
   type SkinId, type FontId, type Icon, type Lang,
   CatCharacter, useT, type Pair,
 } from "../src";
 import { SectionHost } from "./host";
+import { GoldenHome } from "../golden/home/page";
 import { MotionLab } from "./motionlab";
 import { ModernEffects, ThreeLab } from "./modernlab";
 import { AgentLab } from "./agentlab";
@@ -99,6 +100,7 @@ const SECTIONS: { id: string; label: Pair; icon: Icon }[] = [
   { id: "agent-lab", label: ["Agent", "Agent"], icon: Robot },
   { id: "icon-lab", label: ["图标", "Icons"], icon: SquaresFour },
   { id: "motion-lab", label: ["动效实验室", "Motion Lab"], icon: Waveform },
+  { id: "golden/home", label: ["金样本首页", "Golden Home"], icon: Star },
 ];
 
 function NavDock() {
@@ -120,6 +122,7 @@ function NavDock() {
               e.preventDefault();
               window.clearTimeout(timer.current);
               setOpen(false);
+              if (id.startsWith("golden/")) { location.hash = `#${id}`; return; }
               document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
               history.replaceState(null, "", `#${id}`);
             }}>
@@ -456,19 +459,34 @@ function LoadingLab() {
 }
 
 function App() {
+  // Golden Sample 路由：#golden/* 渲染金样本页，其余为能力目录
+  const [golden, setGolden] = useState(() => location.hash.startsWith("#golden/"));
+  useEffect(() => {
+    const on = () => setGolden(location.hash.startsWith("#golden/"));
+    addEventListener("hashchange", on);
+    return () => removeEventListener("hashchange", on);
+  }, []);
   // SPA 锚点：挂载后补跳 + 监听 hash 变化（含 viewNavigate 的同页跳转）
   useEffect(() => {
     const go = () => {
       const h = location.hash;
       if (!h || h === "#top") { window.scrollTo({ top: 0 }); return; }
-      const el = document.querySelector(h);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
+      if (h.startsWith("#golden/")) return; // 金样本路由：由视图切换接管
+      try {
+        const el = document.querySelector(h);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      } catch { /* 非法选择器（如 #golden/home）忽略 */ }
     };
     go();
     addEventListener("hashchange", go);
     return () => removeEventListener("hashchange", go);
   }, []);
   return (
+    <>
+      <div style={{ display: golden ? undefined : "none" }}>
+        <GoldenHome />
+      </div>
+      <div style={{ display: golden ? "none" : undefined }}>
     <SkinProvider persistKey="fragrance-ui-demo">
       <ToastProvider>
         <header style={{ position: "sticky", top: 0, zIndex: 50, display: "flex", alignItems: "center",
@@ -490,6 +508,8 @@ function App() {
         </main>
       </ToastProvider>
     </SkinProvider>
+      </div>
+    </>
   );
 }
 createRoot(document.getElementById("root")!).render(<App />);
