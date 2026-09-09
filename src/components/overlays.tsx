@@ -91,6 +91,42 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+/* ---------------- Drawer（侧滑面板：同 Modal 的覆盖层语义，Medium Surface 物理） ---------------- */
+export function Drawer({ open, onClose, side = "right", width = 420, kicker, title, children, footer }: {
+  open: boolean; onClose: () => void; side?: "left" | "right";
+  width?: number; kicker?: string; title?: React.ReactNode;
+  children: React.ReactNode; footer?: React.ReactNode;
+}) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = ""; };
+  }, [open, onClose]);
+  if (!open) return null;
+  return (
+    <div className="fui-backdrop open" onClick={(e) => e.target === e.currentTarget && onClose()}>
+      <aside className={`fui-drawer fui-drawer--${side}`} style={{ width }} role="dialog" aria-modal="true">
+        <header className="fui-drawer__head">
+          <div>
+            {kicker && <p className="fui-kicker" style={{ fontSize: 10 }}>{kicker}</p>}
+            {title && <h4 className="fui-modal__title" style={{ margin: 0 }}>{title}</h4>}
+          </div>
+          <button className="fui-drawer__close" onClick={onClose} aria-label="关闭">
+            <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden>
+              <path d="M3 3l10 10M13 3L3 13" fill="none" stroke="currentColor"
+                strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          </button>
+        </header>
+        <div className="fui-drawer__body">{children}</div>
+        {footer && <footer className="fui-drawer__foot">{footer}</footer>}
+      </aside>
+    </div>
+  );
+}
+
 /* ---------------- Tooltip 定位提示已在 atoms；这里补 Lightbox ---------------- */
 export function Lightbox({ src, alt = "", caption, open, onClose }: {
   src: string; alt?: string; caption?: string; open: boolean; onClose: () => void;

@@ -134,7 +134,52 @@ const ok = (name, cond, detail = "") => {
   ok("标题字阶生效", prose.h2Size > 20, `got ${prose.h2Size}`);
   ok("双语对照与引用块", prose.en && prose.quote);
 
-  console.log("[7] 390px 溢出");
+  console.log("[7] Drawer / CommandPalette / Stepper");
+  await page.evaluate(() => document.querySelector("#overlays")?.scrollIntoView({ block: "start" }));
+  await sleep(700);
+  await page.evaluate(() => [...document.querySelectorAll("button")].find((b) => b.textContent.includes("打开 Drawer"))?.click());
+  await sleep(650);
+  const dr = await page.evaluate(() => ({
+    open: !!document.querySelector(".fui-drawer"),
+    role: document.querySelector(".fui-drawer")?.getAttribute("role"),
+    locked: document.body.style.overflow === "hidden",
+  }));
+  ok("Drawer 打开 / dialog / 滚动锁", dr.open && dr.role === "dialog" && dr.locked);
+  await page.keyboard.press("Escape");
+  await sleep(600);
+  ok("Drawer Esc 关闭并解锁", await page.evaluate(() =>
+    !document.querySelector(".fui-drawer") && document.body.style.overflow === ""));
+
+  await page.evaluate(() => [...document.querySelectorAll("button")].find((b) => b.textContent.includes("指令面板"))?.click());
+  await sleep(600);
+  const cp0 = await page.evaluate(() => ({
+    open: !!document.querySelector(".fui-cmd"),
+    items: document.querySelectorAll(".fui-cmd__item").length,
+  }));
+  ok("指令面板打开", cp0.open && cp0.items >= 5, `items=${cp0.items}`);
+  await page.keyboard.type("gold");
+  await sleep(400);
+  const cp1 = await page.evaluate(() => document.querySelectorAll(".fui-cmd__item").length);
+  ok("输入即过滤", cp1 === 1, `got ${cp1}`);
+  await page.keyboard.press("Enter");
+  await sleep(900);
+  ok("Enter 执行并关闭", await page.evaluate(() => !document.querySelector(".fui-cmd")));
+  await page.evaluate(() => { location.hash = "#gallery"; });
+  await sleep(1200);
+
+  await page.evaluate(() => document.querySelector(".fui-stepper")?.scrollIntoView({ block: "center" }));
+  await sleep(700);
+  const st = await page.evaluate(() => ({
+    steps: document.querySelectorAll(".fui-stepper__step").length,
+    aria: document.querySelector(".fui-stepper__step.is-cur")?.getAttribute("aria-current"),
+  }));
+  ok("Stepper 步骤与 aria-current", st.steps === 4 && st.aria === "step", JSON.stringify(st));
+  await page.evaluate(() => document.querySelectorAll(".fui-stepper__step")[3]?.click());
+  await sleep(400);
+  const st2 = await page.evaluate(() => document.querySelectorAll(".fui-stepper__step.is-done").length);
+  ok("点击步骤推进", st2 === 3, `done=${st2}`);
+
+  console.log("[8] 390px 溢出");
   await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
   await sleep(600);
   const sw = await page.evaluate(() => document.documentElement.scrollWidth);

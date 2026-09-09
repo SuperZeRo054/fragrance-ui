@@ -5,11 +5,12 @@ import {
   Reveal, Button, Badge, Kicker, SectionHead, ChipGroup, Rating, Avatar, Tooltip,
   CatMark, CatFull, catLoafGroup,
   TextField, SelectField, Switch, Checkbox, RadioGroup, RangeField,
-  Modal, ConfirmModal, ErrorModal, Lightbox,
+  Modal, ConfirmModal, ErrorModal, Lightbox, Drawer, CommandPalette,
+  Stepper, type CommandItem,
   Card, Table, Tabs, Accordion, Pagination, EmptyState, Skeleton, SharedLightbox, Prose,
   PageTransition, viewNavigate, Spinner, Progress, CountUp, LazyImage,
   House, Atom, Textbox, FrameCorners, Cards, Swap, Cube, SquaresFour, List,
-  CircleNotch, Sparkle, Robot, Waveform, HScroll, Star,
+  CircleNotch, Sparkle, Robot, Waveform, HScroll, Star, MoonStars,
   type SkinId, type FontId, type Icon, type Lang,
   CatCharacter, useT, type Pair,
 } from "../src";
@@ -231,6 +232,17 @@ function Overlays() {
   const [confirm, setConfirm] = useState(false);
   const [err, setErr] = useState(false);
   const [lb, setLb] = useState(false);
+  const [drawer, setDrawer] = useState(false);
+  const [cmd, setCmd] = useState(false);
+  const [lastCmd, setLastCmd] = useState("");
+  const CMDS: CommandItem[] = [
+    { id: "home", label: "跳到首页", hint: "Home", group: "导航", icon: <House size={15} weight="light" /> },
+    { id: "atoms", label: "跳到原子件", hint: "Atoms", group: "导航", icon: <Atom size={15} weight="light" /> },
+    { id: "gallery", label: "跳到内容展示", hint: "Content", group: "导航", icon: <Cards size={15} weight="light" /> },
+    { id: "agent", label: "跳到 Agent 实验室", hint: "Agent", group: "导航", icon: <Robot size={15} weight="light" /> },
+    { id: "golden", label: "打开金样本首页", hint: "Golden", group: "路由", icon: <Star size={15} weight="light" /> },
+    { id: "theme", label: "切换昼夜", hint: "Theme", group: "设置", icon: <MoonStars size={15} weight="light" /> },
+  ];
   return (
     <section id="overlays">
       <SectionHead kicker="03 · Overlays" title={t(["覆盖层系统", "Overlays"])}
@@ -242,6 +254,9 @@ function Overlays() {
           <Button variant="danger" onClick={() => setConfirm(true)}>打开 Confirm</Button>
           <Button variant="outline" onClick={() => setErr(true)}>打开报错弹窗</Button>
           <Button variant="outline" onClick={() => setLb(true)}>打开 Lightbox</Button>
+          <Button variant="outline" onClick={() => setDrawer(true)}>打开 Drawer</Button>
+          <Button variant="ghost" onClick={() => setCmd(true)}>打开指令面板 ⌘K</Button>
+          {lastCmd && <span style={{ fontSize: 12, color: "var(--text-dim)" }}>上次执行：{lastCmd}</span>}
         </div>
       </Reveal>
       <Modal open={modal} onClose={() => setModal(false)} kicker="Reservation" title="预约组件演示">
@@ -256,6 +271,19 @@ function Overlays() {
       <ErrorModal open={err} onClose={() => setErr(false)}
         title="网络波动，猫主子暂时失联" body="请求超时（ETIMEDOUT）。请检查网络后重试；若持续失败，主子可能只是在假装没看见。" />
       {/* 用一段内联 SVG 当 lightbox 的演示图 —— 零位图传统 */}
+      <Drawer open={drawer} onClose={() => setDrawer(false)} kicker="Drawer" title="侧滑面板"
+        footer={<Button size="sm" onClick={() => setDrawer(false)}>完成</Button>}>
+        <p style={{ margin: 0 }}>侧滑面板用与 Modal 同一套覆盖层语义：Esc 关闭、遮罩点击关闭、滚动锁、
+          落定曲线无回弹。适合放筛选器、详情、设置这类不该打断页面的内容。</p>
+      </Drawer>
+      <CommandPalette open={cmd} onClose={() => setCmd(false)} items={CMDS}
+        onSelect={(id) => {
+          setLastCmd(CMDS.find((c) => c.id === id)?.label ?? id);
+          if (id === "golden") { location.hash = "#golden/home"; return; }
+          if (id === "theme") { setMode(mode === "day" ? "night" : "day"); return; }
+          const map: Record<string, string> = { home: "top", atoms: "atoms", gallery: "gallery", agent: "agent-lab" };
+          document.getElementById(map[id])?.scrollIntoView({ behavior: "smooth" });
+        }} />
       <Lightbox open={lb} onClose={() => setLb(false)}
         src={"data:image/svg+xml;charset=utf-8," + encodeURIComponent(
           `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 400'><defs><radialGradient id='g' cx='35%' cy='78%' r='85%'><stop offset='0%' stop-color='#ffeec4'/><stop offset='45%' stop-color='#eed493'/><stop offset='100%' stop-color='#93a9b4'/></radialGradient></defs><rect width='640' height='400' fill='url(#g)'/><g transform='translate(530,320)'><circle cx='0' cy='-14' r='40' fill='#cf9a52'/><ellipse cx='0' cy='8' rx='15' ry='10.5' fill='#ecd2b4'/><circle cx='-9.5' cy='-19' r='3.6' fill='#33291f'/><circle cx='9.5' cy='-19' r='3.6' fill='#33291f'/><path d='M-24 -34 Q-31 -50 -19 -55 Q-13 -46 -12 -39Z' fill='#2e2620'/><path d='M24 -34 Q31 -50 19 -55 Q13 -46 12 -39Z' fill='#2e2620'/></g></svg>`)}
@@ -352,6 +380,15 @@ function Content() {
         <div style={{ display: "grid", gap: 18, gridTemplateColumns: "1fr 1fr", alignItems: "start", marginTop: 40 }}>
           <EmptyState icon={<CatCharacter tone="qian" width={96} />} title="这里还没有内容" desc="狗还没来，猫先看着。" />
           <Skeleton lines={3} /><Skeleton rect />
+        </div>
+        <div style={{ marginTop: 46 }}>
+          <Stepper current={page - 1} onStepClick={(i) => setPage(i + 1)}
+            steps={[
+              { id: "s1", label: "定妆照", hint: "锁定形象" },
+              { id: "s2", label: "Prompt 工程", hint: "风格契约" },
+              { id: "s3", label: "装配", hint: "分镜拼接" },
+              { id: "s4", label: "交付", hint: "编码导出" },
+            ]} />
         </div>
         <div style={{ marginTop: 40 }}>
           <Pagination page={page} total={9} onChange={setPage} />

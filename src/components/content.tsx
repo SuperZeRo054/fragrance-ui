@@ -163,3 +163,39 @@ export function Skeleton({ lines = 3, rect = false }: { lines?: number; rect?: b
     </div>
   );
 }
+
+/* ---------------- Stepper（流程步骤：完成 / 当前 / 未到，键盘可达） ---------------- */
+export function Stepper({ steps, current, onStepClick, className = "" }: {
+  steps: { id: string; label: string; hint?: string }[];
+  current: number;
+  onStepClick?: (i: number) => void;
+  className?: string;
+}) {
+  return (
+    <nav className={`fui-stepper ${className}`} aria-label="步骤">
+      {steps.map((st, i) => {
+        const state = i < current ? "done" : i === current ? "cur" : "next";
+        return (
+          <button key={st.id} className={`fui-stepper__step is-${state}`}
+            onClick={() => onStepClick?.(i)}
+            aria-current={i === current ? "step" : undefined}
+            disabled={!onStepClick}>
+            <span className="fui-stepper__dot" aria-hidden>
+              {state === "done" ? (
+                <svg viewBox="0 0 12 12" width="10" height="10">
+                  <path d="M2.4 6.3l2.4 2.4 4.8-5" fill="none" stroke="currentColor"
+                    strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              ) : i + 1}
+            </span>
+            <span className="fui-stepper__body">
+              <b>{st.label}</b>
+              {st.hint && <i>{st.hint}</i>}
+            </span>
+            {i < steps.length - 1 && <span className="fui-stepper__line" aria-hidden />}
+          </button>
+        );
+      })}
+    </nav>
+  );
+}

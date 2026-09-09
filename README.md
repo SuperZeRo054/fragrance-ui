@@ -53,8 +53,8 @@ import "fragrance-ui/styles.css";
 **CORE**
 原子：Reveal · Button(primary/outline/ghost/danger) · Badge · Kicker · SectionHead · ChipGroup · Rating · Avatar · Tooltip · HScroll
 表单：TextField · SelectField · Switch · Checkbox · RadioGroup · RangeField
-覆盖层：Modal · ConfirmModal · ErrorModal · Lightbox · ToastProvider/useToast
-内容：Card · Table · Tabs(steps) · Accordion · Pagination · EmptyState · Skeleton · Prose(长文排版)
+覆盖层：Modal · ConfirmModal · ErrorModal · Lightbox · Drawer · CommandPalette(⌘K) · ToastProvider/useToast
+内容：Card · Table · Tabs(steps) · Accordion · Pagination · Stepper · EmptyState · Skeleton · Prose(长文排版)
 反馈：Spinner · Progress · LazyImage(blur-up)
 基础动效：TypingText · TextReveal · PageTransition · viewNavigate
 
@@ -96,7 +96,6 @@ npm run preview  # 预览构建产物
 
 ## Roadmap
 
-- Drawer / CommandPalette / Stepper（沿用现有令牌与能力分级）
 - 金样本首页的摄影版主视觉资产（现用浮世绘画代位）
 - M02 角色状态机接入 Rive（需 .riv 资产）
 - npm 发布与 token CLI
