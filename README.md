@@ -95,8 +95,12 @@ npm run build:lib    # dist/：ESM + CJS + 单一 CSS + 类型声明
 npm pack --dry-run   # 预览发布内容（约 27 个文件 / 64 kB）
 ```
 
-`exports` 已配好：`.`（含 types/import/require）与 `./styles.css`。
-React / react-dom / three / 图标库均为 external，不进包。
+`exports` 已配好：`.`（含 types / import / default）与 `./styles.css`。
+React / react-dom / three / 图标库 / xstate 均为 external，不进包。
+
+**包名**：`fragrance-ui-react`（npm 上的 `fragrance-ui` 属于无关项目）。
+**发布**：本地 `npm login --registry=https://registry.npmjs.org` 后 `npm run publish:live`；
+或在 GitHub 配好 `NPM_TOKEN` secret 后，发布 Release 即自动走 `.github/workflows/publish.yml`。
 
 ## 本地开发
 
