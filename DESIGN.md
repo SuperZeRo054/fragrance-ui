@@ -1,6 +1,6 @@
 # Fragrance UI Design Constitution
 
-> Version: v0.1 Review Baseline  
+> Version: v0.2 Frozen（2026-09-09，Golden Sample Review 通过，见 audit/v0.2-freeze.md）  
 > Language: Chinese-first, bilingual-product compatible  
 > Authority: Highest design policy for Fragrance UI
 
