@@ -74,5 +74,15 @@ console.log("[5] Glass 不属于 Action（§6.1）");
 const btnSrc = read(path.join(ROOT, "src/components/atoms.tsx"));
 ok("Button 变体不含 glass", !/BtnVariant\s*=[^;]*"glass"/.test(btnSrc));
 
+console.log("[6] token CLI");
+try {
+  const { execFileSync } = require("child_process");
+  execFileSync(process.execPath, [path.join(ROOT, "bin/tokens-cli.mjs"), "check", "src/tokens.css"],
+    { cwd: ROOT, stdio: "pipe" });
+  ok("token CLI check 通过（皮肤块覆盖契约）", true);
+} catch (e) {
+  ok("token CLI check 通过（皮肤块覆盖契约）", false, String(e.stdout || e).slice(0, 120));
+}
+
 console.log(`\nRESULT: ${pass} pass, ${fail} fail`);
 process.exit(fail ? 1 : 0);

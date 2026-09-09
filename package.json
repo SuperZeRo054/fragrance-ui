@@ -43,6 +43,7 @@
   },
   "files": [
     "dist",
+    "bin",
     "DESIGN.md",
     "AGENTS.md",
     "README.md"
@@ -59,5 +60,8 @@
     "three": {
       "optional": true
     }
+  },
+  "bin": {
+    "fragrance-ui": "./bin/tokens-cli.mjs"
   }
 }

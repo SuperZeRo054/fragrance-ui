@@ -108,10 +108,17 @@ npm run preview  # 预览构建产物
 
 线上：<https://superzero054.github.io/fragrance-ui/>
 
+## 皮肤工具
+
+```bash
+npx fragrance-ui tokens          # 列出语义令牌契约
+npx fragrance-ui skin ocean      # 打印新皮肤模板（day/night 两块）
+npx fragrance-ui check src/tokens.css   # 校验皮肤块是否覆盖契约
+```
+
 ## Roadmap
 
-- 金样本首页的摄影版主视觉资产（现用浮世绘画代位）
 - M02 角色状态机接入 Rive（需 .riv 资产）
-- npm 发布与 token CLI
+- 金样本首页的摄影版主视觉（已用真猫双联画实现，等待更正式的拍摄素材）
 
 License: MIT · Curated by two cats
