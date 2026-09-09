@@ -1,0 +1,66 @@
+/* CORE · Prose —— 长文排版（全部消费语义令牌，皮肤/昼夜/字体/语言自动跟随） */
+.fui-prose { max-width: 68ch; color: var(--text); font-family: var(--font-body); }
+.fui-prose--lg { font-size: 17px; }
+
+.fui-prose > * + * { margin-top: 1.1em; }
+
+/* 段落 */
+.fui-prose p { font-size: 1em; line-height: 1.9; color: var(--text); margin: 0; }
+[data-lang="en"] .fui-prose p { line-height: 1.75; }
+
+/* 导语 */
+.fui-prose .fui-prose__lede { font-size: 1.22em; line-height: 1.75; }
+
+/* 标题 */
+.fui-prose h2 { font-family: var(--font-display); font-weight: 500;
+  font-size: 1.72em; line-height: 1.25; letter-spacing: -.005em;
+  margin: 2.1em 0 .7em; color: var(--text); }
+.fui-prose h3 { font-family: var(--font-display); font-weight: 500;
+  font-size: 1.28em; line-height: 1.35; margin: 1.8em 0 .55em; }
+.fui-prose h2:first-child, .fui-prose h3:first-child { margin-top: 0; }
+
+/* 英文对照 / 元数据行：次级文本 */
+.fui-prose .fui-prose__en { display: block; margin-top: .35em;
+  font-family: var(--font-body); font-size: .72em; line-height: 1.8;
+  letter-spacing: .01em; color: var(--text-dim); }
+.fui-prose h2 .fui-prose__en, .fui-prose h3 .fui-prose__en {
+  font-size: .5em; letter-spacing: .16em; text-transform: uppercase; }
+
+/* 引用 */
+.fui-prose blockquote { margin: 1.8em 0; padding: .2em 0 .2em 1.1em;
+  border-left: 2px solid var(--accent); font-family: var(--font-display);
+  font-size: 1.2em; line-height: 1.55; color: var(--text); }
+.fui-prose blockquote cite, .fui-prose blockquote .fui-prose__en {
+  display: block; margin-top: .5em; font-family: var(--font-body);
+  font-size: .58em; letter-spacing: .14em; color: var(--accent); font-style: normal; }
+
+/* 列表 */
+.fui-prose ul, .fui-prose ol { padding-left: 1.3em; margin: 0; }
+.fui-prose li { font-size: 1em; line-height: 1.9; margin-top: .4em; }
+.fui-prose li::marker { color: var(--accent); }
+
+/* 代码 */
+.fui-prose code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .88em; background: var(--surface-inset); border-radius: var(--fui-radius-sm);
+  padding: .12em .42em; }
+.fui-prose pre { margin: 1.4em 0; padding: var(--space-4, 16px);
+  background: var(--surface-inset); border: 1px solid var(--line);
+  border-radius: var(--fui-radius-md); overflow-x: auto; }
+.fui-prose pre code { background: none; padding: 0; font-size: .86em; line-height: 1.75; }
+
+/* 图与图注 */
+.fui-prose figure { margin: 1.8em 0; }
+.fui-prose img { display: block; width: 100%; border-radius: var(--fui-radius-md); }
+.fui-prose figcaption, .fui-prose .fui-prose__cap { margin-top: .7em;
+  font-size: .72em; letter-spacing: .12em; color: var(--text-dim); text-align: center; }
+
+/* 链接与强调 */
+.fui-prose a { color: var(--accent); text-decoration: underline;
+  text-underline-offset: .18em; text-decoration-thickness: 1px; }
+.fui-prose a:hover { text-decoration-thickness: 2px; }
+.fui-prose strong { font-weight: 600; }
+.fui-prose hr { border: 0; border-top: 1px solid var(--line); margin: 2.2em 0; }
+
+@media (prefers-contrast: more) {
+  .fui-prose .fui-prose__en, .fui-prose figcaption, .fui-prose .fui-prose__cap { color: var(--text); }
+}

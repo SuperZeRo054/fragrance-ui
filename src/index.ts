@@ -10,6 +10,7 @@ import "./components/effects.css";
 import "./lab/effects-lab.css";
 import "./motion/shared-lightbox.css";
 import "./components/agent.css";
+import "./components/prose.css";
 import "./components/hscroll.css";
 
 export { SkinProvider, useTheme } from "./theme/SkinProvider";
@@ -19,6 +20,7 @@ export { Reveal, Button, Badge, Kicker, SectionHead, ChipGroup, Rating, Avatar, 
 export { TextField, SelectField, Switch, Checkbox, RadioGroup, RangeField } from "./components/forms";
 export { Modal, ConfirmModal, ErrorModal, ToastProvider, useToast, Lightbox } from "./components/overlays";
 export { Card, Table, Tabs, Accordion, Pagination, EmptyState, Skeleton } from "./components/content";
+export { Prose } from "./components/prose";
 export type { Col } from "./components/content";
 export { PageTransition, viewNavigate } from "./components/motion";
 export type { PageVariant } from "./components/motion";

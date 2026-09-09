@@ -1,6 +1,6 @@
 import React from "react";
 import { GhomeBar, GhomeFoot } from "../chrome";
-import { CatCharacter } from "../../src";
+import { CatCharacter, Prose } from "../../src";
 import windowsill from "../../demo/gallery/frg-windowsill.jpg";
 import starry from "../../demo/gallery/frg-starrynight.jpg";
 import "../home/home.css";
@@ -26,45 +26,47 @@ export function GoldenArticle() {
 
       <img className="gart-cover" src={windowsill} alt="窗台上的两只猫" />
 
-      <article className="gart-body">
-        <p className="gart-lede">
+      <Prose className="gart-body">
+        <p className="fui-prose__lede">
           我们总说互联网让一切变快了。但快，不一定是好事。
-          <span>We built the web to be fast. Fast is not the same as good.</span>
+          <span className="fui-prose__en">We built the web to be fast. Fast is not the same as good.</span>
         </p>
         <p>
           Fragrance UI 是一套个人设计系统。它从两只猫身上学事情：慢慢走路、认真看窗外、
           在阳光最好的位置睡上一觉。这些事情没有一个和「效率」有关，但它们让生活的质感完全不同。
-          <span>
+          <span className="fui-prose__en">
             Fragrance UI is a personal design system that learns from two cats: walk slowly,
             watch the window with intent, and nap in the best light. None of these are
-            efficient — all of them change how a day feels.
+            efficient, yet all of them change how a day feels.
           </span>
         </p>
-        <h2>一、留白不是空 <span>Whitespace is not empty</span></h2>
+        <h2>一、留白不是空<span className="fui-prose__en">Whitespace is not empty</span></h2>
         <p>
           猫趴在窗台上之所以好看，是因为它周围什么都没有。界面也一样：留白不是没有设计，
           而是把注意力完整地让给你最重要的东西。
-          <span>A cat on a windowsill looks good because there is nothing else around it.
+          <span className="fui-prose__en">A cat on a windowsill looks good because there is nothing else around it.
             Interfaces work the same way.</span>
         </p>
-        <img src={starry} alt="星月夜猫" loading="lazy" />
-        <p className="gart-cap">星月夜猫 · FRG-POS-01</p>
+        <figure>
+          <img src={starry} alt="星月夜猫" loading="lazy" />
+          <figcaption>星月夜猫 · FRG-POS-01</figcaption>
+        </figure>
         <blockquote>
           “A quiet space for better ideas.”
-          <span>—— 一个让好想法生长的安静空间。”</span>
+          <span className="fui-prose__en">一个让好想法生长的安静空间。”</span>
         </blockquote>
-        <h2>二、动效是编舞 <span>Motion is choreography</span></h2>
+        <h2>二、动效是编舞<span className="fui-prose__en">Motion is choreography</span></h2>
         <p>
           好的动效像猫跳上桌面的那一下：有准备、有发力、有落定。落定之后，注意力回到内容。
           如果用户还在回味那个动画本身，它就已经过量了。
-          <span>Good motion is a cat landing on a desk: intent, effort, a quiet landing.
+          <span className="fui-prose__en">Good motion is a cat landing on a desk: intent, effort, a quiet landing.
             If the user is still thinking about the animation, there was too much of it.</span>
         </p>
         <p>
           所以这套系统的默认答案是「不加」。克制不是风格，是能力。
-          <span>So the default answer in this system is no. Restraint is not a style — it is a skill.</span>
+          <span className="fui-prose__en">So the default answer in this system is no. Restraint is not a style, it is a skill.</span>
         </p>
-      </article>
+      </Prose>
 
       <div className="gart-end">
         <CatCharacter tone="qian" temperament="shy" width={104} />

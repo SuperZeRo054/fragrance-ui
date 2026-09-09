@@ -6,7 +6,7 @@ import {
   CatMark, CatFull, catLoafGroup,
   TextField, SelectField, Switch, Checkbox, RadioGroup, RangeField,
   Modal, ConfirmModal, ErrorModal, Lightbox,
-  Card, Table, Tabs, Accordion, Pagination, EmptyState, Skeleton, SharedLightbox,
+  Card, Table, Tabs, Accordion, Pagination, EmptyState, Skeleton, SharedLightbox, Prose,
   PageTransition, viewNavigate, Spinner, Progress, CountUp, LazyImage,
   House, Atom, Textbox, FrameCorners, Cards, Swap, Cube, SquaresFour, List,
   CircleNotch, Sparkle, Robot, Waveform, HScroll, Star,
@@ -355,6 +355,30 @@ function Content() {
         </div>
         <div style={{ marginTop: 40 }}>
           <Pagination page={page} total={9} onChange={setPage} />
+        </div>
+        <div style={{ marginTop: 52 }}>
+          <p style={{ fontSize: 10, letterSpacing: ".28em", textTransform: "uppercase",
+            color: "var(--text-dim)", marginBottom: 18 }}>PROSE · 长文排版</p>
+          <Prose>
+            <p className="fui-prose__lede">
+              长文排版是一套库最容易做砸的地方。这一块把它交给 Prose。
+              <span className="fui-prose__en">Long-form typography is where most libraries fall apart. Prose handles it.</span>
+            </p>
+            <h2>标题会自己找到节奏<span className="fui-prose__en">Headings find their own rhythm</span></h2>
+            <p>
+              标题、正文、引用、代码、图注都消费同一组语义令牌，所以换皮肤、换昼夜、换字体包时，
+              排版跟着走，不需要为每一页重写 CSS。
+              <span className="fui-prose__en">Every element consumes the same semantic tokens, so skins, day/night and font packs all carry through.</span>
+            </p>
+            <blockquote>
+              “内容始终拥有最高优先级。”
+              <span className="fui-prose__en">Content always has the highest priority.</span>
+            </blockquote>
+            <ul>
+              <li>中文正文 1.9 行高，英文 1.75<span className="fui-prose__en">zh 1.9 / en 1.75 line-height</span></li>
+              <li>代码块与行内代码用等宽栈<span className="fui-prose__en">mono stack for code</span></li>
+            </ul>
+          </Prose>
         </div>
       </div>
     </section>

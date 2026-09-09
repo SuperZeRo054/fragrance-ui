@@ -113,7 +113,28 @@ const ok = (name, cond, detail = "") => {
   ok("data-lang=en", lang.attr === "en");
   ok("英文行升为主视觉", parseFloat(lang.enSize) > parseFloat(lang.zhSize), `${lang.enSize} vs ${lang.zhSize}`);
 
-  console.log("[6] 390px 溢出");
+  console.log("[6] Prose 长文排版");
+  await page.evaluate(() => {
+    const t = [...document.querySelectorAll("#gallery p")].find((e) => e.textContent.includes("PROSE"));
+    t?.scrollIntoView({ block: "center" });
+  });
+  await sleep(900);
+  const prose = await page.evaluate(() => {
+    const el = document.querySelector("#gallery .fui-prose");
+    if (!el) return { present: false };
+    const h2 = el.querySelector("h2");
+    return {
+      present: true,
+      h2Size: h2 ? parseFloat(getComputedStyle(h2).fontSize) : 0,
+      en: !!el.querySelector(".fui-prose__en"),
+      quote: !!el.querySelector("blockquote"),
+    };
+  });
+  ok("Prose 渲染", prose.present);
+  ok("标题字阶生效", prose.h2Size > 20, `got ${prose.h2Size}`);
+  ok("双语对照与引用块", prose.en && prose.quote);
+
+  console.log("[7] 390px 溢出");
   await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1 });
   await sleep(600);
   const sw = await page.evaluate(() => document.documentElement.scrollWidth);

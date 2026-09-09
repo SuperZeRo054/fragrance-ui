@@ -10,26 +10,14 @@
   border-radius: 14px; display: block;
   box-shadow: 0 40px 90px -40px rgba(0, 0, 0, .8); }
 
-.gart-body { max-width: 720px; margin: 0 auto; padding: 52px 24px 70px; }
-.gart-lede { font-size: 17.5px; line-height: 1.9; color: var(--g-text); }
-.gart-lede span { display: block; margin-top: 6px; font-size: 13px;
-  color: var(--g-dim); line-height: 1.8; }
-.gart-body h2 { font-family: var(--g-serif); font-weight: 500; font-size: 25px;
-  color: #efece4; margin: 44px 0 16px; }
-.gart-body h2 span { display: block; font-family: var(--fui-font-body, sans-serif);
-  font-size: 11px; letter-spacing: .24em; text-transform: uppercase;
-  color: var(--g-cream); margin-top: 6px; }
-.gart-body p { font-size: 14px; line-height: 2.05; color: #c9c7c0; margin: 0 0 18px; }
-.gart-body p span { display: block; margin-top: 6px; font-size: 11.5px;
-  color: var(--g-dim); line-height: 1.85; }
-.gart-body img { width: 100%; border-radius: 12px; margin: 26px 0 8px; }
-.gart-cap { font-size: 10.5px; letter-spacing: .16em; color: var(--g-dim);
-  text-align: center; }
-.gart-body blockquote { margin: 34px 0; padding: 18px 24px;
-  border-left: 2px solid var(--g-cream); font-family: var(--g-serif);
-  font-size: 21px; line-height: 1.5; color: #efece4; }
-.gart-body blockquote span { display: block; font-size: 12.5px; color: var(--g-dim);
-  font-family: var(--fui-font-body, sans-serif); margin-top: 8px; }
+.gart-body {
+  /* 金样本自持配色：通过覆盖语义令牌让 Prose 跟随本页视觉 */
+  --text: #c9c7c0; --text-dim: #9aa0a8;
+  --accent: #ddd2b8; --accent-soft: #c9bfa4;
+  --line: rgba(255, 255, 255, .1); --surface-inset: rgba(255, 255, 255, .05);
+  max-width: 720px; margin: 0 auto; padding: 52px 24px 70px;
+}
+.gart-body .fui-prose__lede { font-size: 17.5px; }
 
 @media (max-width: 640px) {
   .gart-head { padding: 40px 24px 26px; }
