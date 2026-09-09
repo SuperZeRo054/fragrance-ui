@@ -16,6 +16,8 @@ import {
 import { SectionHost } from "./host";
 import { GoldenHome } from "../golden/home/page";
 import { GoldenProject } from "../golden/project/page";
+import { GoldenGallery } from "../golden/gallery/page";
+import { GoldenArticle } from "../golden/article/page";
 import { MotionLab } from "./motionlab";
 import { ModernEffects, ThreeLab } from "./modernlab";
 import { AgentLab } from "./agentlab";
@@ -494,6 +496,12 @@ function App() {
       </div>
       <div style={{ display: golden && goldenView === "project" ? undefined : "none" }}>
         <GoldenProject />
+      </div>
+      <div style={{ display: golden && goldenView === "gallery" ? undefined : "none" }}>
+        <GoldenGallery />
+      </div>
+      <div style={{ display: golden && goldenView === "article" ? undefined : "none" }}>
+        <GoldenArticle />
       </div>
       <div style={{ display: golden ? "none" : undefined }}>
     <SkinProvider persistKey="fragrance-ui-demo">
