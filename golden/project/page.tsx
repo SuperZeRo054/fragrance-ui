@@ -2,6 +2,7 @@ import React from "react";
 import "../home/home.css";
 import "./project.css";
 import { Leaf, PawPrint, Heart } from "../../src";
+import { SceneHero } from "../scene";
 import windowsill from "../../demo/gallery/frg-windowsill.jpg";
 import wave from "../../demo/gallery/frg-greatwave.jpg";
 import starry from "../../demo/gallery/frg-starrynight.jpg";
@@ -70,9 +71,7 @@ export function GoldenProject() {
         </div>
       </header>
 
-      <section className="ghome__hero pd-hero">
-        <img className="ghome__hero-img" src={catCream} alt="万万 · 蓝金渐层" />
-        <div className="ghome__hero-shade" />
+      <SceneHero img={catCream} alt="万万 · 蓝金渐层" className="ghome__hero pd-hero">
         <div className="ghome__hero-copy">
           <p className="ghome__kicker">
             <span>PROJECT DETAIL</span>
@@ -100,7 +99,7 @@ export function GoldenProject() {
           <p className="ghome__hand-zh">好的想法<br />需要时间。</p>
           <p className="ghome__hand-meta pd-meta">/ SAME CATS<br />BRIGHTER TOMORROWS<br />同样的猫，更明亮的明天。</p>
         </aside>
-      </section>
+      </SceneHero>
 
       <section className="pd-row">
         <div className="pd-cell">

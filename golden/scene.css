@@ -1,0 +1,45 @@
+/* M03 · Scene Hero —— 入场编排 + 滚动视差（只动主视觉层） */
+.scene-hero { position: relative; overflow: hidden; }
+.scene-media { position: absolute; inset: -6% 0; will-change: transform; }
+.scene-img { width: 100%; height: 100%; object-fit: cover; display: block;
+  will-change: transform; }
+
+/* 01 主视觉先建立 */
+.scene-media { opacity: 0; }
+.scene-in .scene-media { animation: scene-media-in 1.1s cubic-bezier(.22, 1, .36, 1) both; }
+@keyframes scene-media-in {
+  from { opacity: 0; transform: scale(1.04); }
+  to { opacity: 1; transform: none; }
+}
+
+/* 02–03 元数据与标题随后落位（错峰，不是整块 fade-up） */
+.scene-hero .ghome__kicker,
+.scene-hero .ghome__display,
+.scene-hero .ghome__lead-en,
+.scene-hero .ghome__lead-zh,
+.scene-hero .ghome__actions,
+.scene-hero .ghome__edge-l,
+.scene-hero .ghome__edge-r,
+.scene-hero .ghome__edge-b,
+.scene-hero .gg-hero__meta { opacity: 0; }
+.scene-in .ghome__kicker { animation: scene-settle .7s cubic-bezier(.22, 1, .36, 1) .30s both; }
+.scene-in .ghome__display { animation: scene-settle .8s cubic-bezier(.22, 1, .36, 1) .42s both; }
+.scene-in .ghome__lead-en { animation: scene-settle .8s cubic-bezier(.22, 1, .36, 1) .56s both; }
+.scene-in .ghome__lead-zh { animation: scene-settle .8s cubic-bezier(.22, 1, .36, 1) .64s both; }
+.scene-in .ghome__actions { animation: scene-settle .8s cubic-bezier(.22, 1, .36, 1) .74s both; }
+.scene-in .ghome__edge-l { animation: scene-settle .9s cubic-bezier(.22, 1, .36, 1) .90s both; }
+.scene-in .ghome__edge-r { animation: scene-settle .9s cubic-bezier(.22, 1, .36, 1) 1.0s both; }
+.scene-in .ghome__edge-b { animation: scene-settle .9s cubic-bezier(.22, 1, .36, 1) 1.05s both; }
+@keyframes scene-settle {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-media { opacity: 1 !important; animation: none !important; }
+  .scene-hero .ghome__kicker, .scene-hero .ghome__display,
+  .scene-hero .ghome__lead-en, .scene-hero .ghome__lead-zh,
+  .scene-hero .ghome__actions, .scene-hero .ghome__edge-l,
+  .scene-hero .ghome__edge-r, .scene-hero .ghome__edge-b {
+    opacity: 1 !important; animation: none !important; }
+}

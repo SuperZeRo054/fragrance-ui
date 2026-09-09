@@ -1,6 +1,6 @@
 /* G02 Golden Project Detail —— 复用 home.css 的顶栏/引言带/页脚，此处仅页内差异。 */
 .pd-hero { min-height: 78vh; }
-.pd-hero .ghome__hero-img { object-position: 50% 72%; }
+.pd-hero .scene-img { object-position: 50% 72%; }
 .pd-hero .ghome__hero-copy { max-width: 620px; }
 .pd-edge { position: absolute; left: 48px; bottom: -18px; }
 .pd-meta { line-height: 2; }

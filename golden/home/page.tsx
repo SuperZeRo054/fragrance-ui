@@ -1,4 +1,5 @@
 import React from "react";
+import { SceneHero } from "../scene";
 import "./home.css";
 import wave from "../../demo/gallery/frg-greatwave.jpg";
 import starry from "../../demo/gallery/frg-starrynight.jpg";
@@ -31,9 +32,7 @@ export function GoldenHome() {
         </div>
       </header>
 
-      <section className="ghome__hero">
-        <img className="ghome__hero-img" src={wave} alt="神奈川冲浪猫 · Fragrance UI 主视觉" />
-        <div className="ghome__hero-shade" />
+      <SceneHero img={wave} alt="神奈川冲浪猫 · Fragrance UI 主视觉" className="ghome__hero">
         <div className="ghome__hero-copy">
           <p className="ghome__kicker">
             <span>CATS · DESIGN · A KINDER INTERNET</span>
@@ -62,7 +61,7 @@ export function GoldenHome() {
           <p className="ghome__hand-meta">/ FRAGRANCE UI<br />GOLDEN SAMPLES v0.2<br />精选设计样本</p>
         </aside>
         <p className="ghome__edge-b">QUIETER TOOLS, BRIGHTER TOMORROWS.<span>更安静的工具，更明亮的明天。</span></p>
-      </section>
+      </SceneHero>
 
       <section className="ghome__grid">
         <article className="ghome__cell">
