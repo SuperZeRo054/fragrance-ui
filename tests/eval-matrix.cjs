@@ -112,10 +112,11 @@ const ok = (name, cond, detail = "") => {
     if (a == null || b == null) return null;
     return +(((Math.max(a, b) + .05) / (Math.min(a, b) + .05)).toFixed(2));
   };
-  for (const mode of ["day", "night"]) {
-    await page2.evaluate((m) => {
-      localStorage.setItem("fragrance-ui-demo", JSON.stringify({ skin: "fragrance", mode: m, font: "system", lang: "zh" }));
-    }, mode);
+  for (const skin of ["fragrance", "graphite"]) {
+   for (const mode of ["day", "night"]) {
+    await page2.evaluate((sk, m) => {
+      localStorage.setItem("fragrance-ui-demo", JSON.stringify({ skin: sk, mode: m, font: "system", lang: "zh" }));
+    }, skin, mode);
     await page2.reload({ waitUntil: "networkidle0" });
     await sleep(900);
     const r = await page2.evaluate(() => {
@@ -130,8 +131,9 @@ const ok = (name, cond, detail = "") => {
     });
     const mainR = ratio(r.title, r.bg);
     const subR = ratio(r.sub, r.bg);
-    ok(`对比度 ${mode} 主文本 ≥ 7 (AAA)`, mainR !== null && mainR >= 7, `got ${mainR}`);
-    ok(`对比度 ${mode} 次级文本 ≥ 4.5 (AA)`, subR !== null && subR >= 4.5, `got ${subR}`);
+    ok(`对比度 ${skin}/${mode} 主文本 ≥ 7 (AAA)`, mainR !== null && mainR >= 7, `got ${mainR}`);
+    ok(`对比度 ${skin}/${mode} 次级文本 ≥ 4.5 (AA)`, subR !== null && subR >= 4.5, `got ${subR}`);
+   }
   }
 
   console.log(`\nRESULT: ${pass} pass, ${fail} fail`);

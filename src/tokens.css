@@ -48,18 +48,22 @@
   --line: rgba(220,228,238,.12);
 }
 
-/* ---------------- Skin 02 · graphite（石墨暗室×熔铜 高对比） ---------------- */
+/* ---------------- Skin 02 · graphite（素描纸×铜墨 / 石墨暗室×熔铜） ----------------
+   语义修正（2026-09-09，审计 P1「skin/mode 语义不清」）：mode 在全皮肤下统一表示
+   明/暗。旧版 graphite-day 本身即深色，与 fragrance 的 day=浅色语义冲突；现
+   graphite-day = 暖纸浅色（素描纸×铜墨），graphite-night = 石墨暗室×熔铜。 */
 [data-skin="graphite"][data-mode="day"] {
-  --surface: #17181c; --surface-raised: #1f2127; --surface-inset: rgba(235,220,205,.06);
-  --text: #eceef2; --text-dim: #98a0af; --text-inverse: #14151a;
-  --accent: #d97b45; --accent-soft: #eab08a; --on-accent: #16110d;
-  --success: #7fa663; --warning: #dba24c; --danger: #e06c53; --info: #6ba3c9;
-  --line: rgba(232,235,242,.13);
+  --surface: #e9e7e2; --surface-raised: #dfdcd5; --surface-inset: rgba(28,24,20,.05);
+  --text: #1c1a17; --text-dim: #6b665e; --text-inverse: #f2f0eb;
+  --accent: #a8542e; --accent-soft: #c98a63; --on-accent: #ffffff;
+  --success: #4f6b39; --warning: #8a6220; --danger: #9c3f2b; --info: #45637c;
+  --line: rgba(28,24,20,.14);
 }
 [data-skin="graphite"][data-mode="night"] {
   --surface: #0d0e11; --surface-raised: #15171c; --surface-inset: rgba(235,220,205,.045);
   --text: #dfe2e8; --text-dim: #858da0; --text-inverse: #101114;
   --accent: #c96a38; --accent-soft: #e09a6a; --on-accent: #120d09;
+  --success: #7fa663; --warning: #dba24c; --danger: #e06c53; --info: #6ba3c9;
   --line: rgba(232,235,242,.09);
 }
 
