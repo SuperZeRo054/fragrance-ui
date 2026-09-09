@@ -1,8 +1,8 @@
 {
   "name": "fragrance-ui",
-  "private": true,
-  "version": "0.1.0",
-  "description": "Fragrance UI — 多皮肤主题引擎驱动的个人品牌 React 组件库。一套结构，任意换皮。两位猫咪馆长督阵。",
+  "private": false,
+  "version": "0.2.0",
+  "description": "Fragrance UI — Agent-first frontend design system. Multi-skin theme engine, capability-governed React components, bilingual by design.",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,16 +12,9 @@
     "check:matrix": "node tests/eval-matrix.cjs",
     "check:policy": "node tests/policy-gate.cjs",
     "check": "npm run check:policy && npm run check:ui && npm run check:matrix && npm run check:golden",
-    "check:golden": "node tests/golden-check.cjs"
-  },
-  "dependencies": {
-    "@phosphor-icons/react": "^2.1.10",
-    "@types/three": "^0.185.4",
-    "gsap": "^3.15.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "roughjs": "^4.6.6",
-    "three": "^0.185.1"
+    "check:golden": "node tests/golden-check.cjs",
+    "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run build:lib"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
@@ -29,6 +22,42 @@
     "@vitejs/plugin-react": "^4.3.1",
     "puppeteer-core": "^25.9.0",
     "typescript": "^5.5.3",
-    "vite": "^5.4.0"
+    "vite": "^5.4.0",
+    "three": "^0.185.1",
+    "@types/three": "^0.185.4",
+    "gsap": "^3.15.0",
+    "roughjs": "^4.6.6"
+  },
+  "license": "MIT",
+  "main": "./dist/fragrance-ui.cjs",
+  "module": "./dist/fragrance-ui.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/fragrance-ui.js",
+      "require": "./dist/fragrance-ui.cjs"
+    },
+    "./styles.css": "./dist/fragrance-ui.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "DESIGN.md",
+    "AGENTS.md",
+    "README.md"
+  ],
+  "dependencies": {
+    "@phosphor-icons/react": "^2.1.10"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18",
+    "three": ">=0.160"
+  },
+  "peerDependenciesMeta": {
+    "three": {
+      "optional": true
+    }
   }
 }

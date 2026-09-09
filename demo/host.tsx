@@ -1,15 +1,11 @@
 import React, { useEffect, useRef } from "react";
+import { CAT_PALETTE } from "../src/brand/cats";
 
 export type HostId = "wanwan" | "qianqian";
 
 const META: Record<HostId, { name: string; tone: "wan" | "qian" }> = {
   wanwan: { name: "万万", tone: "wan" },
   qianqian: { name: "千千", tone: "qian" },
-};
-
-export const CAT_PALETTE = {
-  wan: { ink: "#5c4a32", fur: "#eed9a8", iris: "#5c8f46", nose: "#cf8272", chest: "#f6ecd4" },
-  qian: { ink: "#2f3d4e", fur: "#9fb1c4", iris: "#5b7fb0", nose: "#b06a5c", chest: "#dbe4ee" },
 };
 
 /** 描边猫：耳朵压在头版之下，与头一体成剪影，不会飞。

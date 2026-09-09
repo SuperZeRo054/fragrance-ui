@@ -1,5 +1,11 @@
 /* BRAND 层（DESIGN.md §6.2）：猫是角色不是装饰。 */
 
+/** 双猫配色（BRAND 资产锚：万万=蓝金渐层绿眼，千千=重点色蓝眼） */
+export const CAT_PALETTE = {
+  wan: { ink: "#5c4a32", fur: "#eed9a8", iris: "#5c8f46", nose: "#cf8272", chest: "#f6ecd4" },
+  qian: { ink: "#2f3d4e", fur: "#9fb1c4", iris: "#5b7fb0", nose: "#b06a5c", chest: "#dbe4ee" },
+} as const;
+
 /* ---------------- 品牌标记：两位吉祥物（零位图，特征自真实猫抽象） ----------------
    cream = 奶油金渐层英短：奶油杏色密绒毛 · 橄榄绿大眼 · 粉鼻 · 白胸
    blue  = 蓝灰英短：蓝灰被毛 · 蓝宝石圆眼 · 奶油白围脖与口鼻

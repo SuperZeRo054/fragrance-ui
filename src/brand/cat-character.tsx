@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { CAT_PALETTE } from "../../demo/host";
+import { CAT_PALETTE } from "./cats";
 import "./cat-character.css";
 
 export type CatTemperament = "bold" | "shy";

@@ -36,6 +36,10 @@ LAB → CORE 禁止直通；晋升走：用例 → Design Intent → Visual Budg
 
 ## 使用
 
+```bash
+npm i fragrance-ui        # 宿主自备 react / react-dom（>=18）；three 为可选 peer
+```
+
 ```tsx
 import { SkinProvider, Button, Card } from "fragrance-ui";
 import "fragrance-ui/styles.css";
@@ -83,6 +87,16 @@ npm run check:golden   # 四个金样本路由 + Scene Hero 编排 + reduced-mot
 ```
 
 需要本地 preview 运行在 `:4173`（`npm run preview`）。
+
+## 发布
+
+```bash
+npm run build:lib    # dist/：ESM + CJS + 单一 CSS + 类型声明
+npm pack --dry-run   # 预览发布内容（约 27 个文件 / 64 kB）
+```
+
+`exports` 已配好：`.`（含 types/import/require）与 `./styles.css`。
+React / react-dom / three / 图标库均为 external，不进包。
 
 ## 本地开发
 

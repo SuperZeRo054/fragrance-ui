@@ -15,15 +15,19 @@ function Shell({ label, hint, state, htmlFor, children }: {
   );
 }
 
+type FieldProps = React.InputHTMLAttributes<HTMLInputElement> &
+  React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 export function TextField({ label, hint, state = "default", multiline, ...rest }: {
   label?: string; hint?: string; state?: FieldState; multiline?: boolean;
-} & React.InputHTMLAttributes<HTMLInputElement> & React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
+} & FieldProps) {
   const id = useId();
+  const props = rest as React.InputHTMLAttributes<HTMLInputElement> &
+    React.TextareaHTMLAttributes<HTMLTextAreaElement>;
   return (
     <Shell label={label} hint={hint} state={state} htmlFor={id}>
       {multiline
-        ? <textarea id={id} rows={4} {...rest as never} />
-        : <input id={id} {...rest as never} />}
+        ? <textarea id={id} rows={4} {...props} />
+        : <input id={id} {...props} />}
     </Shell>
   );
 }
