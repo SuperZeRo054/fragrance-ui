@@ -6,7 +6,7 @@ export function Spinner({ variant = "ring", size = 34, label }: {
   variant?: "ring" | "dots" | "bars" | "pulse"; size?: number; label?: string;
 }) {
   return (
-    <span className={`mui-spinner mui-spinner--${variant}`} style={{ width: size, height: size }}
+    <span className={`fui-spinner fui-spinner--${variant}`} style={{ width: size, height: size }}
       role="status" aria-label={label ?? "加载中"}>
       {variant === "dots" && <>{[0, 1, 2].map((i) => <i key={i} style={{ "--i": i } as React.CSSProperties} />)}</>}
       {variant === "bars" && <>{[0, 1, 2, 3].map((i) => <i key={i} style={{ "--i": i } as React.CSSProperties} />)}</>}
@@ -19,9 +19,9 @@ export function Progress({ value, label, showNum = true }: {
   value: number; label?: string; showNum?: boolean;
 }) {
   return (
-    <div className="mui-progress-row">
+    <div className="fui-progress-row">
       {label && <span className="lbl">{label}</span>}
-      <div className="mui-progress" role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={100}>
+      <div className="fui-progress" role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={100}>
         <i style={{ width: `${Math.min(100, Math.max(0, value))}%` }} />
       </div>
       {showNum && <output>{Math.round(value)}%</output>}
@@ -73,13 +73,13 @@ export function LazyImage({ src, alt = "", ratio = "16 / 10", style }: {
     return () => io.disconnect();
   }, []);
   return (
-    <div ref={wrap} className={`mui-lazy${loaded ? " loaded" : ""}`}
+    <div ref={wrap} className={`fui-lazy${loaded ? " loaded" : ""}`}
       style={{ aspectRatio: ratio, ...style }}>
       {shouldLoad && (
         <img src={src} alt={alt} loading="lazy" decoding="async"
           onLoad={() => setLoaded(true)} />
       )}
-      {!loaded && <span className="mui-lazy__shimmer" aria-hidden />}
+      {!loaded && <span className="fui-lazy__shimmer" aria-hidden />}
     </div>
   );
 }

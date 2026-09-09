@@ -1,5 +1,7 @@
 # Fragrance UI
 
+> ⚠️ 设计权威：`DESIGN.md`（宪法）+ `AGENTS.md`（Agent 工作规则）。能力分级 CORE / BRAND / CONTROLLED / LAB，Lab 默认禁入。历史 Demo 是能力目录，不是 Golden Sample。
+
 多皮肤主题引擎驱动的个人品牌 React 组件库。**一套结构，任意换皮。**
 吉祥物是两只猫：万万（蓝金渐层，管动效与 Agent 模块）× 千千（重点色，管基础组件与图标）——所有猫均为运行时内联 SVG，零位图零 emoji。定位：适合构建 Agent 服务与现代前端页面的 React UI 库。
 

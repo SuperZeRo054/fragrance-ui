@@ -1,5 +1,5 @@
+/* ⚠️ LAB 层（DESIGN.md §6.4）。 */
 import React, { useEffect, useRef, useState } from "react";
-import "./effects.css";
 
 /* ================= ThreeShapes：银色低多边形悬浮群（three.js，进视口才启动） =================
    场景适配：3D 适合 Hero / 沉浸式首屏 / 产品展示——一句话判断：需要"深度与光影"就上 Three。 */
@@ -78,7 +78,7 @@ export function ThreeShapes({ height = 320, className = "" }: { height?: number;
     };
   }, [height]);
   return (
-    <div ref={wrapRef} className={`mui-three-wrap ${className}`} style={{ height }}>
+    <div ref={wrapRef} className={`fui-three-wrap ${className}`} style={{ height }}>
       <canvas ref={canvasRef} aria-label="Three.js 银色多面体悬浮群" />
     </div>
   );
@@ -167,7 +167,7 @@ export function ParticleField({ height = 300, className = "" }: { height?: numbe
     };
   }, [height]);
   return (
-    <canvas ref={attach} className={`mui-particles ${className}`}
+    <canvas ref={attach} className={`fui-particles ${className}`}
       style={{ height }} aria-label="粒子网络交互场" />
   );
 }

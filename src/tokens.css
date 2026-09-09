@@ -1,5 +1,5 @@
 /* ==================================================================
-   Musée UI · Token Engine
+   Fragrance UI · Token Engine
    Layer 1 原语（形状/动效/字体，跨皮肤共享）
    Layer 2 皮肤语义（surface/text/accent… 整组换血）
    组件只允许消费 Layer 2 语义变量 —— 这是换肤能成立的唯一纪律。
@@ -7,17 +7,17 @@
 
 :root {
   /* Layer 1: 全局原语 */
-  --mui-radius-sm: 8px;
-  --mui-radius-md: 12px;
-  --mui-radius-lg: 18px;
-  --mui-radius-full: 999px;
-  --mui-ease-out: cubic-bezier(.22, 1, .36, 1);
-  --mui-ease-spring: cubic-bezier(.34, 1.56, .64, 1);
-  --mui-dur-fast: .25s;
-  --mui-dur-base: .35s;
-  --mui-dur-slow: .7s;
+  --fui-radius-sm: 8px;
+  --fui-radius-md: 12px;
+  --fui-radius-lg: 18px;
+  --fui-radius-full: 999px;
+  --fui-ease-out: cubic-bezier(.22, 1, .36, 1);
+  --fui-ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --fui-dur-fast: .25s;
+  --fui-dur-base: .35s;
+  --fui-dur-slow: .7s;
 
-  /* Layer 2 默认值 = musée 日间（防止无 skin 时裸奔） */
+  /* Layer 2 默认值 = fragrance 日间（防止无 skin 时裸奔） */
   /* 字体体系：英文 Apple SF · 中文思源黑 · 强调/签名 Caveat 手写 */
   --surface: #f4f0e8; --surface-raised: #ebe5d9; --surface-inset: rgba(26,23,18,.045);
   --text: #1a1712; --text-dim: #6d6555; --text-inverse: #f4f0e8;
@@ -81,4 +81,21 @@
 [data-font="kaiti"] {
   --font-display: "Kaiti SC", "STKaiti", "KaiTi", "Noto Serif SC", serif;
   --font-body: "Kaiti SC", "STKaiti", "KaiTi", "Noto Serif SC", serif;
+}
+
+/* ---------------- Core Extensions：间距 / 字阶 / 容器 / 海拔 / 控件高度 ----------------
+   结构性令牌，与皮肤无关（DESIGN.md Handoff Phase 3）。 */
+:root {
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --space-9: 96px; --space-10: 128px;
+  --text-xs: 11px; --text-sm: 12.5px; --text-base: 14px; --text-md: 15px;
+  --text-lg: 17px; --text-xl: 22px; --text-2xl: 28px;
+  --text-display: clamp(30px, 8vw, 64px);
+  --container-narrow: 720px; --container: 1100px; --container-wide: 1320px;
+  --elev-1: 0 2px 8px -2px rgba(10, 12, 16, .10);
+  --elev-2: 0 12px 32px -16px rgba(10, 12, 16, .18);
+  --elev-3: 0 30px 70px -24px rgba(10, 12, 16, .35);
+  --control-h-sm: 30px; --control-h-md: 38px; --control-h-lg: 46px;
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--accent) 40%, transparent);
 }

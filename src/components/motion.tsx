@@ -7,7 +7,7 @@ export function PageTransition({ pageKey, variant = "rise", children }: {
   pageKey: string | number; variant?: PageVariant; children: React.ReactNode;
 }) {
   return (
-    <div key={pageKey} className={`mui-pt mui-pt--${variant}`} data-page-key={pageKey}>
+    <div key={pageKey} className={`fui-pt fui-pt--${variant}`} data-page-key={pageKey}>
       {children}
     </div>
   );

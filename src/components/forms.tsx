@@ -7,10 +7,10 @@ function Shell({ label, hint, state, htmlFor, children }: {
   label?: string; hint?: string; state: FieldState; htmlFor: string; children: React.ReactNode;
 }) {
   return (
-    <div className={`mui-field mui-field--${state}`}>
+    <div className={`fui-field fui-field--${state}`}>
       {label && <label htmlFor={htmlFor}>{label}</label>}
       {children}
-      {hint && <p className={`mui-field__msg ${state}`}>{hint}</p>}
+      {hint && <p className={`fui-field__msg ${state}`}>{hint}</p>}
     </div>
   );
 }
@@ -44,7 +44,7 @@ export function Switch({ checked, onChange, label }: {
 }) {
   const id = useId();
   return (
-    <span className="mui-switch">
+    <span className="fui-switch">
       <input type="checkbox" id={id} checked={checked} onChange={(e) => onChange(e.target.checked)} />
       <label htmlFor={id} className="track" aria-hidden />
       {label && <label htmlFor={id} className="cap">{label}</label>}
@@ -57,7 +57,7 @@ export function Checkbox({ checked, onChange, label }: {
 }) {
   const id = useId();
   return (
-    <span className="mui-check">
+    <span className="fui-check">
       <input type="checkbox" id={id} checked={checked}
         onChange={(e) => onChange(e.target.checked)} />
       <label htmlFor={id}>{label}</label>
@@ -72,7 +72,7 @@ export function RadioGroup({ name, options, value, onChange }: {
   return (
     <span style={{ display: "inline-flex", gap: 22 }}>
       {options.map((o) => (
-        <span className="mui-check" key={o.value}>
+        <span className="fui-check" key={o.value}>
           <input type="radio" id={`${name}-${o.value}`} name={name}
             checked={value === o.value} onChange={() => onChange(o.value)} />
           <label htmlFor={`${name}-${o.value}`}>{o.label}</label>
@@ -87,7 +87,7 @@ export function RangeField({ label, value, min = 0, max = 100, suffix = "", onCh
   suffix?: string; onChange: (v: number) => void;
 }) {
   return (
-    <span className="mui-range">
+    <span className="fui-range">
       {label && <span className="lbl">{label}</span>}
       <input type="range" min={min} max={max} value={value}
         aria-label={label} onChange={(e) => onChange(+e.target.value)} />

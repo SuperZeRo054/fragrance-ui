@@ -39,9 +39,9 @@ export function StreamText({ text, cps = 26, startOnView = true, onDone, classNa
   }, [go, n, text, cps]);
   const done = n >= text.length;
   return (
-    <span ref={ref} className={`mui-stream${done ? " done" : ""} ${className}`}>
+    <span ref={ref} className={`fui-stream${done ? " done" : ""} ${className}`}>
       {text.slice(0, n)}
-      {!done && <i className="mui-stream__caret" aria-hidden />}
+      {!done && <i className="fui-stream__caret" aria-hidden />}
     </span>
   );
 }
@@ -49,9 +49,9 @@ export function StreamText({ text, cps = 26, startOnView = true, onDone, classNa
 /* ================= ThinkingText：思考态（扫光 + 呼吸点） ================= */
 export function ThinkingText({ label = "思考中", className = "" }: { label?: string; className?: string }) {
   return (
-    <span className={`mui-thinking ${className}`} role="status">
-      <span className="mui-thinking__label">{label}</span>
-      <span className="mui-thinking__dots" aria-hidden><i /><i /><i /></span>
+    <span className={`fui-thinking ${className}`} role="status">
+      <span className="fui-thinking__label">{label}</span>
+      <span className="fui-thinking__dots" aria-hidden><i /><i /><i /></span>
     </span>
   );
 }
@@ -91,7 +91,7 @@ export function TextScramble({ text, duration = 900, startOnView = true, classNa
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [go, text, duration]);
-  return <span ref={ref} className={`mui-scramble ${className}`}>{disp || "\u00A0"}</span>;
+  return <span ref={ref} className={`fui-scramble ${className}`}>{disp || "\u00A0"}</span>;
 }
 
 /* ================= TextRotate：文字轮换（等宽栈位，升起+去模糊切换） ================= */
@@ -105,7 +105,7 @@ export function TextRotate({ words, interval = 2600, className = "" }: {
     return () => clearInterval(id);
   }, [words.length, interval]);
   return (
-    <span className={`mui-rotate ${className}`}>
+    <span className={`fui-rotate ${className}`}>
       {words.map((w, k) => (
         <span key={k} className={k === i ? "on" : "off"} aria-hidden={k !== i}>{w}</span>
       ))}
@@ -119,23 +119,23 @@ export function AgentSteps({ steps, className = "" }: {
   steps: { label: string; detail?: string; status: AgentStepStatus }[]; className?: string;
 }) {
   return (
-    <ol className={`mui-steps ${className}`}>
+    <ol className={`fui-steps ${className}`}>
       {steps.map((s, i) => (
-        <li key={i} className={`mui-steps__item is-${s.status}`}>
-          <span className="mui-steps__node" aria-hidden>
-            {s.status === "running" && <i className="mui-steps__spin" />}
+        <li key={i} className={`fui-steps__item is-${s.status}`}>
+          <span className="fui-steps__node" aria-hidden>
+            {s.status === "running" && <i className="fui-steps__spin" />}
             {s.status === "done" && (
-              <svg className="mui-steps__check" viewBox="0 0 12 12"><path d="M2.2 6.4 5 9.1 9.8 3.2" /></svg>
+              <svg className="fui-steps__check" viewBox="0 0 12 12"><path d="M2.2 6.4 5 9.1 9.8 3.2" /></svg>
             )}
             {s.status === "error" && (
-              <svg className="mui-steps__cross" viewBox="0 0 12 12"><path d="M3.2 3.2l5.6 5.6M8.8 3.2 3.2 8.8" /></svg>
+              <svg className="fui-steps__cross" viewBox="0 0 12 12"><path d="M3.2 3.2l5.6 5.6M8.8 3.2 3.2 8.8" /></svg>
             )}
-            {s.status === "pending" && <i className="mui-steps__dot" />}
+            {s.status === "pending" && <i className="fui-steps__dot" />}
           </span>
-          <span className="mui-steps__body">
-            <span className="mui-steps__label">{s.label}</span>
+          <span className="fui-steps__body">
+            <span className="fui-steps__label">{s.label}</span>
             {s.detail && (s.status === "running" || s.status === "error") && (
-              <span className={`mui-steps__detail${s.status === "error" ? " err" : ""}`}>{s.detail}</span>
+              <span className={`fui-steps__detail${s.status === "error" ? " err" : ""}`}>{s.detail}</span>
             )}
           </span>
         </li>
@@ -158,19 +158,19 @@ export function ToolCallCard({ tool, args, status = "running", ms, result, class
   const shown = status === "running" ? (ms ?? live) : (ms ?? live);
   const stateText = { running: "RUNNING", done: "DONE", error: "ERROR" }[status];
   return (
-    <div className={`mui-tool is-${status} ${className}`}>
-      <div className="mui-tool__head">
-        <svg className="mui-tool__glyph" viewBox="0 0 16 16" aria-hidden>
+    <div className={`fui-tool is-${status} ${className}`}>
+      <div className="fui-tool__head">
+        <svg className="fui-tool__glyph" viewBox="0 0 16 16" aria-hidden>
           <path d="M5.5 4.5 2 8l3.5 3.5M10.5 4.5 14 8l-3.5 3.5" />
         </svg>
-        <span className="mui-tool__name">{tool}</span>
-        <span className="mui-tool__state">{stateText}</span>
+        <span className="fui-tool__name">{tool}</span>
+        <span className="fui-tool__state">{stateText}</span>
       </div>
-      <div className="mui-tool__body">
-        {args && <code className="mui-tool__args">{args}</code>}
-        <span className="mui-tool__meta">
-          {status !== "running" && result && <span className="mui-tool__result">{result}</span>}
-          <span className="mui-tool__ms">{shown >= 1000 ? `${(shown / 1000).toFixed(2)}s` : `${shown}ms`}</span>
+      <div className="fui-tool__body">
+        {args && <code className="fui-tool__args">{args}</code>}
+        <span className="fui-tool__meta">
+          {status !== "running" && result && <span className="fui-tool__result">{result}</span>}
+          <span className="fui-tool__ms">{shown >= 1000 ? `${(shown / 1000).toFixed(2)}s` : `${shown}ms`}</span>
         </span>
       </div>
     </div>
@@ -184,20 +184,20 @@ export function PromptBar({ value, onChange, onSubmit, placeholder = "给 Agent 
 }) {
   const canSend = !disabled && value.trim().length > 0;
   return (
-    <form className={`mui-prompt ${className}`}
+    <form className={`fui-prompt ${className}`}
       onSubmit={(e) => { e.preventDefault(); if (canSend) onSubmit?.(value.trim()); }}>
       {hints.length > 0 && (
-        <div className="mui-prompt__hints">
+        <div className="fui-prompt__hints">
           {hints.map((h) => (
             <button type="button" key={h} disabled={disabled}
               onClick={() => onChange?.(h)}>{h}</button>
           ))}
         </div>
       )}
-      <div className="mui-prompt__field mui-glass">
+      <div className="fui-prompt__field fui-glass">
         <input value={value} placeholder={placeholder} disabled={disabled}
           onChange={(e) => onChange?.(e.target.value)} aria-label="指令输入" />
-        <button type="submit" className="mui-prompt__send" disabled={!canSend} aria-label="发送指令">
+        <button type="submit" className="fui-prompt__send" disabled={!canSend} aria-label="发送指令">
           <svg viewBox="0 0 16 16" aria-hidden><path d="M2.5 8h10M8.5 3.8 12.8 8l-4.3 4.2" /></svg>
         </button>
       </div>
@@ -211,7 +211,7 @@ export function StatusDot({ status = "idle", label, className = "" }: {
 }) {
   const text = label ?? { idle: "空闲", busy: "执行中", done: "已完成", error: "异常" }[status];
   return (
-    <span className={`mui-status is-${status} ${className}`} role="status">
+    <span className={`fui-status is-${status} ${className}`} role="status">
       <i aria-hidden />{text}
     </span>
   );
@@ -222,7 +222,7 @@ export function VoiceBars({ n = 7, active = true, className = "" }: {
   n?: number; active?: boolean; className?: string;
 }) {
   return (
-    <span className={`mui-vbars${active ? " on" : ""} ${className}`} aria-hidden>
+    <span className={`fui-vbars${active ? " on" : ""} ${className}`} aria-hidden>
       {Array.from({ length: n }, (_, i) => (
         <i key={i} style={{
           "--lo": `${.18 + (i % 3) * .08}`,
@@ -257,9 +257,9 @@ export function LiveCounter({ base = 0, gain = 5, every = 750, unit = "", classN
     return () => { io.disconnect(); clearInterval(id); };
   }, [gain, every]);
   return (
-    <span ref={ref} className={`mui-live ${className}`}>
-      <span key={v} className="mui-live__num">{v}</span>
-      <span className="mui-live__unit">{unit}</span>
+    <span ref={ref} className={`fui-live ${className}`}>
+      <span key={v} className="fui-live__num">{v}</span>
+      <span className="fui-live__unit">{unit}</span>
     </span>
   );
 }

@@ -1,0 +1,61 @@
+/* LAB 层样式 */
+/* ===== GradientText ===== */
+.fui-gradient-text {
+  background: linear-gradient(90deg, var(--accent), var(--accent-soft),
+    var(--info, var(--accent)), var(--accent));
+  background-size: 300% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: fui-gslide 6s linear infinite; }
+@keyframes fui-gslide { to { background-position: 300% 0; } }
+
+/* ===== Marquee ===== */
+.fui-marquee { overflow: hidden; position: relative;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.fui-marquee__track { display: inline-flex; gap: 44px; white-space: nowrap;
+  padding-block: 6px; animation: fui-marquee var(--dur, 26s) linear infinite; }
+.fui-marquee.rev .fui-marquee__track { animation-direction: reverse; }
+.fui-marquee:hover .fui-marquee__track { animation-play-state: paused; }
+@keyframes fui-marquee { to { transform: translateX(-50%); } }
+.fui-marquee__item { display: inline-flex; align-items: center; gap: 10px;
+  font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); }
+
+/* ===== Tilt ===== */
+.fui-tilt { position: relative; transform-style: preserve-3d;
+  transition: transform .22s var(--fui-ease-out); will-change: transform; }
+.fui-tilt__glare { position: absolute; inset: 0; border-radius: inherit;
+  background: radial-gradient(320px circle at var(--gx,50%) var(--gy,50%),
+    rgba(255,255,255,.32), transparent 55%);
+  opacity: 0; transition: opacity .35s; pointer-events: none; }
+.fui-tilt:hover .fui-tilt__glare { opacity: 1; }
+
+/* ===== Beam（流光边框） ===== */
+@property --fui-beam-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.fui-beam { position: relative; overflow: hidden; border-radius: var(--fui-radius-lg);
+  background: var(--surface-raised); }
+.fui-beam::before { content: ""; position: absolute; inset: 0; border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(from var(--fui-beam-angle),
+    transparent 0%, var(--accent) 11%, var(--accent-soft) 16%, transparent 28%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: fui-beam 3.4s linear infinite; pointer-events: none; }
+@keyframes fui-beam { to { --fui-beam-angle: 360deg; } }
+.fui-beam > * { position: relative; }
+
+/* ===== Aurora ===== */
+.fui-aurora { position: relative; overflow: hidden; isolation: isolate;
+  border-radius: var(--fui-radius-lg); background: var(--surface); }
+.fui-aurora__a, .fui-aurora__b { position: absolute; border-radius: 50%;
+  filter: blur(64px); opacity: .55; z-index: -1; }
+.fui-aurora__a { width: 62%; height: 78%; left: -12%; top: -18%;
+  background: radial-gradient(circle, var(--accent-soft), transparent 68%);
+  animation: fui-aurora-a 16s ease-in-out infinite alternate; }
+.fui-aurora__b { width: 56%; height: 70%; right: -10%; bottom: -20%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--info) 55%, transparent), transparent 66%);
+  animation: fui-aurora-b 21s ease-in-out infinite alternate; }
+@keyframes fui-aurora-a { to { transform: translate(26%, 20%) scale(1.15); } }
+@keyframes fui-aurora-b { to { transform: translate(-22%, -16%) scale(1.1); } }
+.fui-aurora__content { position: relative; }
+

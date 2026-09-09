@@ -264,7 +264,7 @@ export function CataasEgg() {
   return (
     <div className="lab-card">
       <div className="lab-row">
-        <Button variant="glass" size="sm" onClick={() => { setErr(false); setSrc(`https://cataas.com/cat?${Date.now()}`); }}>
+        <Button variant="outline" size="sm" onClick={() => { setErr(false); setSrc(`https://cataas.com/cat?${Date.now()}`); }}>
           今日随机猫猫
         </Button>
         <Badge tone="info">外链彩蛋 · cataas.com</Badge>

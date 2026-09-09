@@ -26,9 +26,9 @@ export function TypingText({ text, speed = 45, startOnView = true, keepCursor = 
   }, [go, n, text, speed]);
   const done = n >= text.length;
   return (
-    <span ref={ref} className={`mui-typing ${className}`}>
+    <span ref={ref} className={`fui-typing ${className}`}>
       {text.slice(0, n)}
-      {(keepCursor || !done) && <i className="mui-typing__cursor" aria-hidden />}
+      {(keepCursor || !done) && <i className="fui-typing__cursor" aria-hidden />}
     </span>
   );
 }
@@ -48,7 +48,7 @@ export function TextReveal({ text, stagger = 26, delay = 0, className = "" }: {
     return () => io.disconnect();
   }, []);
   return (
-    <span ref={ref} className={`mui-textreveal ${inView ? "in" : ""} ${className}`} aria-label={text}>
+    <span ref={ref} className={`fui-textreveal ${inView ? "in" : ""} ${className}`} aria-label={text}>
       {[...text].map((ch, i) => (
         <span key={i} aria-hidden
           style={{ transitionDelay: `${delay + i * stagger}ms` }}>
@@ -56,25 +56,6 @@ export function TextReveal({ text, stagger = 26, delay = 0, className = "" }: {
         </span>
       ))}
     </span>
-  );
-}
-
-/* ================= GradientText：流光渐变字 ================= */
-export function GradientText({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <span className={`mui-gradient-text ${className}`}>{children}</span>;
-}
-
-/* ================= Marquee：无限跑马灯（hover 暂停） ================= */
-export function Marquee({ items, speed = 26, reverse = false }: {
-  items: React.ReactNode[]; speed?: number; reverse?: boolean;
-}) {
-  const row = [...items, ...items];
-  return (
-    <div className={`mui-marquee${reverse ? " rev" : ""}`} style={{ "--dur": `${speed}s` } as React.CSSProperties}>
-      <div className="mui-marquee__track">
-        {row.map((it, i) => <span className="mui-marquee__item" key={i} aria-hidden={i >= items.length}>{it}</span>)}
-      </div>
-    </div>
   );
 }
 
@@ -93,45 +74,9 @@ export function Magnetic({ children, strength = .28, max = 9 }: {
   };
   const onLeave = () => { if (ref.current) ref.current.style.transform = ""; };
   return (
-    <span ref={ref} className="mui-magnetic" onMouseMove={onMove} onMouseLeave={onLeave}>
+    <span ref={ref} className="fui-magnetic" onMouseMove={onMove} onMouseLeave={onLeave}>
       {children}
     </span>
   );
 }
 
-/* ================= Tilt：3D 倾斜卡（跟随光标 + 高光） ================= */
-export function Tilt({ children, max = 8, className = "" }: {
-  children: React.ReactNode; max?: number; className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const onMove = (e: React.MouseEvent) => {
-    const el = ref.current; if (!el) return;
-    const r = el.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
-    el.style.transform = `perspective(800px) rotateX(${(py - .5) * -2 * max}deg) rotateY(${(px - .5) * 2 * max}deg)`;
-    el.style.setProperty("--gx", `${px * 100}%`);
-    el.style.setProperty("--gy", `${py * 100}%`);
-  };
-  const onLeave = () => { if (ref.current) ref.current.style.transform = ""; };
-  return (
-    <div ref={ref} className={`mui-tilt ${className}`} onMouseMove={onMove} onMouseLeave={onLeave}>
-      {children}
-      <i className="mui-tilt__glare" aria-hidden />
-    </div>
-  );
-}
-
-/* ================= Beam：流光边框（conic 扫边） ================= */
-export function Beam({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <div className={`mui-beam ${className}`}>{children}</div>;
-}
-
-/* ================= Aurora：极光氛围背景 ================= */
-export function Aurora({ children, className = "" }: { children?: React.ReactNode; className?: string }) {
-  return (
-    <div className={`mui-aurora ${className}`}>
-      <i className="mui-aurora__a" aria-hidden /><i className="mui-aurora__b" aria-hidden />
-      <div className="mui-aurora__content">{children}</div>
-    </div>
-  );
-}

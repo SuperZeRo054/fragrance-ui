@@ -1,36 +1,36 @@
-.mui-backdrop { position: fixed; inset: 0; z-index: 200; background: rgba(13,11,8,.55);
+.fui-backdrop { position: fixed; inset: 0; z-index: 200; background: rgba(13,11,8,.55);
   backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px);
   display: flex; align-items: center; justify-content: center; padding: 24px;
-  animation: mui-fade .35s var(--mui-ease-out); }
-@keyframes mui-fade { from { opacity: 0; } }
+  animation: fui-fade .35s var(--fui-ease-out); }
+@keyframes fui-fade { from { opacity: 0; } }
 
-.mui-modal { background: var(--surface); color: var(--text); border-radius: var(--mui-radius-lg);
+.fui-modal { background: var(--surface); color: var(--text); border-radius: var(--fui-radius-lg);
   width: 100%; padding: 36px; position: relative; max-height: 88vh; overflow-y: auto;
-  box-shadow: 0 40px 80px rgba(0,0,0,.35); animation: mui-rise .5s var(--mui-ease-out); }
-@keyframes mui-rise { from { opacity: 0; transform: translateY(16px) scale(.96); } to { opacity: 1; transform: none; } }
-.mui-modal__close { position: absolute; top: 14px; right: 16px; width: 36px; height: 36px;
+  box-shadow: 0 40px 80px rgba(0,0,0,.35); animation: fui-rise .5s var(--fui-ease-out); }
+@keyframes fui-rise { from { opacity: 0; transform: translateY(16px) scale(.96); } to { opacity: 1; transform: none; } }
+.fui-modal__close { position: absolute; top: 14px; right: 16px; width: 36px; height: 36px;
   border-radius: 50%; border: 0; background: none; color: var(--text); font-size: 20px;
-  cursor: pointer; transition: transform var(--mui-dur-base), background var(--mui-dur-base); }
-.mui-modal__close:hover { background: var(--surface-raised); transform: rotate(90deg); }
-.mui-modal__title { font-family: var(--font-display); font-weight: 300;
+  cursor: pointer; transition: transform var(--fui-dur-base), background var(--fui-dur-base); }
+.fui-modal__close:hover { background: var(--surface-raised); transform: rotate(90deg); }
+.fui-modal__title { font-family: var(--font-display); font-weight: 300;
   font-size: 28px; letter-spacing: .04em; margin: 6px 0 14px; }
-.mui-modal p { font-size: 14px; color: var(--text-dim); line-height: 1.85; }
-.mui-modal__actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 26px; flex-wrap: wrap; }
+.fui-modal p { font-size: 14px; color: var(--text-dim); line-height: 1.85; }
+.fui-modal__actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 26px; flex-wrap: wrap; }
 
-.mui-toast-region { position: fixed; left: 50%; bottom: 30px; translate: -50% 0; z-index: 300;
+.fui-toast-region { position: fixed; left: 50%; bottom: 30px; translate: -50% 0; z-index: 300;
   display: grid; gap: 8px; pointer-events: none; }
-.mui-toast { background: var(--text); color: var(--surface); font-size: 13px; letter-spacing: .08em;
-  padding: 12px 26px; border-radius: var(--mui-radius-full);
-  box-shadow: 0 14px 34px rgba(0,0,0,.3); animation: mui-toast-in .45s var(--mui-ease-out); text-align: center; }
-@keyframes mui-toast-in { from { opacity: 0; transform: translateY(18px) scale(.95); } }
+.fui-toast { background: var(--text); color: var(--surface); font-size: 13px; letter-spacing: .08em;
+  padding: 12px 26px; border-radius: var(--fui-radius-full);
+  box-shadow: 0 14px 34px rgba(0,0,0,.3); animation: fui-toast-in .45s var(--fui-ease-out); text-align: center; }
+@keyframes fui-toast-in { from { opacity: 0; transform: translateY(18px) scale(.95); } }
 
-.mui-lightbox__img { width: 100%; border-radius: var(--mui-radius-md); display: block; }
-.mui-lightbox__cap { margin-top: 14px !important; text-align: center;
+.fui-lightbox__img { width: 100%; border-radius: var(--fui-radius-md); display: block; }
+.fui-lightbox__cap { margin-top: 14px !important; text-align: center;
   font-family: var(--font-display); font-style: italic; font-size: 14.5px; }
 
 /* 抖动：弹簧衰减式 —— 幅度递减 + 微倾角，段间缓动平滑不生硬 */
-.mui-shake { animation: mui-shake .62s cubic-bezier(.36,.07,.19,.97) both; }
-@keyframes mui-shake {
+.fui-shake { animation: fui-shake .62s cubic-bezier(.36,.07,.19,.97) both; }
+@keyframes fui-shake {
   0% { transform: translateX(0) rotate(0deg); }
   15% { transform: translateX(-6px) rotate(-.7deg); }
   30% { transform: translateX(5px) rotate(.55deg); }
@@ -42,8 +42,8 @@
 
 /* ---------- 移动端：Modal 收紧 ---------- */
 @media (max-width: 640px) {
-  .mui-backdrop { padding: 14px; }
-  .mui-modal { padding: 26px 22px; border-radius: var(--mui-radius-md); }
-  .mui-modal__title { font-size: 23px; }
-  .mui-modal__actions { gap: 10px; }
+  .fui-backdrop { padding: 14px; }
+  .fui-modal { padding: 26px 22px; border-radius: var(--fui-radius-md); }
+  .fui-modal__title { font-size: 23px; }
+  .fui-modal__actions { gap: 10px; }
 }

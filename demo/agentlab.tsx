@@ -154,7 +154,7 @@ export function AgentLab() {
                       ms={toolStatus === "done" ? 1428 : undefined} result={cur.result} />
                   )}
                   {(phase === "answer" || phase === "done") && (
-                    <div className="agent-answer mui-glass">
+                    <div className="agent-answer fui-glass">
                       <StreamText key={runN.current} text={cur.answer} startOnView={false}
                         onDone={() => setPhase((p) => (p === "answer" ? "done" : p))} />
                       {phase === "done" && (

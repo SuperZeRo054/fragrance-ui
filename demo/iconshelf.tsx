@@ -154,7 +154,7 @@ export function IconWardrobe() {
               ...REMOTE_SET_SPECS.map((s) => ({ id: s.id as string, label: s.label }))]}
             value={set} onChange={(v) => setSet(v as WardSet)} />
         </div>
-        <div className="mini-app mui-glass">
+        <div className="mini-app fui-glass">
           <div className="mini-app__bar">
             <WardIcon name="home" set={set} size={18} />
             <b>Agent 工作台</b>

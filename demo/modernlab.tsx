@@ -36,7 +36,7 @@ export function ModernEffects() {
             <span className="cap" style={{ fontSize: 10, letterSpacing: ".22em", textTransform: "uppercase", color: "var(--accent)" }}>Magnetic + Glass</span>
             <div style={{ display: "flex", gap: 18, justifyContent: "center", padding: "26px 0 10px" }}>
               <Magnetic><Button>靠我近点</Button></Magnetic>
-              <Magnetic strength={.4}><Button variant="glass">再近点</Button></Magnetic>
+              <Magnetic strength={.4}><Button variant="outline">再近点</Button></Magnetic>
             </div>
             <p className="lab-note">磁吸：光标进入时子元素被「吸」过去，离开弹簧回位。适合主 CTA。</p>
           </div>
@@ -52,7 +52,7 @@ export function ModernEffects() {
         </Reveal>
         <Reveal delay={160}>
           <Aurora className="aurora-demo">
-            <span className="mui-hand">Aurora background</span>
+            <span className="fui-hand">Aurora background</span>
             <p style={{ fontSize: 14, color: "var(--text-dim)", marginTop: 8 }}>
               双极光斑 blur(64px) 缓慢游走——Hero 区的氛围担当。</p>
           </Aurora>

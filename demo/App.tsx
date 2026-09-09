@@ -136,10 +136,10 @@ function Atoms() {
           <Button>主要操作</Button>
           <Button variant="outline">描边次级</Button>
           <Button variant="ghost">软底款</Button>
-          <Button variant="glass">毛玻璃款</Button>
+          <Button variant="outline">毛玻璃款</Button>
           <Button variant="danger">危险</Button>
           <Button size="sm" loading>Loading</Button>
-          <Button variant="glass" size="sm" disabled>禁用</Button>
+          <Button variant="outline" size="sm" disabled>禁用</Button>
         </div>
       </Reveal>
       <Reveal delay={120}>
@@ -164,7 +164,7 @@ function Atoms() {
               悬停这枚词
             </span>
           </Tooltip>
-          <Button variant="glass" size="sm" onClick={() => toast("轻提示已送达")}>触发 Toast</Button>
+          <Button variant="outline" size="sm" onClick={() => toast("轻提示已送达")}>触发 Toast</Button>
         </div>
       </Reveal>
     </section>
@@ -348,10 +348,10 @@ function RouteLab() {
             onClick={() => { setView("gallery"); }}>陈列视图</Button>
           <Button variant={view === "essay" ? "primary" : "outline"}
             onClick={() => { setView("essay"); }}>文章视图</Button>
-          <Button variant="glass" onClick={() => viewNavigate("#loading-lab")}>
+          <Button variant="outline" onClick={() => viewNavigate("#loading-lab")}>
             锚点跳转 · View Transition
           </Button>
-          <Button variant="glass" onClick={() => viewNavigate("#top")}>过渡回顶</Button>
+          <Button variant="outline" onClick={() => viewNavigate("#top")}>过渡回顶</Button>
         </div>
       </Reveal>
       <div style={{ marginTop: 30 }}>
@@ -373,7 +373,7 @@ function RouteLab() {
               <p style={{ color: "var(--text-dim)", fontSize: 15 }}>
                 排版的第一原则不是对齐，是呼吸。猫趴在窗台上之所以好看，是因为它周围什么都没有——
                 没有杂物，没有装饰，没有多余的家具。留白不是空，是把所有注意力让给你的主角。</p>
-              <span className="mui-hand" style={{ fontSize: 27, color: "var(--accent)", display: "inline-block", marginTop: 14 }}>
+              <span className="fui-hand" style={{ fontSize: 27, color: "var(--accent)", display: "inline-block", marginTop: 14 }}>
                 — the two cats, on negative space
               </span>
             </article>
@@ -415,10 +415,10 @@ function LoadingLab() {
       <Reveal delay={160}>
         <div style={{ position: "relative" }}>
           <LazyImage src={"data:image/svg+xml;charset=utf-8," + frgSill} ratio="16 / 10" alt="窗台双猫 · GPT 生图" />
-          <div className="mui-glass glass-float" style={{ position: "absolute", left: 18, bottom: 18,
+          <div className="fui-glass glass-float" style={{ position: "absolute", left: 18, bottom: 18,
             padding: "14px 20px", display: "flex", gap: 16, alignItems: "center" }}>
-            <span className="mui-hand" style={{ fontSize: 24, color: "var(--text)" }}>Live by the two cats</span>
-            <Button variant="glass" size="sm">进入直播</Button>
+            <span className="fui-hand" style={{ fontSize: 24, color: "var(--text)" }}>Live by the two cats</span>
+            <Button variant="outline" size="sm">进入直播</Button>
           </div>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 22, marginTop: 22 }}>
@@ -451,7 +451,7 @@ function App() {
         <header style={{ position: "sticky", top: 0, zIndex: 50, display: "flex", alignItems: "center",
           justifyContent: "space-between", padding: "14px 28px", background: "color-mix(in srgb, var(--surface) 88%, transparent)",
           backdropFilter: "blur(12px)", borderBottom: "1px solid var(--line)" }}>
-          <a href="#" className="mui-kicker" style={{ textDecoration: "none", fontSize: 13 }}>FRAGRANCE UI</a>
+          <a href="#" className="fui-kicker" style={{ textDecoration: "none", fontSize: 13 }}>FRAGRANCE UI</a>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <ThemeConsole />
             <NavDock />

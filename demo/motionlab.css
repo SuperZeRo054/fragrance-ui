@@ -6,13 +6,13 @@
 .lab-tag { font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
   color: var(--accent); border: 1px solid var(--accent-soft); border-radius: 999px; padding: 2px 10px; font-weight: 500; }
 .lab-card { background: var(--surface-raised); border: 1px solid var(--line);
-  border-radius: var(--mui-radius-lg); padding: 28px 26px; }
+  border-radius: var(--fui-radius-lg); padding: 28px 26px; }
 .lab-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
 .lab-note { font-size: 12.5px; color: var(--text-dim); margin-top: 12px; line-height: 1.8; }
 
 /* A. 状态机猫 */
 .state-cat-box { position: relative; display: inline-block; cursor: pointer;
-  background: var(--surface-inset); border-radius: var(--mui-radius-md); padding: 8px; }
+  background: var(--surface-inset); border-radius: var(--fui-radius-md); padding: 8px; }
 .state-cat-box svg { overflow: visible; }
 .state-badge { position: absolute; top: 12px; right: 12px; font-size: 10px;
   letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
@@ -25,7 +25,7 @@
   animation: cat-blink 3.2s infinite; }
 @keyframes cat-blink { 0%,86%,100% { transform: scaleY(1); } 90% { transform: scaleY(.05); } 94% { transform: scaleY(1); } }
 .state-cat .cat-ear-l, .state-cat .cat-ear-r { transform-box: fill-box;
-  transform-origin: 50% 100%; transition: transform .45s var(--mui-ease-spring); }
+  transform-origin: 50% 100%; transition: transform .45s var(--fui-ease-spring); }
 .state-cat.st-alert .cat-ear-l { transform-origin: 74% 96%; transform: rotate(-15deg); }
 .state-cat.st-alert .cat-ear-r { transform-origin: 26% 96%; transform: rotate(15deg); }
 .state-cat.st-groom .cat-tail { animation-duration: .9s; }
@@ -46,7 +46,7 @@ svg.state-cat { animation: cat-breathe 3.4s ease-in-out infinite; }
   background: linear-gradient(90deg, var(--accent), var(--accent-soft));
   transform-origin: 0 50%; }
 .sd-track { display: grid; gap: 18px; padding: 22px 4px; }
-.sd-card { border: 1px solid var(--line); border-radius: var(--mui-radius-md);
+.sd-card { border: 1px solid var(--line); border-radius: var(--fui-radius-md);
   padding: 20px 22px; font-size: 15px; background: var(--surface);
   display: flex; align-items: center; gap: 14px; }
 .sd-card b { font-family: var(--font-display); font-weight: 600;
@@ -62,7 +62,7 @@ svg.state-cat { animation: cat-breathe 3.4s ease-in-out infinite; }
 
 /* D. 爪印路径 */
 .paw-track { position: relative; height: 240px; overflow: hidden;
-  border-radius: var(--mui-radius-md); background: var(--surface-inset); }
+  border-radius: var(--fui-radius-md); background: var(--surface-inset); }
 .paw-guide { position: absolute; inset: 0;
   background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='240'%3E%3Cpath d='M20,200 C140,30 280,230 420,70 S600,190 780,60' fill='none' stroke='%23a8894f30' stroke-width='2' stroke-dasharray='6 8'/%3E%3C/svg%3E");
   background-size: 100% 100%; }
@@ -78,15 +78,15 @@ svg.state-cat { animation: cat-breathe 3.4s ease-in-out infinite; }
 }
 
 /* E. 雾面着色器 */
-.shader-wrap { border-radius: var(--mui-radius-md); overflow: hidden; line-height: 0; }
+.shader-wrap { border-radius: var(--fui-radius-md); overflow: hidden; line-height: 0; }
 .shader-wrap canvas { width: 100%; height: 280px; display: block; }
 
 /* F. rough */
 .rough-box { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; min-height: 180px; }
-.rough-box canvas { background: var(--surface); border-radius: var(--mui-radius-md); }
+.rough-box canvas { background: var(--surface); border-radius: var(--fui-radius-md); }
 
 /* G. mesh 渐变面板 */
-.mesh-panel { height: 210px; border-radius: var(--mui-radius-md);
+.mesh-panel { height: 210px; border-radius: var(--fui-radius-md);
   background:
     radial-gradient(60% 90% at 18% 22%, color-mix(in srgb, var(--accent-soft) 55%, transparent), transparent 60%),
     radial-gradient(50% 80% at 82% 30%, #cdd6df, transparent 65%),
@@ -101,8 +101,8 @@ svg.state-cat { animation: cat-breathe 3.4s ease-in-out infinite; }
 
 /* H. cataas */
 .cataas-img { display: block; width: 100%; max-width: 320px; aspect-ratio: 4/3;
-  object-fit: cover; border-radius: var(--mui-radius-md); margin-top: 16px;
-  animation: mui-fade-up .6s var(--mui-ease-out); }
+  object-fit: cover; border-radius: var(--fui-radius-md); margin-top: 16px;
+  animation: fui-fade-up .6s var(--fui-ease-out); }
 
 @media (max-width: 640px) {
   .lab-grid { grid-template-columns: 1fr; }

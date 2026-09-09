@@ -25,7 +25,7 @@
 
 .art-stage { display: grid; grid-template-columns: 1.5fr .9fr; gap: 28px;
   margin-top: 42px; align-items: stretch; }
-.art-canvas { position: relative; border-radius: var(--mui-radius-lg); overflow: hidden;
+.art-canvas { position: relative; border-radius: var(--fui-radius-lg); overflow: hidden;
   border: 1px solid var(--line); background: #ece7df;
   box-shadow: 0 34px 64px -34px rgba(10, 12, 16, .35); }
 .art-canvas svg { display: block; width: 100%; height: auto; }
@@ -35,8 +35,8 @@
 .plaque-wrap { display: flex; flex-direction: column; gap: 16px; }
 .plaque { flex: 1; position: relative; overflow: hidden;
   background: var(--surface-raised); border: 1px solid var(--line);
-  border-radius: var(--mui-radius-md); padding: 24px 26px 18px;
-  animation: plaque-in .6s var(--mui-ease-out) both; }
+  border-radius: var(--fui-radius-md); padding: 24px 26px 18px;
+  animation: plaque-in .6s var(--fui-ease-out) both; }
 @keyframes plaque-in { from { opacity: 0; transform: translateY(12px); } }
 .plaque::before { content: ""; position: absolute; top: 0; left: 26px; right: 26px; height: 3px;
   background: linear-gradient(90deg, var(--mv-accent), transparent); }

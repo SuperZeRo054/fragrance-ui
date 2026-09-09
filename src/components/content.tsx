@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CatMark } from "./atoms";
+import { CatMark } from "../brand/cats";
 import "./content.css";
 
 /* ---------------- Card ---------------- */
@@ -8,15 +8,15 @@ export function Card({ media, kicker, title, subtitle, footer, onClick, interact
   subtitle?: string; footer?: React.ReactNode; onClick?: () => void; interactive?: boolean;
 }) {
   return (
-    <article className={`mui-card${interactive ? " mui-card--hot" : ""}`}
+    <article className={`fui-card${interactive ? " fui-card--hot" : ""}`}
       onClick={onClick} tabIndex={onClick ? 0 : undefined}
       onKeyDown={onClick ? (e) => e.key === "Enter" && onClick() : undefined}>
-      {media && <div className="mui-card__media">{media}</div>}
-      <div className="mui-card__meta">
-        {kicker && <div className="mui-card__era">{kicker}</div>}
+      {media && <div className="fui-card__media">{media}</div>}
+      <div className="fui-card__meta">
+        {kicker && <div className="fui-card__era">{kicker}</div>}
         <h4>{title}</h4>
-        {subtitle && <p className="mui-card__sub">{subtitle}</p>}
-        {footer && <div className="mui-card__foot">{footer}</div>}
+        {subtitle && <p className="fui-card__sub">{subtitle}</p>}
+        {footer && <div className="fui-card__foot">{footer}</div>}
       </div>
     </article>
   );
@@ -28,8 +28,8 @@ export function Table<T extends Record<string, unknown>>({ columns, rows, rowKey
   columns: Col<T>[]; rows: T[]; rowKey: (r: T) => string; onRowClick?: (r: T) => void;
 }) {
   return (
-    <div className="mui-tablewrap">
-      <table className="mui-table">
+    <div className="fui-tablewrap">
+      <table className="fui-table">
         <thead><tr>{columns.map((c) => (
           <th key={c.key} style={{ textAlign: c.align ?? "left" }}>{c.label}</th>))}</tr></thead>
         <tbody>
@@ -58,12 +58,12 @@ export function Tabs({ items, variant = "underline" }: {
   if (variant === "steps") {
     return (
       <div>
-        <div className="mui-tabs mui-tabs--steps" role="tablist">
+        <div className="fui-tabs fui-tabs--steps" role="tablist">
           {items.map((it, i) => (
             <React.Fragment key={it.id}>
-              {i > 0 && <i className={`mui-step-line${i <= activeIdx ? " done" : ""}`} aria-hidden />}
+              {i > 0 && <i className={`fui-step-line${i <= activeIdx ? " done" : ""}`} aria-hidden />}
               <button role="tab" aria-selected={active === it.id}
-                className={`mui-step${active === it.id ? " active" : ""}${i < activeIdx ? " done" : ""}`}
+                className={`fui-step${active === it.id ? " active" : ""}${i < activeIdx ? " done" : ""}`}
                 onClick={() => setActive(it.id)}>
                 <b className="no">{i < activeIdx ? (
                   <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden>
@@ -77,21 +77,21 @@ export function Tabs({ items, variant = "underline" }: {
           ))}
         </div>
         {items.map((it) => active === it.id && (
-          <div key={it.id} role="tabpanel" className="mui-tabpanel">{it.content}</div>))}
+          <div key={it.id} role="tabpanel" className="fui-tabpanel">{it.content}</div>))}
       </div>
     );
   }
   return (
     <div>
-      <div className="mui-tabs" role="tablist">
+      <div className="fui-tabs" role="tablist">
         {items.map((it) => (
           <button key={it.id} role="tab" aria-selected={active === it.id}
-            className={`mui-tab${active === it.id ? " active" : ""}`} onClick={() => setActive(it.id)}>
+            className={`fui-tab${active === it.id ? " active" : ""}`} onClick={() => setActive(it.id)}>
             {it.label}
           </button>))}
       </div>
       {items.map((it) => active === it.id && (
-        <div key={it.id} role="tabpanel" className="mui-tabpanel">{it.content}</div>))}
+        <div key={it.id} role="tabpanel" className="fui-tabpanel">{it.content}</div>))}
     </div>
   );
 }
@@ -102,12 +102,12 @@ export function Accordion({ items, defaultOpen = -1 }: {
 }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div className="mui-acc">
+    <div className="fui-acc">
       {items.map((it, i) => (
         <details key={i} open={open === i} onToggle={(e) =>
           (e.target as HTMLDetailsElement).open && setOpen(i)}>
           <summary>{it.q}<span className="plus">＋</span></summary>
-          <div className="mui-acc__body">{it.a}</div>
+          <div className="fui-acc__body">{it.a}</div>
         </details>))}
     </div>
   );
@@ -123,7 +123,7 @@ export function Pagination({ page, total, onChange }: {
     else if (nums[nums.length - 1] !== "…") nums.push("…");
   }
   return (
-    <nav className="mui-pagi" aria-label="分页">
+    <nav className="fui-pagi" aria-label="分页">
       <button disabled={page <= 1} onClick={() => onChange(page - 1)}>‹</button>
       {nums.map((n, i) => n === "…"
         ? <span key={`e${i}`} className="dots">…</span>
@@ -139,7 +139,7 @@ export function EmptyState({ icon, title, desc }: {
   icon?: React.ReactNode; title: string; desc?: string;
 }) {
   return (
-    <div className="mui-empty">
+    <div className="fui-empty">
       <span className="ico">{icon ?? <CatMark tone="blue" size={38} />}</span>
       <strong>{title}</strong>
       {desc && <p>{desc}</p>}
@@ -151,7 +151,7 @@ export function Skeleton({ lines = 3, rect = false }: { lines?: number; rect?: b
   return (
     <div aria-hidden>
       {Array.from({ length: rect ? 1 : lines }).map((_, i) => (
-        <div key={i} className={`mui-skeleton ${rect ? "rect" : "line"}`}
+        <div key={i} className={`fui-skeleton ${rect ? "rect" : "line"}`}
           style={rect ? undefined : { width: `${100 - (i % 3) * 12}%` }} />
       ))}
     </div>

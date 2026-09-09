@@ -37,7 +37,7 @@ export function HScroll({ children, className = "", style }: {
   };
 
   return (
-    <div ref={ref} className={`mui-hscroll ${className}`} style={style}
+    <div ref={ref} className={`fui-hscroll ${className}`} style={style}
       onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up}
       onDragStart={(e) => e.preventDefault()}
       onClickCapture={clickCapture}>
