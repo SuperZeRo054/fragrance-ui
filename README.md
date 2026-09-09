@@ -63,7 +63,7 @@ import "fragrance-ui/styles.css";
 基础动效：TypingText · TextReveal · PageTransition · viewNavigate
 
 **BRAND**
-CatMark · CatFull · CatCharacter（指针邻近驱动的状态机：idle/notice/watch/curious/interact/return）
+CatMark · CatFull · CatCharacter + catMachine（XState v5 状态机：idle/notice/watch/curious/interact/return，纯逻辑可单测）
 
 **CONTROLLED**
 SharedLightbox（Gallery → Detail 共享元素过渡）· Magnetic · CountUp · Glass Surface（`.fui-glass`）

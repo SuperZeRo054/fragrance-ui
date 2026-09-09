@@ -17,7 +17,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // 宿主依赖不进包：React / three / 图标库由使用方提供
-      external: ["react", "react-dom", "react/jsx-runtime", "three", "@phosphor-icons/react"],
+      external: ["react", "react-dom", "react/jsx-runtime", "three", "@phosphor-icons/react", "xstate"],
       output: {
         assetFileNames: (info) =>
           info.name && info.name.endsWith(".css") ? "fragrance-ui.css" : "assets/[name][extname]",

@@ -1,23 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { CAT_PALETTE } from "./cats";
+import { createActor } from "xstate";
+import { catMachine, type CatState, type CatTemperament } from "./cat-machine";
 import "./cat-character.css";
+import { CAT_PALETTE } from "./cats";
 
-export type CatTemperament = "bold" | "shy";
-type State = "idle" | "notice" | "watch" | "curious" | "interact" | "return";
-
-const TEMPO: Record<CatTemperament, { notice: number; watch: number; lean: number }> = {
-  bold: { notice: 380, watch: 190, lean: 1 },   // 万万：人来疯，凑近
-  shy: { notice: 300, watch: 150, lean: -1 },   // 千千：慢热，微微后仰
-};
-const STATE_LABEL: Record<State, string> = {
-  idle: "idle", notice: "notice", watch: "watch", curious: "curious",
-  interact: "interact", return: "return",
-};
-
-/** BRAND · M02 Character State Machine（DESIGN.md §16）。
- *  状态由指针邻近度驱动：idle → notice（竖耳）→ watch（目光跟随）→
- *  curious（歪头）→ interact（点击，眯眼）→ return → idle。
- *  两只猫 temperament 不同：bold 凑近、shy 后仰，避免同频同动作。 */
+/** 描边猫角色：视觉与类名保持稳定，状态由 XState actor 驱动。 */
 export function CatCharacter({ tone = "wan", temperament = "bold", width = 150, showState = false }: {
   tone?: "wan" | "qian"; temperament?: CatTemperament; width?: number; showState?: boolean;
 }) {
@@ -26,90 +13,61 @@ export function CatCharacter({ tone = "wan", temperament = "bold", width = 150, 
   const svgRef = useRef<SVGSVGElement>(null);
   const headRef = useRef<SVGGElement>(null);
   const pupilRef = useRef<SVGGElement>(null);
-  const [state, setState] = useState<State>("idle");
-  const st = useRef({ state: "idle" as State, px: 0, py: 0, watchSince: 0,
-    interactUntil: 0, absentSince: 0, raf: 0 });
+  const [state, setState] = useState<CatState>("idle");
 
   useEffect(() => {
     const root = rootRef.current, svg = svgRef.current;
     if (!root || !svg) return;
-    const T = TEMPO[temperament];
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let lastRaf = 0;
 
-    const apply = () => {
-      const head = headRef.current, pupil = pupilRef.current;
-      if (!head || !pupil) return;
-      const r = svg.getBoundingClientRect();
-      const cx = r.left + r.width / 2, cy = r.top + r.height * 0.36;
-      const st0 = st.current;
-      if (st0.state === "watch" || st0.state === "curious") {
-        const dx = Math.max(-1, Math.min(1, (st0.px - cx) / (r.width * .9)));
-        const dy = Math.max(-1, Math.min(1, (st0.py - cy) / (r.height * .9)));
-        if (!reduced) {
-          pupil.style.transform = `translate(${(dx * 3.4).toFixed(2)}px, ${(dy * 2.4).toFixed(2)}px)`;
-          head.style.transform = `rotate(${(dx * (st0.state === "curious" ? 9 : 4)).toFixed(2)}deg)`;
-        }
-      } else {
-        if (!reduced) { pupil.style.transform = ""; head.style.transform = ""; }
-      }
-    };
+    // —— XState actor：状态的唯一真相 ——
+    const actor = createActor(catMachine, { input: { temperament } });
+    const sub = actor.subscribe((snap) => {
+      const v = String(snap.value) as CatState;
+      root.dataset.state = v;
+      setState(v);
+    });
+    actor.start();
+    root.dataset.state = "idle";
 
-    const onMove = (e: PointerEvent) => {
-      st.current.px = e.clientX; st.current.py = e.clientY;
-      const now = performance.now();
-      if (now - lastRaf < 60) return;
-      lastRaf = now;
-      requestAnimationFrame(() => {
-        const svg0 = svgRef.current; if (!svg0) return;
-        const r = svg0.getBoundingClientRect();
-        const cx = r.left + r.width / 2, cy = r.top + r.height * .36;
-        const d = Math.hypot(st.current.px - cx, st.current.py - cy);
-        const now2 = performance.now();
-        let next: State = st.current.state;
-        const inWatch = d <= T.watch, inNotice = d <= T.notice;
-        const interacting = now2 < st.current.interactUntil;
-        if (interacting) next = "interact";
-        else if (inWatch) {
-          if (st.current.state === "curious") next = "curious";
-          else if (st.current.watchSince && now2 - st.current.watchSince > 1600) next = "curious";
-          else next = "watch";
-          if (st.current.state !== "watch") st.current.watchSince = now2;
-        } else if (inNotice) {
-          next = "notice"; st.current.watchSince = 0;
-        } else if (st.current.state === "watch" || st.current.state === "curious") {
-          next = "return";
-          if (!st.current.absentSince) st.current.absentSince = now2;
-          if (now2 - st.current.absentSince > 900) next = "idle";
-        } else next = "idle";
-        if (next !== st.current.state) {
-          if (next === "watch") st.current.watchSince = now2;
-          if (next === "idle" || next === "notice") { st.current.watchSince = 0; st.current.absentSince = 0; }
-          st.current.state = next;
-          root.dataset.state = next;
-          setState(next);
-        }
-        apply();
+    // —— 指针 → 距离（节流 ~12/s，避免事件风暴）——
+    const last = { x: 0, y: 0, t: 0 };
+    let raf = 0;
+    const gaze = (cx: number, cy: number, r: DOMRect) => {
+      if (reduced) return;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const head = headRef.current, pupil = pupilRef.current;
+        if (!head || !pupil) return;
+        const dx = Math.max(-1, Math.min(1, (last.x - cx) / (r.width * .9)));
+        const dy = Math.max(-1, Math.min(1, (last.y - cy) / (r.height * .9)));
+        const curious = root.dataset.state === "curious";
+        pupil.style.transform = `translate(${(dx * 3.4).toFixed(2)}px, ${(dy * 2.4).toFixed(2)}px)`;
+        head.style.transform = `rotate(${(dx * (curious ? 9 : 4)).toFixed(2)}deg)`;
       });
     };
-    const onLeave = () => {
-      st.current.absentSince = performance.now();
-      window.setTimeout(() => {
-        if (st.current.state !== "interact") { st.current.state = "idle"; root.dataset.state = "idle"; setState("idle"); }
-      }, 900);
+    const onMove = (e: PointerEvent) => {
+      last.x = e.clientX; last.y = e.clientY;
+      const now = performance.now();
+      if (now - last.t < 80) return;
+      last.t = now;
+      const r = svg.getBoundingClientRect();
+      const cx = r.left + r.width / 2, cy = r.top + r.height * 0.36;
+      actor.send({ type: "POINTER", dist: Math.hypot(e.clientX - cx, e.clientY - cy) });
+      gaze(cx, cy, r);
     };
-    const onClick = () => { st.current.interactUntil = performance.now() + 1700; };
+
+    const onLeave = () => actor.send({ type: "LEAVE" });
+    const onClick = () => actor.send({ type: "INTERACT" });
 
     window.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("pointerdown", onMove, { passive: true });
     svg.addEventListener("click", onClick);
     document.documentElement.addEventListener("mouseleave", onLeave);
-    // 时间推进不依赖指针移动：curious 计时 / interact 到期 / 离开回落，靠自评循环
-    const tick = window.setInterval(() => onMove({ clientX: st.current.px, clientY: st.current.py } as PointerEvent), 250);
     return () => {
-      window.clearInterval(tick);
+      sub.unsubscribe();
+      actor.stop();
+      cancelAnimationFrame(raf);
       window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("pointerdown", onMove);
       svg.removeEventListener("click", onClick);
       document.documentElement.removeEventListener("mouseleave", onLeave);
     };
@@ -148,7 +106,7 @@ export function CatCharacter({ tone = "wan", temperament = "bold", width = 150, 
           <path className="ccat-paw l" d="M48,106 h20 a5,5 0 0 1 5,5 v1 h-30 a5,5 0 0 1 5,-6 Z" fill={c.chest} />
         </g>
       </svg>
-      {showState && <i className="ccat-badge">{STATE_LABEL[state]}</i>}
+      {showState && <i className="ccat-badge">{state}</i>}
     </div>
   );
 }

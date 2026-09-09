@@ -11,22 +11,23 @@
     "check:ui": "node tests/ui-check.cjs",
     "check:matrix": "node tests/eval-matrix.cjs",
     "check:policy": "node tests/policy-gate.cjs",
-    "check": "npm run check:policy && npm run check:ui && npm run check:matrix && npm run check:golden",
+    "check": "npm run check:policy && npm run check:machine && npm run check:ui && npm run check:matrix && npm run check:golden",
     "check:golden": "node tests/golden-check.cjs",
     "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
-    "prepublishOnly": "npm run build:lib"
+    "prepublishOnly": "npm run build:lib",
+    "check:machine": "node tests/cat-machine.test.mjs"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
-    "puppeteer-core": "^25.9.0",
-    "typescript": "^5.5.3",
-    "vite": "^5.4.0",
-    "three": "^0.185.1",
     "@types/three": "^0.185.4",
+    "@vitejs/plugin-react": "^4.3.1",
     "gsap": "^3.15.0",
-    "roughjs": "^4.6.6"
+    "puppeteer-core": "^25.9.0",
+    "roughjs": "^4.6.6",
+    "three": "^0.185.1",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.0"
   },
   "license": "MIT",
   "main": "./dist/fragrance-ui.cjs",
@@ -49,7 +50,8 @@
     "README.md"
   ],
   "dependencies": {
-    "@phosphor-icons/react": "^2.1.10"
+    "@phosphor-icons/react": "^2.1.10",
+    "xstate": "^5.32.6"
   },
   "peerDependencies": {
     "react": ">=18",
