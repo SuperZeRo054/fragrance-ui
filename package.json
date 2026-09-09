@@ -15,7 +15,9 @@
     "check:golden": "node tests/golden-check.cjs",
     "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build:lib",
-    "check:machine": "node tests/cat-machine.test.mjs"
+    "check:machine": "node tests/cat-machine.test.mjs",
+    "publish:dry": "npm run build:lib && npm publish --dry-run --registry=https://registry.npmjs.org",
+    "publish:live": "npm run build:lib && npm publish --registry=https://registry.npmjs.org"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
@@ -30,14 +32,14 @@
     "vite": "^5.4.0"
   },
   "license": "MIT",
-  "main": "./dist/fragrance-ui.cjs",
+  "main": "./dist/fragrance-ui.js",
   "module": "./dist/fragrance-ui.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
       "import": "./dist/fragrance-ui.js",
-      "require": "./dist/fragrance-ui.cjs"
+      "default": "./dist/fragrance-ui.js"
     },
     "./styles.css": "./dist/fragrance-ui.css",
     "./package.json": "./package.json"
@@ -64,6 +66,31 @@
     }
   },
   "bin": {
-    "fragrance-ui": "./bin/tokens-cli.mjs"
+    "fragrance-ui": "bin/tokens-cli.mjs"
+  },
+  "keywords": [
+    "react",
+    "design-system",
+    "component-library",
+    "theme",
+    "design-tokens",
+    "agent",
+    "bilingual",
+    "typescript",
+    "css-variables",
+    "state-machine",
+    "xstate"
+  ],
+  "homepage": "https://superzero054.github.io/fragrance-ui/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuperZeRo054/fragrance-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SuperZeRo054/fragrance-ui/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

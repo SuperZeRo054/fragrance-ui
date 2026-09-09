@@ -12,8 +12,8 @@ export default defineConfig({
     lib: {
       entry: "src/index.ts",
       name: "FragranceUI",
-      formats: ["es", "cjs"],
-      fileName: (format) => (format === "es" ? "fragrance-ui.js" : "fragrance-ui.cjs"),
+      formats: ["es"],
+      fileName: () => "fragrance-ui.js",
     },
     rollupOptions: {
       // 宿主依赖不进包：React / three / 图标库由使用方提供
