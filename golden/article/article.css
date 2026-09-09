@@ -35,3 +35,7 @@
   .gart-head { padding: 40px 24px 26px; }
   .gart-cover { width: calc(100% - 48px); }
 }
+
+/* 文章末尾的角色彩蛋（§6.2 Easter Egg，全页仅此一处 Mascot） */
+.gart-end { display: grid; justify-items: center; gap: 10px; padding: 30px 24px 44px; }
+.gart-end p { margin: 0; font-size: 12px; letter-spacing: .12em; color: var(--g-dim); }

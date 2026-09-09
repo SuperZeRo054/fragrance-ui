@@ -1,14 +1,38 @@
 # Fragrance UI
 
-> ⚠️ 设计权威：`DESIGN.md`（宪法）+ `AGENTS.md`（Agent 工作规则）。能力分级 CORE / BRAND / CONTROLLED / LAB，Lab 默认禁入。历史 Demo 是能力目录，不是 Golden Sample。
+一套面向个人作品与技术表达的 Agent-first Frontend Design System。
+用克制的设计承载内容，用艺术建立情绪，用技术制造质感，用角色建立人格。
 
-多皮肤主题引擎驱动的个人品牌 React 组件库。**一套结构，任意换皮。**
-吉祥物是两只猫：万万（蓝金渐层，管动效与 Agent 模块）× 千千（重点色，管基础组件与图标）——所有猫均为运行时内联 SVG，零位图零 emoji。定位：适合构建 Agent 服务与现代前端页面的 React UI 库。
+**设计权威在 `DESIGN.md`（宪法），Agent 工作规则在 `AGENTS.md`。**
+本 README 只是入口地图；发生冲突时以宪法为准。
 
-- 组件只消费语义令牌（`--surface / --accent / --font-display …`）
-- 皮肤 = 一组挂在 `<html data-skin data-mode>` 上的 CSS 变量，整组换血零闪烁
-- 内置皮肤：`fragrance`（银白冷调日/灰黑夜）、`graphite`（石墨×熔铜日/夜）
-- 动效只碰 `opacity / transform`；离屏视频/懒加载自动让位；尊重 `prefers-reduced-motion`
+## 仓库地图
+
+```text
+DESIGN.md            设计宪法：Identity / Visual Budget / 能力治理 / Motion 系统
+AGENTS.md            Agent 行为约束：权威顺序、开工前必读、快速否决清单
+src/tokens.css       主题引擎：皮肤 × 昼夜 × 字体包
+src/components/      CORE：语义符合即可用
+src/brand/           BRAND：猫是角色不是装饰，稀缺使用
+src/motion/          CONTROLLED：共享过渡等，需 Design Intent
+src/lab/             LAB：默认禁入，见 src/lab/README.md 的晋升路径
+golden/              金样本：What good looks like（G01 首页 / G02 项目详情 / G03 画廊 / G04 文章 / M03 场景）
+patterns/            页面级编排模式
+tests/               四道质量门（见下）
+audit/               历次设计审计与冻结记录
+demo/                能力目录（Playground），不是金样本
+```
+
+## 能力分级
+
+| 级别 | 含义 | 位置 |
+|---|---|---|
+| CORE | 语义符合即可用 | `src/components`、`src/tokens.css` |
+| BRAND | 猫 / 手写体 / 颗粒 / 艺术处理，稀缺使用 | `src/brand` |
+| CONTROLLED | 需明确 Design Intent（Glass Surface / Magnetic / CountUp / Shared Transition） | 组件注释标注 |
+| LAB | 默认禁止进入正式实现 | `src/lab` |
+
+LAB → CORE 禁止直通；晋升走：用例 → Design Intent → Visual Budget → 实现 → Review → Golden Sample。
 
 ## 使用
 
@@ -16,27 +40,65 @@
 import { SkinProvider, Button, Card } from "fragrance-ui";
 import "fragrance-ui/styles.css";
 
-<SkinProvider defaultSkin="fragrance" defaultMode="day">
-  <Button variant="primary">你香大了</Button>
+<SkinProvider defaultSkin="fragrance" defaultMode="day" defaultLang="zh">
+  <Button variant="primary">开始创作</Button>
 </SkinProvider>
 ```
 
-## v0.1 导出清单
-原子：Reveal · Button(glass) · Badge · Kicker · SectionHead · ChipGroup · Rating · Avatar · CatMark · Tooltip
+主题引擎三个维度：皮肤（`fragrance` / `graphite`）、昼夜、字体包（系统 / 衬线 / 等宽 / 圆体 / 楷体），
+外加语言（`zh` / `en`，Equal Authority, Different Rhythm）。全部通过 `<html data-*>` 整组换血。
+
+## 导出（按能力分级）
+
+**CORE**
+原子：Reveal · Button(primary/outline/ghost/danger) · Badge · Kicker · SectionHead · ChipGroup · Rating · Avatar · Tooltip · HScroll
 表单：TextField · SelectField · Switch · Checkbox · RadioGroup · RangeField
-覆盖层：Modal · ConfirmModal · ErrorModal(震动) · Lightbox · ToastProvider/useToast
-内容：Card · Table · Tabs(含 steps) · Accordion · Pagination(方形) · EmptyState · Skeleton
-动效：PageTransition · viewNavigate · Spinner×4 · Progress · CountUp · LazyImage(blur-up)
-现代特效：TypingText · TextReveal · GradientText · Marquee · Magnetic · Tilt · Beam(流光边框) · Aurora
-三维/画布：ThreeShapes(three.js 银色多面体) · ParticleField(粒子网络) · 纯 CSS 画猫(见 demo)
-Agent 原生：StreamText(LLM 式流式) · ThinkingText(扫光思考) · TextScramble(解码) · TextRotate(轮换) · AgentSteps(任务时间线) · ToolCallCard(工具调用卡+活计时) · PromptBar(指令输入) · StatusDot · VoiceBars · LiveCounter
+覆盖层：Modal · ConfirmModal · ErrorModal · Lightbox · ToastProvider/useToast
+内容：Card · Table · Tabs(steps) · Accordion · Pagination · EmptyState · Skeleton
+反馈：Spinner · Progress · LazyImage(blur-up)
+基础动效：TypingText · TextReveal · PageTransition · viewNavigate
+
+**BRAND**
+CatMark · CatFull · CatCharacter（指针邻近驱动的状态机：idle/notice/watch/curious/interact/return）
+
+**CONTROLLED**
+SharedLightbox（Gallery → Detail 共享元素过渡）· Magnetic · CountUp · Glass Surface（`.fui-glass`）
+
+**LAB**（默认禁入）
+GradientText · Marquee · Tilt · Beam · Aurora · ThreeShapes · ParticleField
+
+**Agent 原生**（CORE）
+StreamText · ThinkingText · TextScramble · TextRotate · AgentSteps · ToolCallCard · PromptBar · StatusDot · VoiceBars · LiveCounter
+
+**图标**：Phosphor 精选桶 45 枚（MIT，`src/icons.ts`），六档字重，currentColor 随主题。
+
+## 质量门
+
+```bash
+npm run check          # 全部四道门
+npm run check:policy   # 宪法硬规则：CORE 纯度 / LAB 隔离 / 禁用词 / emoji / hover 哲学 / glass 非 action
+npm run check:ui       # 组件目录回归（渲染 / 锚点 / 导航 / 共享过渡 / 角色状态机 / 双语 / 390px）
+npm run check:matrix   # 2 视口 × 2 皮肤 × 2 模式 × 2 语言的渲染与对比度矩阵
+npm run check:golden   # 四个金样本路由 + Scene Hero 编排 + reduced-motion 降级
+```
+
+需要本地 preview 运行在 `:4173`（`npm run preview`）。
+
+## 本地开发
+
+```bash
+npm run dev      # vite dev
+npm run build    # 产出 docs/（GitHub Pages 用）
+npm run preview  # 预览构建产物
+```
+
+线上：<https://superzero054.github.io/fragrance-ui/>
 
 ## Roadmap
-- v0.2 → Drawer / CommandPalette / Stepper / Blog Prose 排版
-- v0.3 → npm 发布 + token CLI
-- 皮肤征集：按 `src/tokens.css` 块格式提交你的皮
 
-主题引擎：SkinProvider（皮肤 / 昼夜 / 字体三维度）· 字体五包：系统 / 衬线 / 等宽 / 圆体 / 楷体
-图标：Phosphor 精选桶 45 枚（src/icons.ts，MIT）· 六档字重 · currentColor 随主题 · 按需打包
+- Drawer / CommandPalette / Stepper / Blog Prose 排版（沿用现有令牌与能力分级）
+- 金样本首页的摄影版主视觉资产（现用浮世绘画代位）
+- M02 角色状态机接入 Rive（需 .riv 资产）
+- npm 发布与 token CLI
 
 License: MIT · Curated by two cats

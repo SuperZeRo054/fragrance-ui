@@ -1,5 +1,6 @@
 import React from "react";
 import { GhomeBar, GhomeFoot } from "../chrome";
+import { CatCharacter } from "../../src";
 import windowsill from "../../demo/gallery/frg-windowsill.jpg";
 import starry from "../../demo/gallery/frg-starrynight.jpg";
 import "../home/home.css";
@@ -64,6 +65,11 @@ export function GoldenArticle() {
           <span>So the default answer in this system is no. Restraint is not a style — it is a skill.</span>
         </p>
       </article>
+
+      <div className="gart-end">
+        <CatCharacter tone="qian" temperament="shy" width={104} />
+        <p>千千 也读到了这里。</p>
+      </div>
 
       <section className="ghome__quote">
         <blockquote>
