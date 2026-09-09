@@ -38,6 +38,8 @@ export { CatMark, CatFull, catLoafGroup } from "./brand/cats";
 export { CatCharacter } from "./brand/cat-character";
 export type { CatTemperament } from "./brand/cat-character";
 export type { Lang } from "./theme/SkinProvider";
+export { useT } from "./theme/copy";
+export type { Pair } from "./theme/copy";
 export { StreamText, ThinkingText, TextScramble, TextRotate, AgentSteps, ToolCallCard, PromptBar, StatusDot, VoiceBars, LiveCounter } from "./components/agent";
 export type { AgentStepStatus } from "./components/agent";
 export { HScroll } from "./components/hscroll";

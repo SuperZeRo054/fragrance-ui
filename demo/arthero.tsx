@@ -1,26 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Reveal } from "../src";
+import { Reveal, useT } from "../src";
 import "./arthero.css";
 
 /* ================= 六画派数据 ================= */
 const MOVES = [
   { id: "realism", zh: "写实主义", en: "REALISM", yrs: "1840 —",
-    note: "渐变塑体积，毛色跟着光走。两位吉祥物没化妆的样子。",
+    note: ["渐变塑体积，毛色跟着光走。两位吉祥物没化妆的样子。", "Gradient volume, fur following the light — the mascots, bare-faced."],
     chip: ["#c9a06a", "#7c8ba0", "#2f2a26"] },
   { id: "impressionism", zh: "印象派", en: "IMPRESSIONNISME", yrs: "1872 —",
-    note: "碎笔和光斑，轮廓融进空气，像清晨十点的花园。",
+    note: ["碎笔和光斑，轮廓融进空气，像清晨十点的花园。", "Broken strokes and light spots; outlines dissolve into morning air."],
     chip: ["#a48fd0", "#e0a94a", "#8fa8bf"] },
   { id: "ukiyo", zh: "浮世绘", en: "UKIYO-E", yrs: "1831 —",
-    note: "普鲁士蓝平涂，红日当头，底下的浪永不停。",
+    note: ["普鲁士蓝平涂，红日当头，底下的浪永不停。", "Flat Prussian blue, a red sun overhead, waves that never rest."],
     chip: ["#274b8f", "#eadfc4", "#a63c2e"] },
   { id: "bauhaus", zh: "包豪斯", en: "BAUHAUS", yrs: "1919 —",
-    note: "圆、三角、方，两只吉祥物被拆成一份几何作业。",
+    note: ["圆、三角、方，两只吉祥物被拆成一份几何作业。", "Circle, triangle, square — the mascots, taken apart as a geometry exercise."],
     chip: ["#c2452d", "#2b5ea7", "#e8c531"] },
   { id: "pop", zh: "波普艺术", en: "POP ART", yrs: "1962 —",
-    note: "网点、重描边，再加一声 PURR。就是漫画封面那一期。",
+    note: ["网点、重描边，再加一声 PURR。就是漫画封面那一期。", "Halftone dots, heavy outlines and one PURR — the comic-cover issue."],
     chip: ["#e8442e", "#f5c531", "#141414"] },
   { id: "abstract", zh: "抽象主义", en: "ABSTRACTION", yrs: "1910 —",
-    note: "认不出耳朵，认得出眼神。",
+    note: ["认不出耳朵，认得出眼神。", "You cannot recognize the ears, but you know the gaze."],
     chip: ["#c78d5e", "#5e7d8c", "#8c6a9e"] },
 ];
 
@@ -76,6 +76,7 @@ export function ArtHero() {
     const id = window.setTimeout(() => setIdx((v) => (v + 1) % MOVES.length), 4200);
     return () => window.clearTimeout(id);
   }, [idx, beat, visible]);
+  const t = useT();
   const mv = MOVES[idx];
   return (
     <div className="art-hero" ref={wrapRef} style={{ "--mv-accent": mv.chip[0] } as React.CSSProperties}>
@@ -490,7 +491,7 @@ export function ArtHero() {
               <span className="plaque__no">PL.{String(idx + 1).padStart(2, "0")} / 06 · {mv.yrs}</span>
               <h3 className="plaque__zh">{mv.zh}</h3>
               <span className="plaque__en">{mv.en}</span>
-              <p className="plaque__note">{mv.note}</p>
+              <p className="plaque__note">{t(mv.note)}</p>
               <div className="plaque__foot">
                 <span className="plaque__chips">{mv.chip.map((c) => <i key={c} style={{ background: c }} />)}</span>
                 <span className="plaque__sig">painted in pure CSS</span>

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button, Badge, SectionHead, Reveal } from "../src";
 import { SectionHost, CatSvg } from "./host";
 import { CatCharacter } from "../src/brand/cat-character";
+import { useT } from "../src";
 import "./motionlab.css";
 
 /* ============ A. 状态机猫（Rive 思路的 CSS 复刻：idle/groom/alert） ============ */
@@ -280,10 +281,11 @@ export function CataasEgg() {
 
 /* ============ 分区入口 ============ */
 export function MotionLab() {
+  const t = useT();
   return (
     <section id="motion-lab">
-      <SectionHead kicker="07 · Motion & Art Lab" title="动效与画法实验室"
-        sub="状态机、描边生长、滚动驱动、爪印路径、雾面着色器、涂鸦、流体渐变，每件都能单独搬走。" />
+      <SectionHead kicker="07 · Motion & Art Lab" title={t(["动效与画法实验室", "Motion Lab"])}
+        sub={t(["状态机、描边生长、滚动驱动、爪印路径、雾面着色器、涂鸦、流体渐变，每件都能单独搬走。", "State machine, stroke growth, scroll-driven, paw trails, silk shader, sketching, mesh gradients — each one portable."])} />
       <SectionHost host="wanwan" />
       <div className="lab-grid">
         <Reveal><h3 className="lab-h">A · 状态机猫 <span className="lab-tag">CSS 状态机</span></h3><StateCat /></Reveal>

@@ -5,6 +5,7 @@ import {
   ThreeShapes, ParticleField,
 } from "../src";
 import { SectionHost } from "./host";
+import { useT } from "../src";
 
 /* ============ 纯 CSS 画猫（零 SVG 零图片：div + 圆角 + 渐变） ============ */
 export function CssCat({ tone = "cream" }: { tone?: "cream" | "blue" }) {
@@ -13,11 +14,12 @@ export function CssCat({ tone = "cream" }: { tone?: "cream" | "blue" }) {
 
 /* ===== 08 · 现代特效套件 ===== */
 export function ModernEffects() {
+  const t = useT();
   const marquee = ["GPT 生图", "Seedance 视频", "SVG 手绘", "Three.js 3D", "Rive 状态机", "CSS 磨砂", "Canvas 粒子"];
   return (
     <section id="effects-lab">
-      <SectionHead kicker="08 · Modern Effects" title="现代特效套件"
-        sub="打字机、逐字揭示、流光字、跑马灯、磁吸、3D 倾斜、流光边框、极光背景。动效只碰 opacity 和 transform。" />
+      <SectionHead kicker="08 · Modern Effects" title={t(["现代特效套件", "Modern Effects"])}
+        sub={t(["打字机、逐字揭示、流光字、跑马灯、磁吸、3D 倾斜、流光边框、极光背景。动效只碰 opacity 和 transform。", "Typing, per-char reveal, gradient text, marquee, magnetic, tilt, beam, aurora. Motion touches only opacity and transform."])} />
       <SectionHost host="wanwan" />
       <div className="effects-hero">
         <Reveal>
@@ -64,11 +66,12 @@ export function ModernEffects() {
 
 /* ===== 09 · 三维与粒子 ===== */
 export function ThreeLab() {
+  const t = useT();
   const [shape3d] = useState(true);
   return (
     <section id="three-lab">
-      <SectionHead kicker="09 · 3D & Canvas" title="三维与粒子"
-        sub="Three.js 管深度和光影，Canvas 管粒子群体。至于几何吉祥物，纯 CSS 就够。" />
+      <SectionHead kicker="09 · 3D & Canvas" title={t(["三维与粒子", "3D & Particles"])}
+        sub={t(["Three.js 管深度和光影，Canvas 管粒子群体。至于几何吉祥物，纯 CSS 就够。", "Three.js for depth and light, Canvas for swarm behavior. Geometry mascots are pure CSS."])} />
       <SectionHost host="wanwan" />
       <div className="combo-grid">
         <Reveal>

@@ -11,7 +11,7 @@ import {
   House, Atom, Textbox, FrameCorners, Cards, Swap, Cube, SquaresFour, List,
   CircleNotch, Sparkle, Robot, Waveform, HScroll,
   type SkinId, type FontId, type Icon, type Lang,
-  CatCharacter,
+  CatCharacter, useT, type Pair,
 } from "../src";
 import { SectionHost } from "./host";
 import { MotionLab } from "./motionlab";
@@ -86,23 +86,24 @@ function ScrollGuide() {
 }
 
 /* ---------- 悬停展开的导航舱：icon + 区块，点了平滑跳 ---------- */
-const SECTIONS: { id: string; label: string; icon: Icon }[] = [
-  { id: "top", label: "首页", icon: House },
-  { id: "atoms", label: "原子件", icon: Atom },
-  { id: "forms", label: "表单", icon: Textbox },
-  { id: "overlays", label: "覆盖层", icon: FrameCorners },
-  { id: "gallery", label: "内容展示", icon: Cards },
-  { id: "route-lab", label: "页面切换", icon: Swap },
-  { id: "loading-lab", label: "加载", icon: CircleNotch },
-  { id: "effects-lab", label: "现代特效", icon: Sparkle },
-  { id: "three-lab", label: "三维粒子", icon: Cube },
-  { id: "agent-lab", label: "Agent", icon: Robot },
-  { id: "icon-lab", label: "图标", icon: SquaresFour },
-  { id: "motion-lab", label: "动效实验室", icon: Waveform },
+const SECTIONS: { id: string; label: Pair; icon: Icon }[] = [
+  { id: "top", label: ["首页", "Home"], icon: House },
+  { id: "atoms", label: ["原子件", "Atoms"], icon: Atom },
+  { id: "forms", label: ["表单", "Forms"], icon: Textbox },
+  { id: "overlays", label: ["覆盖层", "Overlays"], icon: FrameCorners },
+  { id: "gallery", label: ["内容展示", "Content"], icon: Cards },
+  { id: "route-lab", label: ["页面切换", "Transitions"], icon: Swap },
+  { id: "loading-lab", label: ["加载", "Loading"], icon: CircleNotch },
+  { id: "effects-lab", label: ["现代特效", "Effects"], icon: Sparkle },
+  { id: "three-lab", label: ["三维粒子", "3D & Particles"], icon: Cube },
+  { id: "agent-lab", label: ["Agent", "Agent"], icon: Robot },
+  { id: "icon-lab", label: ["图标", "Icons"], icon: SquaresFour },
+  { id: "motion-lab", label: ["动效实验室", "Motion Lab"], icon: Waveform },
 ];
 
 function NavDock() {
   const [open, setOpen] = useState(false);
+  const t = useT();
   const timer = useRef<number>(0);
   const enter = () => { window.clearTimeout(timer.current); setOpen(true); };
   const leave = () => { timer.current = window.setTimeout(() => setOpen(false), 220); };
@@ -123,7 +124,7 @@ function NavDock() {
               history.replaceState(null, "", `#${id}`);
             }}>
             <Ic size={17} weight="light" />
-            <span>{label}</span>
+            <span>{t(label)}</span>
           </a>
         ))}
       </nav>
@@ -134,10 +135,11 @@ function NavDock() {
 /* ---------- 各分类展示块 ---------- */
 function Atoms() {
   const toast = useToast();
+  const t = useT();
   const [era, setEra] = useState("all");
   return (
     <section id="atoms">
-      <SectionHead kicker="01 · Atoms" title="原子件" sub="按钮 / 徽章 / 标签组 / 稀有度 / 头像 / 提示词。" />
+      <SectionHead kicker="01 · Atoms" title={t(["原子件", "Atoms"])} sub={t(["按钮 / 徽章 / 标签组 / 稀有度 / 头像 / 提示词。", "Buttons / badges / chip groups / ratings / avatars / tooltips."])} />
       <SectionHost host="qianqian" />
       <Reveal>
         <div style={{ display: "flex", flexWrap: "wrap", gap: 18, marginTop: 40 }}>
@@ -181,6 +183,7 @@ function Atoms() {
 
 function Forms() {
   const toast = useToast();
+  const t = useT();
   const [mail, setMail] = useState("moo@moo");
   const [mailShake, setMailShake] = useState(0);
   const [sw, setSw] = useState(true);
@@ -189,7 +192,7 @@ function Forms() {
   const [rng, setRng] = useState(64);
   return (
     <section id="forms">
-      <SectionHead kicker="02 · Forms" title="表单控件全套" sub="含校验错误与成功反馈态、开关、单选复选与滑块。" />
+      <SectionHead kicker="02 · Forms" title={t(["表单控件全套", "Forms"])} sub={t(["含校验错误与成功反馈态、开关、单选复选与滑块。", "Validation, error & success feedback, switches, radios and sliders."])} />
       <SectionHost host="qianqian" />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(230px,1fr))", gap: 20, marginTop: 30 }}>
         <Reveal><TextField label="访客姓名" placeholder="可匿名观展"
@@ -217,13 +220,14 @@ function Forms() {
 }
 
 function Overlays() {
+  const t = useT();
   const [modal, setModal] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [err, setErr] = useState(false);
   const [lb, setLb] = useState(false);
   return (
     <section id="overlays">
-      <SectionHead kicker="03 · Overlays" title="覆盖层系统"
+      <SectionHead kicker="03 · Overlays" title={t(["覆盖层系统", "Overlays"])}
         sub="Modal / Confirm / Error（入场震动）/ Lightbox / Toast · Esc 与遮罩点击均可关闭。" />
       <SectionHost host="qianqian" />
       <Reveal>
@@ -268,6 +272,7 @@ const WORKS = [
 ];
 
 function Content() {
+  const t = useT();
   const [page, setPage] = useState(2);
   const [lbWork, setLbWork] = useState<any>(null);
   const [lbRect, setLbRect] = useState<DOMRect | null>(null);
@@ -278,7 +283,7 @@ function Content() {
   };
   return (
     <section id="gallery">
-      <SectionHead kicker="04 · Content" title="数据与内容展示" sub="卡片 / 名录表 / 标签页 / 手风琴 / 分页 / 空态与骨架屏。" />
+      <SectionHead kicker="04 · Content" title={t(["数据与内容展示", "Content"])} sub={t(["卡片 / 名录表 / 标签页 / 手风琴 / 分页 / 空态与骨架屏。", "Cards / tables / tabs / accordion / pagination / empty states / skeletons."])} />
       <SectionHost host="qianqian" />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(250px,1fr))", gap: 32, marginTop: 34 }}>
         {WORKS.map((w, i) => (
@@ -352,11 +357,12 @@ function Content() {
 
 /* ---------- 页面切换实验室 ---------- */
 function RouteLab() {
+  const t = useT();
   const [view, setView] = useState<"gallery" | "essay">("gallery");
   return (
     <section id="route-lab">
-      <SectionHead kicker="05 · Page Transition" title="页面切换实验室"
-        sub="SPA 切页用 PageTransition。跨页和锚点跳转走 viewNavigate，合成器接管过渡，稳定 60fps。" />
+      <SectionHead kicker="05 · Page Transition" title={t(["页面切换实验室", "Page Transitions"])}
+        sub={t(["SPA 切页用 PageTransition。跨页和锚点跳转走 viewNavigate，合成器接管过渡，稳定 60fps。", "In-page transitions via PageTransition; cross-page jumps via viewNavigate — compositor-driven, steady 60fps."])} />
       <SectionHost host="wanwan" />
       <Reveal>
         <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 28 }}>
@@ -402,10 +408,11 @@ function RouteLab() {
 
 /* ---------- Loading 画廊 ---------- */
 function LoadingLab() {
+  const t = useT();
   return (
     <section id="loading-lab">
-      <SectionHead kicker="06 · Loading & Lazy" title="加载与懒加载"
-        sub="四种 Spinner 口味 · 进度条 · 数字滚动 · LazyImage 进入视口才拉取并 blur-up 淡入。" />
+      <SectionHead kicker="06 · Loading & Lazy" title={t(["加载与懒加载", "Loading & Lazy"])}
+        sub={t(["四种 Spinner 口味 · 进度条 · 数字滚动 · LazyImage 进入视口才拉取并 blur-up 淡入。", "Four spinners · progress · count-up · LazyImage with blur-up on viewport entry."])} />
       <SectionHost host="qianqian" />
       <Reveal>
         <div style={{ display: "flex", gap: 44, alignItems: "center", flexWrap: "wrap", marginTop: 32 }}>

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   SectionHead, Reveal, Badge, Button, CatMark, Kicker, Skeleton,
   StreamText, ThinkingText, TextScramble, TextRotate, AgentSteps, ToolCallCard,
-  PromptBar, StatusDot, VoiceBars, LiveCounter,
+  PromptBar, StatusDot, VoiceBars, LiveCounter, useT,
   type AgentStepStatus,
 } from "../src";
 import { SectionHost } from "./host";
@@ -51,6 +51,7 @@ type Phase = "idle" | "think" | "tools" | "sum" | "answer" | "done";
 
 /* ---------- 10 · Agent Lab ---------- */
 export function AgentLab() {
+  const t = useT();
   const [cur, setCur] = useState(CANNED[0]);
   const [phase, setPhase] = useState<Phase>("idle");
   const [prompt, setPrompt] = useState("");
@@ -104,8 +105,8 @@ export function AgentLab() {
 
   return (
     <section id="agent-lab" ref={secRef}>
-      <SectionHead kicker="10 · Agent Native" title="Agent 原生界面"
-        sub="给「机器正在工作」做的界面：流式输出、思考态、工具调用卡、任务时间线。输入框可以直接指挥，不打字就看它自己跑。" />
+      <SectionHead kicker="10 · Agent Native" title={t(["Agent 原生界面", "Agent-Native UI"])}
+        sub={t(["给「机器正在工作」做的界面：流式输出、思考态、工具调用卡、任务时间线。输入框可以直接指挥，不打字就看它自己跑。", "Interfaces for machines at work: streaming text, thinking states, tool-call cards, task timelines. Command the input — or watch it run on its own."])} />
       <SectionHost host="wanwan" />
 
       <Reveal>

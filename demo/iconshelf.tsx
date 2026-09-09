@@ -12,6 +12,7 @@ import {
   ArrowRight,
   Bell, House, Trash,
   PaperPlaneRight as SendIc, ArrowRight as ArrowIc,
+  useT,
   type IconWeight, type Icon,
 } from "../src";
 import { SectionHost } from "./host";
@@ -47,11 +48,12 @@ const WEIGHTS: { id: string; label: IconWeight }[] = [
 
 /* 11 · Icons：Phosphor 精选货架 */
 export function IconShelf() {
+  const t = useT();
   const [w, setW] = useState<IconWeight>("light");
   return (
     <section id="icon-lab">
-      <SectionHead kicker="11 · Icons" title="图标精选货架"
-        sub="取自 Phosphor（MIT）：细线圆头，跟整套库一条笔路。currentColor 上色，随皮肤昼夜自动换装。" />
+      <SectionHead kicker="11 · Icons" title={t(["图标精选货架", "Icon Shelf"])}
+        sub={t(["取自 Phosphor（MIT）：细线圆头，跟整套库一条笔路。currentColor 上色，随皮肤昼夜自动换装。", "Curated from Phosphor (MIT): thin round-cap strokes on the same line as the library. currentColor — reskins with the theme."])} />
       <SectionHost host="qianqian" />
       <Reveal>
         <div className="lab-card">
