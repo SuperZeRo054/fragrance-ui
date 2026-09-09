@@ -2,6 +2,7 @@ import React from "react";
 import { SceneHero } from "../scene";
 import "./home.css";
 import wave from "../../demo/gallery/frg-greatwave.jpg";
+import heroDuo from "./hero-duo.jpg";
 import starry from "../../demo/gallery/frg-starrynight.jpg";
 import waterlilies from "../../demo/gallery/frg-waterlilies.jpg";
 import athens from "../../demo/gallery/frg-athens.jpg";
@@ -32,7 +33,7 @@ export function GoldenHome() {
         </div>
       </header>
 
-      <SceneHero img={wave} alt="神奈川冲浪猫 · Fragrance UI 主视觉" className="ghome__hero">
+      <SceneHero img={heroDuo} alt="万万 与 千千 · 真实双猫主视觉" className="ghome__hero">
         <div className="ghome__hero-copy">
           <p className="ghome__kicker">
             <span>CATS · DESIGN · A KINDER INTERNET</span>

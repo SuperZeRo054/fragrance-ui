@@ -5,7 +5,7 @@ Status: **implemented** · 路由 `#golden/home` · 代码 `page.tsx` + `home.cs
 ## Visual Budget Declaration
 
 ```text
-Primary:    摄影主视觉（浮世绘冲浪猫代位，摄影版资产待生成）+ 编辑志大标题
+Primary:    摄影主视觉（万万 × 千千 真实照片双联画，编辑化处理）+ 编辑志大标题
 Secondary:  三栏编辑栅格（Featured / Writing / Gallery）、引言带
 Continuous: 0
 Atmosphere: 主视觉上的暗部渐变（静态）
